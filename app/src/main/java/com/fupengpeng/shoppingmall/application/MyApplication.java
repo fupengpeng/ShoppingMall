@@ -5,6 +5,7 @@ import android.app.Application;
 import android.os.Process;
 
 import com.fupengpeng.shoppingmall.crash.CrashHandler;
+import com.mob.MobApplication;
 import com.yolanda.nohttp.Logger;
 import com.yolanda.nohttp.NoHttp;
 import com.yolanda.nohttp.rest.RequestQueue;
@@ -16,7 +17,7 @@ import java.util.List;
 /**
  * 应用
  */
-public class MyApplication extends Application {
+public class MyApplication extends MobApplication {
     /**
      * Application实例
      */

@@ -32,6 +32,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import cn.sharesdk.onekeyshare.OnekeyShare;
 
 /**
  * 个人中心Fragment
@@ -363,4 +364,5 @@ public class PersonCenterFragment extends Fragment {
                 break;
         }
     }
+
 }

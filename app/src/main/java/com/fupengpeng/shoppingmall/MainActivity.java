@@ -4,16 +4,13 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.fupengpeng.shoppingmall.activity.BaseActivity;
 import com.fupengpeng.shoppingmall.fragment.ClassifyFragment;
 import com.fupengpeng.shoppingmall.fragment.HomeFragment;
 import com.fupengpeng.shoppingmall.fragment.PersonCenterFragment;
@@ -23,9 +20,9 @@ import com.fupengpeng.shoppingmall.fragment.ShoppingCartFragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.sharesdk.onekeyshare.OnekeyShare;
 
 public class MainActivity extends AppCompatActivity {
-
 
 
     @BindView(R.id.tv_title_activity_title)
@@ -68,6 +65,10 @@ public class MainActivity extends AppCompatActivity {
     TextView tvActivityMainPersonCenter;
     @BindView(R.id.ll_activity_main_person_center)
     LinearLayout llActivityMainPersonCenter;
+
+
+    @BindView(R.id.iv_title_activity_right)
+    ImageView ivTitleActivityRight;
 
 
     /**
@@ -147,13 +148,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-
     @OnClick({R.id.ll_activity_main_home,
             R.id.ll_activity_main_classify,
             R.id.ll_activity_main_shopping_cart,
             R.id.ll_activity_main_share,
-            R.id.ll_activity_main_person_center})
+            R.id.ll_activity_main_person_center,
+            R.id.iv_title_activity_right})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ll_activity_main_home:
@@ -170,6 +170,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.ll_activity_main_person_center:
                 setTabSelection(5);
+                break;
+            case R.id.iv_title_activity_right:
+                showShare();
                 break;
         }
     }
@@ -301,11 +304,11 @@ public class MainActivity extends AppCompatActivity {
     /**
      * 初始化展示和点击筛选之后的fragment展示
      */
-    private void questionList(){
+    private void questionList() {
         Intent intent = this.getIntent();
-        setFragment = intent.getIntExtra("setFragment",0);
-        Log.e(TAG, "questionList: --------"+ setFragment);
-        switch (setFragment){
+        setFragment = intent.getIntExtra("setFragment", 0);
+        Log.e(TAG, "questionList: --------" + setFragment);
+        switch (setFragment) {
             /**
              * 订单管理界面
              */
@@ -343,5 +346,31 @@ public class MainActivity extends AppCompatActivity {
                 setTabSelection(HOME);
                 break;
         }
+    }
+
+    private void showShare() {
+        OnekeyShare oks = new OnekeyShare();
+//关闭sso授权
+        oks.disableSSOWhenAuthorize();
+
+// title标题，印象笔记、邮箱、信息、微信、人人网和QQ空间等使用
+        oks.setTitle("标题");
+// titleUrl是标题的网络链接，QQ和QQ空间等使用
+        oks.setTitleUrl("http://sharesdk.cn");
+// text是分享文本，所有平台都需要这个字段
+        oks.setText("我是分享文本");
+// imagePath是图片的本地路径，Linked-In以外的平台都支持此参数
+//oks.setImagePath("/sdcard/test.jpg");//确保SDcard下面存在此张图片
+// url仅在微信（包括好友和朋友圈）中使用
+        oks.setUrl("http://sharesdk.cn");
+// comment是我对这条分享的评论，仅在人人网和QQ空间使用
+        oks.setComment("我是测试评论文本");
+// site是分享此内容的网站名称，仅在QQ空间使用
+        oks.setSite(getString(R.string.app_name));
+// siteUrl是分享此内容的网站地址，仅在QQ空间使用
+        oks.setSiteUrl("http://sharesdk.cn");
+
+// 启动分享GUI
+        oks.show(this);
     }
 }
