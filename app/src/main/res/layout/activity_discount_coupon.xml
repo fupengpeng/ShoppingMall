@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/iv_activity_discount_coupon_return"
+                android:layout_width="@dimen/dp_45"
+                android:layout_height="match_parent" />
+            <TextView
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="优惠券列表"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_45" />
+            <ImageView
+                android:id="@+id/iv_activity_discount_coupon_close"
+                android:layout_width="@dimen/dp_45"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_45">
+            <LinearLayout
+                android:id="@+id/ll_activity_discount_coupon_unused"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/tv_activity_discount_coupon_unused"
+                    android:gravity="center"
+                    android:text="未使用"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp" />
+                <View
+                    android:id="@+id/v_activity_discount_coupon_unused"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_3"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ll_activity_discount_coupon_useless"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/tv_activity_discount_coupon_useless"
+                    android:gravity="center"
+                    android:text="已失效"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp" />
+                <View
+                    android:id="@+id/v_activity_discount_coupon_useless"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_3"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_activity_discount_coupon_parent"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>
+

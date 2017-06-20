@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">恒康生物商城</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="group_at">团购中</string>
+    <string name="group_finish">已团购</string>
+    <string name="group_unfinished">未团购</string>
+
+    <string name="order_center_all">暂时没有相关订单</string>
+    <string name="order_center_wait_payment">待付款</string>
+    <string name="order_center_wait_shipments">待发货</string>
+    <string name="order_center_wait_receiving">待收货</string>
+    <string name="order_center_wait_picking">待提货</string>
+    <string name="order_center_wait_evaluation">待评价</string>
+    <string name="order_center_refund_after_sales">退款/售后</string>
+
+    <string name="bargain_unused">未使用</string>
+    <string name="bargain_useless">已失效</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>

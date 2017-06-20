@@ -1,0 +1,148 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!-- 会员攻略 -->
+    <LinearLayout
+        android:layout_margin="@dimen/dp_10"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:src="@drawable/nvshengtouxiang"
+            android:layout_width="@dimen/dp_100"
+            android:layout_height="match_parent" />
+        <LinearLayout
+            android:layout_margin="@dimen/dp_12"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="会员享折扣"
+                android:layout_margin="@dimen/dp_5"
+                android:layout_weight="0.2"
+                android:layout_width="match_parent"
+                android:layout_height="0dp" />
+            <TextView
+                android:text="根据商城管理员的设置，不同等级的会员在购买商品是会拥有不同的折扣优惠，详情可以查看具体商品购买页。"
+                android:layout_margin="@dimen/dp_5"
+                android:layout_weight="0.7"
+                android:layout_width="match_parent"
+                android:layout_height="0dp" />
+        </LinearLayout>
+    </LinearLayout>
+    <View
+        android:background="#dddddd"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"/>
+    <!-- 会员攻略 -->
+    <LinearLayout
+        android:layout_margin="@dimen/dp_10"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:src="@drawable/nvshengtouxiang"
+            android:layout_width="@dimen/dp_100"
+            android:layout_height="match_parent" />
+        <LinearLayout
+            android:layout_margin="@dimen/dp_12"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="会员特权"
+                android:layout_margin="@dimen/dp_5"
+                android:layout_weight="0.4"
+                android:layout_width="match_parent"
+                android:layout_height="0dp" />
+            <TextView
+                android:text="部分会员会在商城内享有特权，详情以具体通知为准。"
+                android:layout_margin="@dimen/dp_5"
+                android:layout_weight="0.7"
+                android:layout_width="match_parent"
+                android:layout_height="0dp" />
+        </LinearLayout>
+    </LinearLayout>
+    <View
+        android:background="#dddddd"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"/>
+    <!-- 会员攻略 -->
+    <LinearLayout
+        android:layout_margin="@dimen/dp_10"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:src="@drawable/nvshengtouxiang"
+            android:layout_width="@dimen/dp_100"
+            android:layout_height="match_parent" />
+        <LinearLayout
+            android:layout_margin="@dimen/dp_12"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="会员优先体验"
+                android:layout_margin="@dimen/dp_5"
+                android:layout_weight="0.4"
+                android:layout_width="match_parent"
+                android:layout_height="0dp" />
+            <TextView
+                android:text="部分会员有时会拥有优先体验商品活动的权利。"
+                android:layout_margin="@dimen/dp_5"
+                android:layout_weight="0.7"
+                android:layout_width="match_parent"
+                android:layout_height="0dp" />
+        </LinearLayout>
+    </LinearLayout>
+    <View
+        android:background="#dddddd"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"/>
+    <!-- 会员攻略 -->
+    <LinearLayout
+        android:layout_margin="@dimen/dp_10"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:src="@drawable/nvshengtouxiang"
+            android:layout_width="@dimen/dp_100"
+            android:layout_height="match_parent" />
+        <LinearLayout
+            android:layout_margin="@dimen/dp_12"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="更多会员福利"
+                android:layout_margin="@dimen/dp_5"
+                android:layout_weight="0.4"
+                android:layout_width="match_parent"
+                android:layout_height="0dp" />
+            <TextView
+                android:text="部分会员有时会拥有优先体验商品活动的权利。"
+                android:layout_margin="@dimen/dp_5"
+                android:layout_weight="0.7"
+                android:layout_width="match_parent"
+                android:layout_height="0dp" />
+        </LinearLayout>
+    </LinearLayout>
+    <View
+        android:background="#dddddd"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"/>
+
+</LinearLayout>

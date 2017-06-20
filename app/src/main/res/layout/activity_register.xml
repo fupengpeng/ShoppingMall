@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!-- 标题栏 -->
+    <include layout="@layout/title_activity" />
+
+    <com.fupengpeng.shoppingmall.customerview.ClearEditText
+        android:id="@+id/cet_register_phone_number"
+        style="@style/AppTheme.EditText.Big"
+        android:layout_width="match_parent"
+        android:numeric="integer"
+        android:layout_height="@dimen/dp_60"
+        android:layout_marginLeft="@dimen/dp_23"
+        android:layout_marginRight="@dimen/dp_23"
+        android:layout_marginTop="@dimen/dp_31"
+        android:background="@color/white"
+        android:drawableLeft="@drawable/selector_ic_person"
+        android:hint="手机号"
+        android:maxLength="20" />
+    <com.fupengpeng.shoppingmall.customerview.ClearEditText
+        android:id="@+id/cet_register_password"
+        style="@style/AppTheme.EditText.Big"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_60"
+        android:layout_marginLeft="@dimen/dp_23"
+        android:layout_marginRight="@dimen/dp_23"
+        android:layout_marginTop="@dimen/dp_31"
+        android:background="@color/white"
+        android:drawableLeft="@drawable/selector_ic_person"
+        android:inputType="textPassword"
+        android:hint="登录密码"
+        android:maxLength="20" />
+    <com.fupengpeng.shoppingmall.customerview.ClearEditText
+        android:id="@+id/cet_register_affirm_password"
+        style="@style/AppTheme.EditText.Big"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_60"
+        android:layout_marginLeft="@dimen/dp_23"
+        android:layout_marginRight="@dimen/dp_23"
+        android:layout_marginTop="@dimen/dp_31"
+        android:background="@color/white"
+        android:drawableLeft="@drawable/selector_ic_person"
+        android:inputType="textPassword"
+        android:hint="确认密码"
+        android:maxLength="20" />
+    <LinearLayout
+        style="@style/AppTheme.EditText.Big"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_60"
+        android:layout_marginLeft="@dimen/dp_23"
+        android:layout_marginRight="@dimen/dp_23"
+        android:layout_marginTop="@dimen/dp_31"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:maxLength="20">
+        <com.fupengpeng.shoppingmall.customerview.ClearEditText
+            android:id="@+id/cet_register_verification_code"
+            style="@style/AppTheme.EditText.Big"
+            android:layout_weight="0.7"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_60"
+            android:numeric="integer"
+            android:background="@color/white"
+            android:drawableLeft="@drawable/selector_ic_person"
+            android:hint="验证码"
+            android:maxLength="20" />
+
+        <Button
+            android:id="@+id/btn_register_verification_code"
+            android:background="@drawable/shape_rounded_rectangle_unable_code"
+            android:text="获取验证码"
+            android:layout_weight="0.3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginLeft="23dp"
+        android:layout_marginRight="23dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <CheckBox
+            android:id="@+id/checkbox_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:text="我已阅读并接受"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:textColor="#ff5555"
+            android:text="《91淘课注册条款》"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button_register"
+        android:text="注册"
+        android:enabled="false"
+        android:background="@drawable/shape_rounded_rectangle_unable"
+        android:layout_marginLeft="23dp"
+        android:layout_marginRight="23dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+
+
+
+</LinearLayout>
+

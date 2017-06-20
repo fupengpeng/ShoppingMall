@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/ll_activity_address_edit_parent"
+    android:orientation="vertical">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/iv_activity_address_edit_return"
+            android:layout_width="45dp"
+            android:layout_height="45dp" />
+        <TextView
+            android:gravity="center"
+            android:layout_marginRight="45dp"
+            android:textSize="@dimen/dp_20"
+            android:text="收货地址管理"
+            android:layout_width="match_parent"
+            android:layout_height="45dp" />
+    </LinearLayout>
+    <View
+        android:background="#dddddd"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_4"/>
+
+    <ListView
+        android:id="@+id/lv_activity_address_edit_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="90dp">
+
+
+        <Button
+            android:id="@+id/btn_activity_address_edit_add"
+            android:background="@color/background_red"
+            android:textColor="#ffffff"
+            android:text="添加新地址"
+            android:layout_width="match_parent"
+            android:textSize="@dimen/dp_20"
+            android:layout_height="@dimen/dp_45" />
+
+        <Button
+            android:id="@+id/btn_activity_address_edit_obtain"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_45"
+            android:background="@color/btn_background_save"
+            android:text="一键获取微信地址"
+            android:textColor="#ffffff"
+            android:textSize="@dimen/dp_20" />
+
+    </LinearLayout>
+
+</LinearLayout>

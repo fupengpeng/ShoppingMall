@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_activity_phone_number_bind_return"
+            android:layout_width="45dp"
+            android:layout_height="45dp" />
+
+        <TextView
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="绑定手机号"
+            android:textSize="@dimen/dp_20"
+            android:layout_width="match_parent"
+            android:layout_height="45dp" />
+        <ImageView
+            android:layout_width="45dp"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+    <ImageView
+        android:layout_marginTop="@dimen/dp_15"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/nvshengtouxiang"
+        android:layout_width="@dimen/dp_100"
+        android:layout_height="@dimen/dp_95" />
+    <com.fupengpeng.shoppingmall.customerview.ClearEditText
+        android:id="@+id/cet_activity_phone_number_bind_phone_number"
+        style="@style/AppTheme.EditText.Big"
+        android:layout_width="match_parent"
+        android:numeric="integer"
+        android:layout_height="@dimen/dp_60"
+        android:layout_marginLeft="@dimen/dp_23"
+        android:layout_marginRight="@dimen/dp_23"
+        android:layout_marginTop="@dimen/dp_31"
+        android:background="@color/white"
+        android:drawableLeft="@drawable/selector_ic_person"
+        android:hint="手机号"
+        android:maxLength="20" />
+
+    <LinearLayout
+        style="@style/AppTheme.EditText.Big"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_60"
+        android:layout_marginLeft="@dimen/dp_23"
+        android:layout_marginRight="@dimen/dp_23"
+        android:layout_marginTop="@dimen/dp_31"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:maxLength="20">
+        <com.fupengpeng.shoppingmall.customerview.ClearEditText
+            android:id="@+id/cet_activity_phone_number_bind_verification_code"
+            style="@style/AppTheme.EditText.Big"
+            android:layout_weight="0.7"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_60"
+            android:numeric="integer"
+            android:background="@color/white"
+            android:drawableLeft="@drawable/selector_ic_person"
+            android:hint="验证码"
+            android:maxLength="20" />
+
+        <Button
+            android:id="@+id/btn_activity_phone_number_bind_verification_code"
+            android:background="@drawable/shape_rounded_rectangle_unable_code"
+            android:text="获取验证码"
+            android:layout_weight="0.3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <com.fupengpeng.shoppingmall.customerview.ClearEditText
+        android:id="@+id/cet_activity_phone_number_bind_affirm_password"
+        style="@style/AppTheme.EditText.Big"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_60"
+        android:layout_marginLeft="@dimen/dp_23"
+        android:layout_marginRight="@dimen/dp_23"
+        android:layout_marginTop="@dimen/dp_31"
+        android:background="@color/white"
+        android:drawableLeft="@drawable/selector_ic_person"
+        android:inputType="textPassword"
+        android:hint="确认密码"
+        android:maxLength="20" />
+
+    <Button
+        android:id="@+id/btn_activity_phone_number_bind_bind"
+        android:layout_marginTop="@dimen/dp_20"
+        android:layout_marginLeft="@dimen/dp_80"
+        android:layout_marginRight="@dimen/dp_80"
+        android:background="@color/btn_background_blue"
+        android:text="立即绑定"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_45">
+
+        <ImageView
+            android:id="@+id/iv_activity_integral_particulars_return"
+            android:src="@drawable/ic_left_return_black_24dp"
+            android:layout_marginLeft="@dimen/dp_5"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_gravity="center"
+            android:layout_width="@dimen/dp_30"
+            android:layout_height="@dimen/dp_30" />
+
+        <TextView
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="积分详情"
+            android:textSize="@dimen/dp_20"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_45" />
+        <ImageView
+            android:id="@+id/iv_activity_integral_particulars_share"
+            android:layout_marginRight="@dimen/dp_5"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_more_vert_black_24dp"
+            android:layout_width="@dimen/dp_30"
+            android:layout_height="@dimen/dp_30" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:background="#888888"
+        android:layout_height="@dimen/dp_45">
+        <LinearLayout
+            android:id="@+id/ll_activity_integral_particulars_all"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/tv_activity_integral_particulars_all"
+                android:gravity="center"
+                android:textColor="#dddddd"
+                android:text="全部"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp" />
+            <View
+                android:id="@+id/v_activity_integral_particulars_all"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_3"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_activity_integral_particulars_gain"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/tv_activity_integral_particulars_gain"
+                android:gravity="center"
+                android:textColor="#dddddd"
+                android:text="获得"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp" />
+            <View
+                android:id="@+id/v_activity_integral_particulars_gain"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_3"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_activity_integral_particulars_expend"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/tv_activity_integral_particulars_expend"
+                android:gravity="center"
+                android:textColor="#dddddd"
+                android:text="消耗"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp" />
+            <View
+                android:id="@+id/v_activity_integral_particulars_expend"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_3"/>
+        </LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_activity_integral_particulars_parent"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</LinearLayout>

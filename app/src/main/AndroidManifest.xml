@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.fupengpeng.shoppingmall">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/nvshengtouxiang"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".activity.BaseActivity"/>
+        <activity android:name=".activity.personcenter.impl.InformationEditActivity" />
+        <activity android:name=".activity.personcenter.impl.DataActivity" />
+        <activity android:name=".activity.personcenter.impl.AddressEditActivity" />
+        <activity android:name=".activity.personcenter.impl.MemberCenterActivity" />
+        <activity android:name=".activity.personcenter.impl.OrderCenterActivity" />
+        <activity android:name=".activity.personcenter.impl.ShoppingCartActivity" />
+        <activity android:name=".activity.personcenter.impl.DiscountCouponActivity" />
+        <activity android:name=".activity.personcenter.impl.IntegralShoppingMallActivity" />
+        <activity android:name=".activity.personcenter.impl.IntegralPersonActivity" />
+        <activity android:name=".activity.personcenter.impl.OrderParticularsActivity" />
+        <activity android:name=".activity.personcenter.impl.OrderTrackingActivity" />
+        <activity android:name=".activity.personcenter.impl.CommodityParticularsActivity" />
+        <activity android:name=".activity.personcenter.impl.AlterationInsuranceActivity" />
+        <activity android:name=".activity.personcenter.impl.IntegralSequenceActivity" />
+        <activity android:name=".activity.personcenter.impl.IntegralTaskActivity" />
+        <activity android:name=".activity.personcenter.impl.IntegralUseActivity" />
+        <activity android:name=".activity.personcenter.impl.IntegralParticularsActivity" />
+        <activity android:name=".activity.personcenter.impl.IntegralShoppingMallOrderActivity" />
+        <activity android:name=".activity.personcenter.impl.WithdrawDepositActivity"/>
+        <activity android:name=".activity.personcenter.impl.BargainActivity"/>
+        <activity android:name=".activity.personcenter.impl.GrouponActivity"/>
+        <activity android:name=".activity.personcenter.impl.WinningActivity"/>
+
+
+
+    </application>
+
+
+</manifest>

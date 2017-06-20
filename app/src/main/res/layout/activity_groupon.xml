@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/iv_activity_groupon_return"
+                android:layout_width="@dimen/dp_45"
+                android:layout_height="match_parent" />
+            <TextView
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="资料编辑"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_45" />
+            <ImageView
+                android:id="@+id/iv_activity_groupon_close"
+                android:layout_width="@dimen/dp_45"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_45">
+            <LinearLayout
+                android:id="@+id/ll_activity_groupon_at"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/tv_activity_groupon_at"
+                    android:gravity="center"
+                    android:text="拼团中"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp" />
+                <View
+                    android:id="@+id/v_activity_groupon_at"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_3"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ll_activity_groupon_finish"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/tv_activity_groupon_finish"
+                    android:gravity="center"
+                    android:text="已成团"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp" />
+                <View
+                    android:id="@+id/v_activity_groupon_finish"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_3"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ll_activity_groupon_unfinished"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/tv_activity_groupon_unfinished"
+                    android:gravity="center"
+                    android:text="未成团"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp" />
+                <View
+                    android:id="@+id/v_activity_groupon_unfinished"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_3"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_activity_groupon_parent"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

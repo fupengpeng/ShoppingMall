@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp_46">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_45">
+        <TextView
+            android:id="@+id/tv_item_activity_integral_sequence_ranking"
+            android:gravity="center"
+            android:text="排名"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+        <ImageView
+            android:id="@+id/iv_item_activity_integral_sequence_user_pic"
+            android:src="@drawable/nvshengtouxiang"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+        <TextView
+            android:id="@+id/tv_item_activity_integral_sequence_username"
+            android:text="龙腾交通"
+            android:layout_marginLeft="@dimen/dp_8"
+            android:gravity="center|left"
+            android:layout_weight="3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+        <ImageView
+            android:id="@+id/iv_item_activity_integral_sequence_ranking_pic"
+            android:src="@drawable/nvshengtouxiang"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+
+        <LinearLayout
+            android:layout_gravity="center"
+            android:layout_weight="2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_item_activity_integral_sequence_integral"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.5"
+                android:gravity="center"
+                android:text="305"
+                android:textColor="#444444"
+                android:textSize="@dimen/dp_15" />
+
+            <TextView
+                android:gravity="center"
+                android:text="积分"
+                android:layout_weight="0.5"
+                android:layout_width="match_parent"
+                android:layout_height="0dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:background="#E6E9ED"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"/>
+
+
+</LinearLayout>

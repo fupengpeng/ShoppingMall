@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_45"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/dp_40"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="会员成长值是什么？"
+            android:textColor="#444444"
+            android:textSize="@dimen/dp_15" />
+
+        <ImageView
+            android:id="@+id/iv_item_activity_member_center_query"
+            android:src="@drawable/ic_close_black_24dp"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_gravity="center"
+            android:layout_width="@dimen/dp_30"
+            android:layout_height="@dimen/dp_30" />
+    </LinearLayout>
+
+    <View
+        android:background="#dddddd"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"/>
+    <TextView
+        android:text="1、在商城内，每获得1积分会相应的取得1个成长值，积分可以用来使用，而成长值正则用来给会员升级，会员等级越高在商城内拥有更高的优惠和福利。"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:lineSpacingExtra="@dimen/dp_5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:text="2、积分使用后，成长值不会降低，简单的说，成长值 = 可用积分 + 已使用积分。"
+        android:layout_marginTop="@dimen/dp_5"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:layout_marginBottom="@dimen/dp_15"
+        android:lineSpacingExtra="@dimen/dp_5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+</LinearLayout>

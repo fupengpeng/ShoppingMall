@@ -1,0 +1,36 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/ll_fragment_order_center_refund_after_sales"
+        android:visibility="gone"
+        android:background="#ffffff"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_weight="0.5"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:src="@drawable/zanwudingdan" />
+        <TextView
+            android:gravity="top|center_horizontal"
+            android:layout_weight="0.5"
+            android:textSize="@dimen/dp_40"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:text="@string/order_center_all" />
+    </LinearLayout>
+    <!-- 数据列表 -->
+    <com.handmark.pulltorefresh.library.PullToRefreshListView
+        android:id="@+id/ptrlv_fragment_order_center_refund_after_sales"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@null"
+        android:scrollbars="none"
+        />
+
+</FrameLayout>
