@@ -32,7 +32,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
-import cn.sharesdk.onekeyshare.OnekeyShare;
 
 /**
  * 个人中心Fragment
@@ -177,7 +176,7 @@ public class PersonCenterFragment extends Fragment {
     LinearLayout llFragmentPersonIntegralShopping;
 
     Unbinder unbinder;
-    private View personCenterView;
+    private View personCenterFragmentView;
 
     private Intent intent;
     private int setFragment;
@@ -201,9 +200,9 @@ public class PersonCenterFragment extends Fragment {
         // Inflate the layout for this fragment
 
         getActivity();
-        personCenterView = inflater.inflate(R.layout.fragment_person_center, container, false);
-        unbinder = ButterKnife.bind(this, personCenterView);
-        return personCenterView;
+        personCenterFragmentView = inflater.inflate(R.layout.fragment_person_center, container, false);
+        unbinder = ButterKnife.bind(this, personCenterFragmentView);
+        return personCenterFragmentView;
     }
 
 
