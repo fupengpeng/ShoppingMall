@@ -566,6 +566,7 @@
                         android:text="商品总额" />
 
                     <TextView
+                        android:id="@+id/tv_activity_order_particulars_commodity_amount"
                         android:gravity="center"
                         android:text="￥700.00"
                         android:layout_width="wrap_content"
@@ -587,6 +588,7 @@
                         android:text="+退换无忧" />
 
                     <TextView
+
                         android:gravity="center"
                         android:text="￥5.00"
                         android:layout_width="wrap_content"
@@ -608,6 +610,7 @@
                         android:text="+运费" />
 
                     <TextView
+                        android:id="@+id/tv_activity_order_particulars_freight"
                         android:gravity="center"
                         android:text="￥0.00"
                         android:layout_width="wrap_content"
@@ -632,6 +635,7 @@
                         android:layout_height="match_parent" />
 
                     <TextView
+                        android:id="@+id/tv_activity_order_particulars_actual_payment"
                         android:textColor="#ffff0000"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"

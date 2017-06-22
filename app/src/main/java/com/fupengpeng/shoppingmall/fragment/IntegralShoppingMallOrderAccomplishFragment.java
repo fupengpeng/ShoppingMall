@@ -337,7 +337,7 @@ public class IntegralShoppingMallOrderAccomplishFragment extends Fragment {
     }
 
 
-    static class IntegralShoppingMallOrderAccomplishFragmentAdapter extends BaseAdapter {
+    static class IntegralShoppingMallOrderAccomplishFragmentAdapter extends BaseAdapter implements View.OnClickListener{
         public static final String TAG = "OrderCenterAllFragmentAdapter";
         public static final String ORDER_STATE_WAIT_SHIPMENTS = "1000";
         public static final String ORDER_STATE_WAIT_RECEIVING = "2000";
@@ -463,7 +463,7 @@ public class IntegralShoppingMallOrderAccomplishFragment extends Fragment {
             viewHolder.tvItemFragmentOrderCenterOrderListOrderNumberExplain.setOnClickListener((View.OnClickListener) context);
             viewHolder.tvItemFragmentOrderCenterOrderListOrderNumber.setOnClickListener((View.OnClickListener) context);
             viewHolder.tvItemFragmentOrderCenterOrderListOrderState.setOnClickListener((View.OnClickListener) context);
-            viewHolder.ivItemFragmentOrderCenterOrderListDeleteOrder.setOnClickListener((View.OnClickListener) context);
+            viewHolder.ivItemFragmentOrderCenterOrderListDeleteOrder.setOnClickListener(this);
             viewHolder.ivItemFragmentOrderCenterOrderListCommodityPic.setOnClickListener((View.OnClickListener) context);
             viewHolder.tvItemFragmentOrderCenterOrderListCommodityName.setOnClickListener((View.OnClickListener) context);
             viewHolder.tvItemFragmentOrderCenterOrderListCommodityQuantity.setOnClickListener((View.OnClickListener) context);
@@ -476,6 +476,24 @@ public class IntegralShoppingMallOrderAccomplishFragment extends Fragment {
 
 
             return convertView;
+        }
+
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()){
+                case R.id.iv_item_fragment_order_center_order_list_delete_order:
+                    synchronized (data) {
+                        for (int i = 0; i < data.size(); i++) {
+                            if (i == (Integer) v.getTag()) {
+                                data.remove(i);
+                            } else {
+
+                            }
+                        }
+                    }
+                    notifyDataSetChanged();
+                    break;
+            }
         }
 
 

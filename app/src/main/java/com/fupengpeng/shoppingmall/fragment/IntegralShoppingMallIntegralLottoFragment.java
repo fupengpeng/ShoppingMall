@@ -14,9 +14,9 @@ import android.widget.TextView;
 
 import com.fupengpeng.shoppingmall.R;
 import com.fupengpeng.shoppingmall.activity.personcenter.impl.IntegralShoppingMallActivity;
+import com.fupengpeng.shoppingmall.customerview.ScrollViewNestedGridView;
 import com.fupengpeng.shoppingmall.entity.IntegralCommodityList;
 import com.fupengpeng.shoppingmall.entity.IntegralCommodityObject;
-
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,9 +33,9 @@ import butterknife.Unbinder;
 public class IntegralShoppingMallIntegralLottoFragment extends Fragment {
 
 
-    @BindView(R.id.gv_fragment_integral_shopping_mall_integral_lotto)
-    GridView gvFragmentIntegralShoppingMallIntegralLotto;
     Unbinder unbinder;
+    @BindView(R.id.gv_fragment_integral_shopping_mall_integral_lotto)
+    ScrollViewNestedGridView gvFragmentIntegralShoppingMallIntegralLotto;
     /**
      * 数据对象列表
      */
@@ -82,7 +82,7 @@ public class IntegralShoppingMallIntegralLottoFragment extends Fragment {
         parseData();
 
         list = getData();
-        integralShoppingMallIntegralLottoFragmentAdapter = new IntegralShoppingMallIntegralLottoFragmentAdapter(getActivity(),list);
+        integralShoppingMallIntegralLottoFragmentAdapter = new IntegralShoppingMallIntegralLottoFragmentAdapter(getActivity(), list);
         gvFragmentIntegralShoppingMallIntegralLotto.setAdapter(integralShoppingMallIntegralLottoFragmentAdapter);
 
         return integralShoppingMallIntegralLottoFragmentView;
@@ -109,6 +109,7 @@ public class IntegralShoppingMallIntegralLottoFragment extends Fragment {
         }
         return list;
     }
+
     /**
      * 数据对象获取
      */
@@ -202,6 +203,7 @@ public class IntegralShoppingMallIntegralLottoFragment extends Fragment {
 
             return convertView;
         }
+
         //ViewHolder静态类
         static class ViewHolder {
             @BindView(R.id.iv_item_fragment_integral_shopping_mall_commodity_pic)

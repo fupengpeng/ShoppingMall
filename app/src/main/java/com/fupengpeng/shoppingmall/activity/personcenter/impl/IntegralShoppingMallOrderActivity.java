@@ -11,10 +11,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-
 import com.fupengpeng.shoppingmall.MainActivity;
 import com.fupengpeng.shoppingmall.R;
-import com.fupengpeng.shoppingmall.activity.BaseActivity;
 import com.fupengpeng.shoppingmall.fragment.IntegralShoppingMallOrderAccomplishFragment;
 import com.fupengpeng.shoppingmall.fragment.IntegralShoppingMallOrderAllFragment;
 import com.fupengpeng.shoppingmall.fragment.IntegralShoppingMallOrderWaitReceivingFragment;
@@ -81,8 +79,8 @@ public class IntegralShoppingMallOrderActivity extends AppCompatActivity impleme
     /**
      * 订单列表Fragment容器
      */
-    @BindView(R.id.ll_activity_integral_shopping_mall_parent)
-    LinearLayout llActivityIntegralShoppingMallParent;
+    @BindView(R.id.ll_activity_integral_shopping_mall_order_parent)
+    LinearLayout llActivityIntegralShoppingMallOrderParent;
 
 
     /**
@@ -108,7 +106,7 @@ public class IntegralShoppingMallOrderActivity extends AppCompatActivity impleme
     /**
      * 设置展示Fragment的参数
      */
-    private int setFragment ;
+    private int setFragment;
 
     /**
      * 全部订单
@@ -163,7 +161,7 @@ public class IntegralShoppingMallOrderActivity extends AppCompatActivity impleme
             case R.id.tv_item_fragment_order_center_order_list_order_number_explain:
                 intent = new Intent(this, OrderParticularsActivity.class);
                 bundle = new Bundle();
-                bundle.putInt("fragmentRequestSign", 200);
+                bundle.putInt("setFragment", 200);
                 intent.putExtras(bundle);
                 startActivity(intent);
                 break;
@@ -173,7 +171,7 @@ public class IntegralShoppingMallOrderActivity extends AppCompatActivity impleme
             case R.id.tv_item_fragment_order_center_order_list_order_number:
                 intent = new Intent(this, OrderParticularsActivity.class);
                 bundle = new Bundle();
-                bundle.putInt("fragmentRequestSign", 200);
+                bundle.putInt("setFragment", 200);
                 intent.putExtras(bundle);
                 startActivity(intent);
                 break;
@@ -183,16 +181,9 @@ public class IntegralShoppingMallOrderActivity extends AppCompatActivity impleme
             case R.id.tv_item_fragment_order_center_order_list_order_state:
                 intent = new Intent(this, OrderParticularsActivity.class);
                 bundle = new Bundle();
-                bundle.putInt("fragmentRequestSign", 200);
+                bundle.putInt("setFragment", 200);
                 intent.putExtras(bundle);
                 startActivity(intent);
-                break;
-            /**
-             * 点击删除此订单
-             */
-            case R.id.iv_item_fragment_order_center_order_list_delete_order:
-                // TODO: 2017/6/9 0009  删除订单待实现
-                ToastUtils.showLong(this, "删除订单待实现");
                 break;
             /**
              * 点击跳转至订单详情界面
@@ -200,7 +191,7 @@ public class IntegralShoppingMallOrderActivity extends AppCompatActivity impleme
             case R.id.iv_item_fragment_order_center_order_list_commodity_pic:
                 intent = new Intent(this, OrderParticularsActivity.class);
                 bundle = new Bundle();
-                bundle.putInt("fragmentRequestSign", 200);
+                bundle.putInt("setFragment", 200);
                 intent.putExtras(bundle);
                 startActivity(intent);
                 break;
@@ -210,7 +201,7 @@ public class IntegralShoppingMallOrderActivity extends AppCompatActivity impleme
             case R.id.tv_item_fragment_order_center_order_list_commodity_name:
                 intent = new Intent(this, OrderParticularsActivity.class);
                 bundle = new Bundle();
-                bundle.putInt("fragmentRequestSign", 200);
+                bundle.putInt("setFragment", 200);
                 intent.putExtras(bundle);
                 startActivity(intent);
                 break;
@@ -220,7 +211,7 @@ public class IntegralShoppingMallOrderActivity extends AppCompatActivity impleme
             case R.id.tv_item_fragment_order_center_order_list_commodity_quantity:
                 intent = new Intent(this, OrderParticularsActivity.class);
                 bundle = new Bundle();
-                bundle.putInt("fragmentRequestSign", 200);
+                bundle.putInt("setFragment", 200);
                 intent.putExtras(bundle);
                 startActivity(intent);
                 break;
@@ -230,7 +221,7 @@ public class IntegralShoppingMallOrderActivity extends AppCompatActivity impleme
             case R.id.tv_item_fragment_order_center_order_list_commodity_pay:
                 intent = new Intent(this, OrderParticularsActivity.class);
                 bundle = new Bundle();
-                bundle.putInt("fragmentRequestSign", 200);
+                bundle.putInt("setFragment", 200);
                 intent.putExtras(bundle);
                 startActivity(intent);
                 break;
@@ -240,7 +231,7 @@ public class IntegralShoppingMallOrderActivity extends AppCompatActivity impleme
             case R.id.tv_item_fragment_order_center_order_list_commodity_aggregate_price:
                 intent = new Intent(this, OrderParticularsActivity.class);
                 bundle = new Bundle();
-                bundle.putInt("fragmentRequestSign", 200);
+                bundle.putInt("setFragment", 200);
                 intent.putExtras(bundle);
                 startActivity(intent);
                 break;
@@ -250,7 +241,7 @@ public class IntegralShoppingMallOrderActivity extends AppCompatActivity impleme
             case R.id.v_item_fragment_order_center_order_list_blank:
                 intent = new Intent(this, OrderParticularsActivity.class);
                 bundle = new Bundle();
-                bundle.putInt("fragmentRequestSign", 200);
+                bundle.putInt("setFragment", 200);
                 intent.putExtras(bundle);
                 startActivity(intent);
                 break;
@@ -304,7 +295,7 @@ public class IntegralShoppingMallOrderActivity extends AppCompatActivity impleme
                 vActivityIntegralShoppingMallAll.setBackgroundColor(0xffff0000);
                 if (integralShoppingMallOrderAllFragment == null) {
                     integralShoppingMallOrderAllFragment = new IntegralShoppingMallOrderAllFragment();
-                    transaction.add(R.id.ll_activity_integral_shopping_mall_parent, integralShoppingMallOrderAllFragment);
+                    transaction.add(R.id.ll_activity_integral_shopping_mall_order_parent, integralShoppingMallOrderAllFragment);
                 } else {
                     transaction.show(integralShoppingMallOrderAllFragment);
                 }
@@ -318,7 +309,7 @@ public class IntegralShoppingMallOrderActivity extends AppCompatActivity impleme
                 vActivityIntegralShoppingMallWaitShipments.setBackgroundColor(0xffff0000);
                 if (integralShoppingMallOrderWaitShipmentsFragment == null) {
                     integralShoppingMallOrderWaitShipmentsFragment = new IntegralShoppingMallOrderWaitShipmentsFragment();
-                    transaction.add(R.id.ll_activity_integral_shopping_mall_parent, integralShoppingMallOrderWaitShipmentsFragment);
+                    transaction.add(R.id.ll_activity_integral_shopping_mall_order_parent, integralShoppingMallOrderWaitShipmentsFragment);
                 } else {
                     transaction.show(integralShoppingMallOrderWaitShipmentsFragment);
                 }
@@ -332,7 +323,7 @@ public class IntegralShoppingMallOrderActivity extends AppCompatActivity impleme
                 vActivityIntegralShoppingMallWaitReceiving.setBackgroundColor(0xffff0000);
                 if (integralShoppingMallOrderWaitReceivingFragment == null) {
                     integralShoppingMallOrderWaitReceivingFragment = new IntegralShoppingMallOrderWaitReceivingFragment();
-                    transaction.add(R.id.ll_activity_integral_shopping_mall_parent, integralShoppingMallOrderWaitReceivingFragment);
+                    transaction.add(R.id.ll_activity_integral_shopping_mall_order_parent, integralShoppingMallOrderWaitReceivingFragment);
                 } else {
                     transaction.show(integralShoppingMallOrderWaitReceivingFragment);
                 }
@@ -346,7 +337,7 @@ public class IntegralShoppingMallOrderActivity extends AppCompatActivity impleme
                 vActivityIntegralShoppingMallAccomplish.setBackgroundColor(0xffff0000);
                 if (integralShoppingMallOrderAccomplishFragment == null) {
                     integralShoppingMallOrderAccomplishFragment = new IntegralShoppingMallOrderAccomplishFragment();
-                    transaction.add(R.id.ll_activity_integral_shopping_mall_parent, integralShoppingMallOrderAccomplishFragment);
+                    transaction.add(R.id.ll_activity_integral_shopping_mall_order_parent, integralShoppingMallOrderAccomplishFragment);
                 } else {
                     transaction.show(integralShoppingMallOrderAccomplishFragment);
                 }

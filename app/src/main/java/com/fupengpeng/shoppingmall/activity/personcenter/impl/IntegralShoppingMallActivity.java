@@ -10,12 +10,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
-
 
 import com.fupengpeng.shoppingmall.MainActivity;
 import com.fupengpeng.shoppingmall.R;
-import com.fupengpeng.shoppingmall.activity.BaseActivity;
 import com.fupengpeng.shoppingmall.activity.personcenter.view.IIntegralView;
 import com.fupengpeng.shoppingmall.fragment.IntegralShoppingMallAllFragment;
 import com.fupengpeng.shoppingmall.fragment.IntegralShoppingMallIntegralLottoFragment;
@@ -104,9 +103,10 @@ public class IntegralShoppingMallActivity extends AppCompatActivity implements I
     @BindView(R.id.ll_activity_integral_shopping_mall_parent)
     LinearLayout llActivityIntegralShoppingMallParent;
 
-
-
-
+    @BindView(R.id.ll_activity_integral_shopping_mall_scrollview)
+    LinearLayout llActivityIntegralShoppingMallScrollview;
+    @BindView(R.id.scv_activity_integral_shopping_mall)
+    ScrollView scvActivityIntegralShoppingMall;
 
 
     private Intent intent;
@@ -120,7 +120,7 @@ public class IntegralShoppingMallActivity extends AppCompatActivity implements I
     /**
      * 用于展示全部商品的Fragment
      */
-    private IntegralShoppingMallAllFragment intergralShoppingMallAllFragment;
+    private IntegralShoppingMallAllFragment integralShoppingMallAllFragment;
 
     /**
      * 用于展示0元换购的Fragment
@@ -138,7 +138,6 @@ public class IntegralShoppingMallActivity extends AppCompatActivity implements I
      */
     FragmentManager fragmentManager;
     FragmentTransaction transaction;
-    private int fragmentRequestSign;
 
     public static final String TAG = "GrouponActivity";
     private Intent intent1;
@@ -149,11 +148,8 @@ public class IntegralShoppingMallActivity extends AppCompatActivity implements I
         setContentView(R.layout.activity_integral_shopping_mall);
         ButterKnife.bind(this);
 
-        //添加一个FragmentTransaction的实例
-        fragmentManager = getFragmentManager();
-        // 开启一个Fragment事务
-        transaction = fragmentManager.beginTransaction();
-        Log.e(TAG, "onCreate: "+"进入积分商城" );
+        scvActivityIntegralShoppingMall.requestChildFocus(llActivityIntegralShoppingMallScrollview,null);
+        Log.e(TAG, "onCreate: " + "进入积分商城");
         setTabSelection(1);
 
     }
@@ -173,31 +169,31 @@ public class IntegralShoppingMallActivity extends AppCompatActivity implements I
              * 返回和分享
              */
             case R.id.iv_activity_integral_shopping_mall_return:
-                intent1 = new Intent(IntegralShoppingMallActivity.this,MainActivity.class);
+                intent1 = new Intent(IntegralShoppingMallActivity.this, MainActivity.class);
                 startActivity(intent1);
                 break;
             case R.id.iv_activity_integral_shopping_mall_share:
                 // TODO: 2017/6/15 0015 分享待实现
-                ToastUtils.showLong(IntegralShoppingMallActivity.this,"分享待实现");
+                ToastUtils.showLong(IntegralShoppingMallActivity.this, "分享待实现");
                 break;
             /**
              * 店铺首页
              */
             case R.id.ll_activity_integral_shopping_mall_store_home:
-                ToastUtils.showLong(IntegralShoppingMallActivity.this,"店铺首页待实现");
+                ToastUtils.showLong(IntegralShoppingMallActivity.this, "店铺首页待实现");
                 break;
             /**
              * 获取积分
              */
             case R.id.tv_activity_integral_shopping_mall_integral_gain:
-                intent = new Intent(IntegralShoppingMallActivity.this,IntegralPersonActivity.class);
+                intent = new Intent(IntegralShoppingMallActivity.this, IntegralPersonActivity.class);
                 startActivity(intent);
                 break;
             /**
              * 积分商城订单
              */
             case R.id.btn_activity_integral_shopping_mall_order:
-                intent = new Intent(IntegralShoppingMallActivity.this,IntegralShoppingMallOrderActivity.class);
+                intent = new Intent(IntegralShoppingMallActivity.this, IntegralShoppingMallOrderActivity.class);
                 startActivity(intent);
                 break;
             /**
@@ -236,13 +232,13 @@ public class IntegralShoppingMallActivity extends AppCompatActivity implements I
                 // 当点击了已解决图片时，改变控件的图片
                 tvActivityIntegralShoppingMallAll.setTextColor(0xffff0000);
                 vActivityIntegralShoppingMallAll.setBackgroundColor(0xffff0000);
-                if (intergralShoppingMallAllFragment == null) {
-                    intergralShoppingMallAllFragment = new IntegralShoppingMallAllFragment();
-                    transaction.add(R.id.ll_activity_integral_shopping_mall_parent, intergralShoppingMallAllFragment);
+                if (integralShoppingMallAllFragment == null) {
+                    integralShoppingMallAllFragment = new IntegralShoppingMallAllFragment();
+                    transaction.add(R.id.ll_activity_integral_shopping_mall_parent, integralShoppingMallAllFragment);
                 } else {
-                    transaction.show(intergralShoppingMallAllFragment);
+                    transaction.show(integralShoppingMallAllFragment);
                 }
-                fragmentRequestSign = 100;
+                setFragment = 100;
                 break;
             case GROUP_FINISH:
 
@@ -255,7 +251,7 @@ public class IntegralShoppingMallActivity extends AppCompatActivity implements I
                 } else {
                     transaction.show(integralShoppingMallZeroConversionFragment);
                 }
-                fragmentRequestSign = 200;
+                setFragment = 200;
                 break;
             case GROUP_UNFINISHED:
                 // 当点击了我要提问时，改变控件的图片
@@ -267,7 +263,7 @@ public class IntegralShoppingMallActivity extends AppCompatActivity implements I
                 } else {
                     transaction.show(integralShoppingMallIntegralLottoFragment);
                 }
-                fragmentRequestSign = 300;
+                setFragment = 300;
                 break;
         }
         transaction.commit();
@@ -290,8 +286,8 @@ public class IntegralShoppingMallActivity extends AppCompatActivity implements I
      * 用于对Fragment执行操作的事务
      */
     private void hideFragments(FragmentTransaction transaction) {
-        if (intergralShoppingMallAllFragment != null) {
-            transaction.hide(intergralShoppingMallAllFragment);
+        if (integralShoppingMallAllFragment != null) {
+            transaction.hide(integralShoppingMallAllFragment);
         }
         if (integralShoppingMallZeroConversionFragment != null) {
             transaction.hide(integralShoppingMallZeroConversionFragment);
@@ -300,11 +296,6 @@ public class IntegralShoppingMallActivity extends AppCompatActivity implements I
             transaction.hide(integralShoppingMallIntegralLottoFragment);
         }
     }
-
-
-
-
-
 
 
 }

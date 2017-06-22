@@ -37,8 +37,7 @@ import butterknife.Unbinder;
  * 全部订单
  */
 public class OrderCenterAllFragment extends Fragment
-
-//        , View.OnClickListener
+//        implements View.OnClickListener
 {
 
     public static final String TAG = "OrderCenterAllFragment";

@@ -9,7 +9,9 @@ import java.util.List;
 
 public class IntegralCommodityList implements Serializable {
 
+
     List<IntegralCommodityObject> commodityObjectList ;
+
 
     public List<IntegralCommodityObject> getCommodityObjectList() {
         return commodityObjectList;

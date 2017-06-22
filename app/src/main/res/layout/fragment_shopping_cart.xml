@@ -6,9 +6,8 @@
 
 
     <include
-        android:id="@+id/include"
-        android:visibility="gone"
         layout="@layout/title_activity"/>
+
     <ListView
         android:id="@+id/lv_fragment_shopping_cart"
         android:layout_width="match_parent"
@@ -20,58 +19,67 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_45"
         android:orientation="horizontal">
+
         <CheckBox
             android:id="@+id/cb_fragment_shopping_cart_select_all"
             style="@style/circlecheckbox"
-            android:text="全选"
-            android:clickable="true"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:layout_marginTop="@dimen/dp_4"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:scaleX="0.5"
+            android:scaleY="0.5"
+            android:textSize="@dimen/dp_25"
             android:layout_marginBottom="@dimen/dp_4"
             android:layout_marginLeft="@dimen/dp_10"
             android:layout_marginRight="@dimen/dp_5"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
+            android:layout_marginTop="@dimen/dp_4"
+            android:text="全选" />
+
         <LinearLayout
-            android:layout_marginLeft="@dimen/dp_5"
-            android:orientation="vertical"
-            android:layout_weight="1"
+            android:id="@+id/ll_fragment_shopping_cart_price_total"
             android:layout_width="0dp"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/dp_5"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
             <LinearLayout
-                android:orientation="horizontal"
-                android:layout_weight="0.5"
                 android:layout_width="match_parent"
-                android:layout_height="0dp">
+                android:layout_height="0dp"
+                android:layout_weight="0.5"
+                android:orientation="horizontal">
+
                 <TextView
-                    android:text="合计："
-                    android:gravity="center"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="合计：" />
+
                 <TextView
                     android:id="@+id/tv_fragment_shopping_cart_total"
-                    android:text="￥100.25"
-                    android:gravity="center"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="￥0.00" />
             </LinearLayout>
+
             <LinearLayout
-                android:orientation="horizontal"
-                android:layout_weight="0.5"
                 android:layout_width="match_parent"
-                android:layout_height="0dp">
+                android:layout_height="0dp"
+                android:layout_weight="0.5"
+                android:orientation="horizontal">
+
                 <TextView
-                    android:text="总额："
-                    android:gravity="center"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="总额：" />
+
                 <TextView
                     android:id="@+id/tv_fragment_shopping_cart_amount"
-                    android:text="￥5001547.64"
-                    android:gravity="center"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="￥0.00" />
             </LinearLayout>
 
 
@@ -79,9 +87,9 @@
 
         <Button
             android:id="@+id/btn_fragment_shopping_cart_settlement"
-            android:text="去结算（86）"
             android:layout_width="@dimen/dp_120"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:text="去结算（0）" />
     </LinearLayout>
 
 

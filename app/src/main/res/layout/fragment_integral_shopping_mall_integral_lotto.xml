@@ -4,7 +4,7 @@
     android:layout_height="match_parent">
 
     <!-- TODO: Update blank fragment layout -->
-    <GridView
+    <com.fupengpeng.shoppingmall.customerview.ScrollViewNestedGridView
         android:id="@+id/gv_fragment_integral_shopping_mall_integral_lotto"
         android:gravity="center"
         android:numColumns="2"

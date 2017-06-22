@@ -14,14 +14,9 @@ import android.widget.TextView;
 
 import com.fupengpeng.shoppingmall.R;
 import com.fupengpeng.shoppingmall.activity.personcenter.impl.IntegralShoppingMallActivity;
-import com.fupengpeng.shoppingmall.activity.personcenter.impl.IntegralShoppingMallOrderActivity;
+import com.fupengpeng.shoppingmall.customerview.ScrollViewNestedGridView;
 import com.fupengpeng.shoppingmall.entity.IntegralCommodityList;
 import com.fupengpeng.shoppingmall.entity.IntegralCommodityObject;
-import com.fupengpeng.shoppingmall.entity.OrderCenterOrderList;
-import com.fupengpeng.shoppingmall.entity.OrderCenterOrderObject;
-import com.fupengpeng.shoppingmall.util.PullToRefreshUtils;
-import com.handmark.pulltorefresh.library.PullToRefreshBase;
-import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -37,9 +32,10 @@ import butterknife.Unbinder;
  */
 public class IntegralShoppingMallZeroConversionFragment extends Fragment {
 
-    @BindView(R.id.gv_fragment_integral_shopping_mall_zero_conversion)
-    GridView gvFragmentIntegralShoppingMallZeroConversion;
+
     Unbinder unbinder;
+    @BindView(R.id.gv_fragment_integral_shopping_mall_zero_conversion)
+    ScrollViewNestedGridView gvFragmentIntegralShoppingMallZeroConversion;
 
 
     /**
@@ -54,6 +50,7 @@ public class IntegralShoppingMallZeroConversionFragment extends Fragment {
      * 依附的MainActivity
      */
     protected Activity integralShoppingMallActivity = null;
+
     /**
      * 获取Fragment依赖的MainActivity
      *
@@ -64,6 +61,7 @@ public class IntegralShoppingMallZeroConversionFragment extends Fragment {
         context = integralShoppingMallActivity;
         return integralShoppingMallActivity;
     }
+
     /**
      * 数据源
      */
@@ -71,10 +69,11 @@ public class IntegralShoppingMallZeroConversionFragment extends Fragment {
     /**
      * 适配器
      */
-    IntegralShoppingMallZeroConversionFragmentAdapter integralShoppingMallZeroConversionFragmentAdapter ;
+    IntegralShoppingMallZeroConversionFragmentAdapter integralShoppingMallZeroConversionFragmentAdapter;
 
 
     private View integralShoppingMallZeroConversionView;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -86,7 +85,7 @@ public class IntegralShoppingMallZeroConversionFragment extends Fragment {
         parseData();
 
         list = getData();
-        integralShoppingMallZeroConversionFragmentAdapter = new IntegralShoppingMallZeroConversionFragmentAdapter(getActivity(),list);
+        integralShoppingMallZeroConversionFragmentAdapter = new IntegralShoppingMallZeroConversionFragmentAdapter(getActivity(), list);
         gvFragmentIntegralShoppingMallZeroConversion.setAdapter(integralShoppingMallZeroConversionFragmentAdapter);
         return integralShoppingMallZeroConversionView;
     }
@@ -111,6 +110,7 @@ public class IntegralShoppingMallZeroConversionFragment extends Fragment {
         }
         return list;
     }
+
     /**
      * 数据对象获取
      */
@@ -204,6 +204,7 @@ public class IntegralShoppingMallZeroConversionFragment extends Fragment {
 
             return convertView;
         }
+
         //ViewHolder静态类
         static class ViewHolder {
             @BindView(R.id.iv_item_fragment_integral_shopping_mall_commodity_pic)

@@ -194,11 +194,11 @@ public class MainActivity extends AppCompatActivity {
 
         switch (index) {
             /**
-             * 订单管理界面
+             * 首页
              */
             case HOME:
-                // 当点击了已解决图片时，改变控件的图片
                 tvActivityMainHome.setTextColor(0xffff0000);
+                tvTitleActivityTitle.setText("首页");
                 if (homeFragment == null) {
                     homeFragment = new HomeFragment();
                     transaction.add(R.id.ll_activity_main_parent, homeFragment);
@@ -207,12 +207,11 @@ public class MainActivity extends AppCompatActivity {
                 }
                 break;
             /**
-             * 订单管理界面
+             * 分类界面
              */
             case CLASSIFY:
-
-                // 当点击了未解决图片时，改变控件的图片
                 tvActivityMainClassify.setTextColor(0xffff0000);
+                tvTitleActivityTitle.setText("分类");
                 if (classifyFragment == null) {
                     classifyFragment = new ClassifyFragment();
                     transaction.add(R.id.ll_activity_main_parent, classifyFragment);
@@ -221,10 +220,10 @@ public class MainActivity extends AppCompatActivity {
                 }
                 break;
             /**
-             * 订单管理界面
+             * 分享界面
              */
             case SHARE:
-                // 当点击了我要提问时，改变控件的图片
+                tvTitleActivityTitle.setText("分享");
                 tvActivityMainShare.setTextColor(0xffff0000);
                 if (shareFragment == null) {
                     shareFragment = new ShareFragment();
@@ -234,10 +233,10 @@ public class MainActivity extends AppCompatActivity {
                 }
                 break;
             /**
-             * 订单管理界面
+             * 购物车界面
              */
             case SHOPPING_CART:
-                // 当点击了我要提问时，改变控件的图片
+                tvTitleActivityTitle.setText("购物车");
                 tvActivityMainShoppingCart.setTextColor(0xffff0000);
                 if (shoppingCartFragment == null) {
                     shoppingCartFragment = new ShoppingCartFragment();
@@ -247,10 +246,10 @@ public class MainActivity extends AppCompatActivity {
                 }
                 break;
             /**
-             * 订单管理界面
+             * 个人中心界面
              */
             case PERSON_CENTER:
-                // 当点击了我要提问时，改变控件的图片
+                tvTitleActivityTitle.setText("个人中心");
                 tvActivityMainPersonCenter.setTextColor(0xffff0000);
                 if (personCenterFragment == null) {
                     personCenterFragment = new PersonCenterFragment();
@@ -310,37 +309,37 @@ public class MainActivity extends AppCompatActivity {
         Log.e(TAG, "questionList: --------" + setFragment);
         switch (setFragment) {
             /**
-             * 订单管理界面
+             * 首页界面
              */
             case 100:
                 setTabSelection(HOME);
                 break;
             /**
-             * 订单管理界面
+             * 分类界面
              */
             case 200:
                 setTabSelection(CLASSIFY);
                 break;
             /**
-             * 订单管理界面
+             * 分享界面
              */
             case 300:
                 setTabSelection(SHARE);
                 break;
             /**
-             * 订单管理界面
+             * 购物车界面
              */
             case 400:
                 setTabSelection(SHOPPING_CART);
                 break;
             /**
-             * 订单管理界面
+             * 个人中心界面
              */
             case 500:
                 setTabSelection(PERSON_CENTER);
                 break;
             /**
-             * 订单管理界面
+             * 默认首页界面
              */
             default:
                 setTabSelection(HOME);

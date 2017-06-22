@@ -37,152 +37,195 @@
             android:layout_height="@dimen/dp_30" />
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/iv_activity_integral_shopping_mall_store_pic"
-        android:src="@drawable/nvshengtouxiang"
+    <ScrollView
+        android:id="@+id/scv_activity_integral_shopping_mall"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_200" />
-    <View
-        android:background="#dddddd"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_5"/>
-    <!--店铺首页-->
-    <LinearLayout
-        android:id="@+id/ll_activity_integral_shopping_mall_store_home"
-        android:layout_margin="@dimen/dp_10"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_50">
-        <ImageView
-            android:src="@drawable/jifenshangcheng"
-            android:layout_width="@dimen/dp_50"
-            android:layout_height="match_parent" />
-        <TextView
-            android:layout_marginLeft="@dimen/dp_10"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:text="店铺首页"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
+        android:layout_height="match_parent">
 
-        <ImageView
-            android:src="@drawable/ic_chevron_right_black_24dp"
-            android:layout_width="@dimen/dp_50"
-            android:layout_height="match_parent" />
-    </LinearLayout>
-    <View
-        android:background="#dddddd"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_1"/>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_45">
-        <ImageView
-            android:src="@drawable/nvshengtouxiang"
-            android:layout_width="@dimen/dp_45"
-            android:layout_height="match_parent" />
         <LinearLayout
-            android:orientation="vertical"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
             <LinearLayout
-                android:orientation="horizontal"
-                android:layout_weight="0.5"
+                android:id="@+id/ll_activity_integral_shopping_mall_scrollview"
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="0dp">
-                <TextView
-                    android:gravity="center"
-                    android:text="可用积分："
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent" />
-                <TextView
-                    android:id="@+id/tv_activity_integral_shopping_mall_integral"
-                    android:gravity="center"
-                    android:text="0"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent" />
+                android:layout_height="match_parent">
+                <ImageView
+                    android:id="@+id/iv_activity_integral_shopping_mall_store_pic"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_200"
+                    android:src="@drawable/nvshengtouxiang" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_5"
+                    android:background="#dddddd" />
+                <!--店铺首页-->
+                <LinearLayout
+                    android:id="@+id/ll_activity_integral_shopping_mall_store_home"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_50"
+                    android:layout_margin="@dimen/dp_10">
+
+                    <ImageView
+                        android:layout_width="@dimen/dp_50"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/jifenshangcheng" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/dp_10"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="店铺首页" />
+
+                    <ImageView
+                        android:layout_width="@dimen/dp_50"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_chevron_right_black_24dp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_1"
+                    android:background="#dddddd" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_45"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/dp_45"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/nvshengtouxiang" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="0.5"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="可用积分：" />
+
+                            <TextView
+                                android:id="@+id/tv_activity_integral_shopping_mall_integral"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="0" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/tv_activity_integral_shopping_mall_integral_gain"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="0.5"
+                            android:gravity="center|left"
+                            android:text="如何赚积分？点我" />
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/btn_activity_integral_shopping_mall_order"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="积分商城订单" />
+                </LinearLayout>
+                <!--商品Fragment选项-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_45"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/ll_activity_integral_shopping_mall_all"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_activity_integral_shopping_mall_all"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="全部商品" />
+
+                        <View
+                            android:id="@+id/v_activity_integral_shopping_mall_all"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/dp_3" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_activity_integral_shopping_mall_zero_conversion"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_activity_integral_shopping_mall_zero_conversion"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="0元兑换" />
+
+                        <View
+                            android:id="@+id/v_activity_integral_shopping_mall_zero_conversion"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/dp_3" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_activity_integral_shopping_mall_integral_lotto"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_activity_integral_shopping_mall_integral_lotto"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="积分抽奖" />
+
+                        <View
+                            android:id="@+id/v_activity_integral_shopping_mall_integral_lotto"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/dp_3" />
+                    </LinearLayout>
+
+                </LinearLayout>
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/tv_activity_integral_shopping_mall_integral_gain"
-                android:gravity="center|left"
-                android:text="如何赚积分？点我"
-                android:layout_weight="0.5"
+            <LinearLayout
+                android:id="@+id/ll_activity_integral_shopping_mall_parent"
                 android:layout_width="match_parent"
-                android:layout_height="0dp" />
-        </LinearLayout>
-        <Button
-            android:id="@+id/btn_activity_integral_shopping_mall_order"
-            android:text="积分商城订单"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
-    </LinearLayout>
-    <!--商品Fragment选项-->
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_45">
-        <LinearLayout
-            android:id="@+id/ll_activity_integral_shopping_mall_all"
-            android:orientation="vertical"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent">
-            <TextView
-                android:id="@+id/tv_activity_integral_shopping_mall_all"
-                android:gravity="center"
-                android:text="全部商品"
-                android:layout_weight="1"
-                android:layout_width="match_parent"
-                android:layout_height="0dp" />
-            <View
-                android:id="@+id/v_activity_integral_shopping_mall_all"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_3"/>
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/ll_activity_integral_shopping_mall_zero_conversion"
-            android:orientation="vertical"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent">
-            <TextView
-                android:id="@+id/tv_activity_integral_shopping_mall_zero_conversion"
-                android:gravity="center"
-                android:text="0元兑换"
-                android:layout_weight="1"
-                android:layout_width="match_parent"
-                android:layout_height="0dp" />
-            <View
-                android:id="@+id/v_activity_integral_shopping_mall_zero_conversion"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_3"/>
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/ll_activity_integral_shopping_mall_integral_lotto"
-            android:orientation="vertical"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent">
-            <TextView
-                android:id="@+id/tv_activity_integral_shopping_mall_integral_lotto"
-                android:gravity="center"
-                android:text="积分抽奖"
-                android:layout_weight="1"
-                android:layout_width="match_parent"
-                android:layout_height="0dp" />
-            <View
-                android:id="@+id/v_activity_integral_shopping_mall_integral_lotto"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_3"/>
+                android:layout_height="match_parent"
+                android:orientation="vertical" />
+
         </LinearLayout>
 
-    </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/ll_activity_integral_shopping_mall_parent"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+    </ScrollView>
+
 </LinearLayout>

@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -19,7 +20,6 @@ import android.widget.Toast;
 
 import com.fupengpeng.shoppingmall.R;
 import com.fupengpeng.shoppingmall.activity.personcenter.impl.OrderCenterActivity;
-import com.fupengpeng.shoppingmall.adapter.OrderCenterAllFragmentAdapter;
 import com.fupengpeng.shoppingmall.entity.OrderCenterOrderList;
 import com.fupengpeng.shoppingmall.entity.OrderCenterOrderObject;
 import com.fupengpeng.shoppingmall.util.PullToRefreshUtils;
@@ -69,6 +69,7 @@ public class OrderCenterWaitPaymentFragment extends Fragment {
         context = orderCenterActivity;
         return orderCenterActivity;
     }
+
     /**
      * 当前页
      */
@@ -87,7 +88,6 @@ public class OrderCenterWaitPaymentFragment extends Fragment {
      * 数据源
      */
     List<Map<String, Object>> list;
-
 
 
     /**
@@ -145,6 +145,7 @@ public class OrderCenterWaitPaymentFragment extends Fragment {
         Log.e(TAG, "getData: " + "数据设置");
         return list;
     }
+
     /**
      * 数据对象获取
      */
@@ -165,6 +166,7 @@ public class OrderCenterWaitPaymentFragment extends Fragment {
         Log.e(TAG, "parseData: " + orderCenterOrderList.getOrderCenterOrderObjectList().get(2).getOrderCenterOrderListCommodityName().toString().trim());
 
     }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -282,15 +284,16 @@ public class OrderCenterWaitPaymentFragment extends Fragment {
             orderCenterWaitPaymentFragmentAdapter.notifyDataSetChanged();
         }
     }
+
     /**
      * 绑定数据
      */
     private void bindData() {
         list = getData();
-        if (list == null){
+        if (list == null) {
             llFragmentOrderCenterWaitPayment.setVisibility(View.VISIBLE);
             ptrlvFragmentOrderCenterWaitPayment.setVisibility(View.GONE);
-        }else {
+        } else {
             llFragmentOrderCenterWaitPayment.setVisibility(View.GONE);
             ptrlvFragmentOrderCenterWaitPayment.setVisibility(View.VISIBLE);
             orderCenterWaitPaymentFragmentAdapter = new OrderCenterWaitPaymentFragmentAdapter(context, list);
@@ -344,7 +347,7 @@ public class OrderCenterWaitPaymentFragment extends Fragment {
     /**
      * 适配器
      */
-    class OrderCenterWaitPaymentFragmentAdapter extends BaseAdapter {
+    class OrderCenterWaitPaymentFragmentAdapter extends BaseAdapter implements View.OnClickListener {
 
         public static final String TAG = "OrderCenterAllFragmentAdapter";
         public static final String ORDER_STATE_WAIT_PAYMENT = "1000";
@@ -436,7 +439,6 @@ public class OrderCenterWaitPaymentFragment extends Fragment {
             Log.e(TAG, "getView: " + "适配器数据设置");
 
 
-
             viewHolder.tvItemFragmentOrderCenterOrderListOrderNumber.setText((String) data.get(position).get("orderCenterOrderListOrderNumber"));
             viewHolder.ivItemFragmentOrderCenterOrderListCommodityPic.setImageResource((Integer) data.get(position).get("orderCenterOrderListCommodityPic"));
             viewHolder.tvItemFragmentOrderCenterOrderListCommodityName.setText((String) data.get(position).get("orderCenterOrderListCommodityName"));
@@ -444,34 +446,34 @@ public class OrderCenterWaitPaymentFragment extends Fragment {
             viewHolder.tvItemFragmentOrderCenterOrderListCommodityAggregatePrice.setText((String) data.get(position).get("orderCenterOrderListCommodityAggregatePrice"));
 
             //判断订单状态，决定订单条目所要展示的订单状态栏的状态和条目按钮有哪些
-            if (data.get(position).get("orderCenterOrderListOrderState").toString().equals(ORDER_STATE_WAIT_PAYMENT)){
+            if (data.get(position).get("orderCenterOrderListOrderState").toString().equals(ORDER_STATE_WAIT_PAYMENT)) {
                 viewHolder.tvItemFragmentOrderCenterOrderListOrderState.setText("待付款");
                 viewHolder.btnItemFragmentOrderCenterOrderListOne.setVisibility(View.GONE);
                 viewHolder.btnItemFragmentOrderCenterOrderListTwo.setVisibility(View.VISIBLE);
                 viewHolder.btnItemFragmentOrderCenterOrderListThree.setVisibility(View.VISIBLE);
-            }else if (data.get(position).get("orderCenterOrderListOrderState").toString().equals(ORDER_STATE_WAIT_SHIPMENTS)){
+            } else if (data.get(position).get("orderCenterOrderListOrderState").toString().equals(ORDER_STATE_WAIT_SHIPMENTS)) {
                 viewHolder.tvItemFragmentOrderCenterOrderListOrderState.setText("待发货");
                 viewHolder.btnItemFragmentOrderCenterOrderListThree.setText("提醒发货");
                 viewHolder.btnItemFragmentOrderCenterOrderListOne.setVisibility(View.GONE);
                 viewHolder.btnItemFragmentOrderCenterOrderListTwo.setVisibility(View.VISIBLE);
                 viewHolder.btnItemFragmentOrderCenterOrderListThree.setVisibility(View.VISIBLE);
-            }else if (data.get(position).get("orderCenterOrderListOrderState").toString().equals(ORDER_STATE_WAIT_RECEIVING)){
+            } else if (data.get(position).get("orderCenterOrderListOrderState").toString().equals(ORDER_STATE_WAIT_RECEIVING)) {
                 viewHolder.tvItemFragmentOrderCenterOrderListOrderState.setText("待收货");
                 viewHolder.btnItemFragmentOrderCenterOrderListOne.setVisibility(View.GONE);
                 viewHolder.btnItemFragmentOrderCenterOrderListTwo.setVisibility(View.VISIBLE);
                 viewHolder.btnItemFragmentOrderCenterOrderListThree.setVisibility(View.VISIBLE);
 
-            }else if (data.get(position).get("orderCenterOrderListOrderState").toString().equals(ORDER_STATE_WAIT_EVALUATION)){
+            } else if (data.get(position).get("orderCenterOrderListOrderState").toString().equals(ORDER_STATE_WAIT_EVALUATION)) {
                 viewHolder.tvItemFragmentOrderCenterOrderListOrderState.setText("已完成");
                 viewHolder.btnItemFragmentOrderCenterOrderListOne.setVisibility(View.GONE);
                 viewHolder.btnItemFragmentOrderCenterOrderListTwo.setVisibility(View.VISIBLE);
                 viewHolder.btnItemFragmentOrderCenterOrderListThree.setVisibility(View.VISIBLE);
-            }else if (data.get(position).get("orderCenterOrderListOrderState").toString().equals(ORDER_STATE_WAIT_PICKING)){
+            } else if (data.get(position).get("orderCenterOrderListOrderState").toString().equals(ORDER_STATE_WAIT_PICKING)) {
                 viewHolder.tvItemFragmentOrderCenterOrderListOrderState.setText("待提货");
                 viewHolder.btnItemFragmentOrderCenterOrderListOne.setVisibility(View.GONE);
                 viewHolder.btnItemFragmentOrderCenterOrderListTwo.setVisibility(View.VISIBLE);
                 viewHolder.btnItemFragmentOrderCenterOrderListThree.setVisibility(View.VISIBLE);
-            }else if (data.get(position).get("orderCenterOrderListOrderState").toString().equals(ORDER_STATE_REFUND_AFTER_SALES)){
+            } else if (data.get(position).get("orderCenterOrderListOrderState").toString().equals(ORDER_STATE_REFUND_AFTER_SALES)) {
                 viewHolder.tvItemFragmentOrderCenterOrderListOrderState.setText("已完成");
                 viewHolder.btnItemFragmentOrderCenterOrderListOne.setVisibility(View.GONE);
                 viewHolder.btnItemFragmentOrderCenterOrderListTwo.setVisibility(View.VISIBLE);
@@ -496,7 +498,7 @@ public class OrderCenterWaitPaymentFragment extends Fragment {
             viewHolder.tvItemFragmentOrderCenterOrderListOrderNumberExplain.setOnClickListener((View.OnClickListener) context);
             viewHolder.tvItemFragmentOrderCenterOrderListOrderNumber.setOnClickListener((View.OnClickListener) context);
             viewHolder.tvItemFragmentOrderCenterOrderListOrderState.setOnClickListener((View.OnClickListener) context);
-            viewHolder.ivItemFragmentOrderCenterOrderListDeleteOrder.setOnClickListener((View.OnClickListener) context);
+            viewHolder.ivItemFragmentOrderCenterOrderListDeleteOrder.setOnClickListener(this);
             viewHolder.ivItemFragmentOrderCenterOrderListCommodityPic.setOnClickListener((View.OnClickListener) context);
             viewHolder.tvItemFragmentOrderCenterOrderListCommodityName.setOnClickListener((View.OnClickListener) context);
             viewHolder.tvItemFragmentOrderCenterOrderListCommodityQuantity.setOnClickListener((View.OnClickListener) context);
@@ -510,6 +512,26 @@ public class OrderCenterWaitPaymentFragment extends Fragment {
 
             return convertView;
         }
+
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()) {
+                case R.id.iv_item_fragment_order_center_order_list_delete_order:
+                    synchronized (data) {
+                        for (int i = 0; i < data.size(); i++) {
+                            if (i == (Integer) v.getTag()) {
+                                data.remove(i);
+                            } else {
+
+                            }
+                        }
+                    }
+                    notifyDataSetChanged();
+                    break;
+            }
+        }
+
+
 
 
         //ViewHolder静态类
@@ -585,5 +607,7 @@ public class OrderCenterWaitPaymentFragment extends Fragment {
                 btnItemFragmentOrderCenterOrderListOne.setVisibility(View.GONE);
             }
         }
+
+
     }
 }

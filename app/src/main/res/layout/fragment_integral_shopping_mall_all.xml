@@ -4,11 +4,10 @@
     android:layout_height="match_parent">
 
     <!-- TODO: Update blank fragment layout -->
-    <GridView
+    <com.fupengpeng.shoppingmall.customerview.ScrollViewNestedGridView
         android:id="@+id/gv_fragment_integral_shopping_mall_all"
-        android:gravity="center"
-        android:numColumns="2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-         />
+        android:gravity="center"
+        android:numColumns="2" />
 </FrameLayout>

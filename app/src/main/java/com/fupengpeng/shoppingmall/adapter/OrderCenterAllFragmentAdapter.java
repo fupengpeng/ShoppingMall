@@ -22,7 +22,7 @@ import butterknife.ButterKnife;
 /**
  * 适配器
  */
-public class OrderCenterAllFragmentAdapter extends BaseAdapter {
+public class OrderCenterAllFragmentAdapter extends BaseAdapter implements View.OnClickListener{
 
     public static final String TAG = "OrderCenterAllFragmentAdapter";
     public static final String ORDER_STATE_WAIT_PAYMENT = "1000";
@@ -174,7 +174,7 @@ public class OrderCenterAllFragmentAdapter extends BaseAdapter {
         viewHolder.tvItemFragmentOrderCenterOrderListOrderNumberExplain.setOnClickListener((View.OnClickListener) context);
         viewHolder.tvItemFragmentOrderCenterOrderListOrderNumber.setOnClickListener((View.OnClickListener) context);
         viewHolder.tvItemFragmentOrderCenterOrderListOrderState.setOnClickListener((View.OnClickListener) context);
-        viewHolder.ivItemFragmentOrderCenterOrderListDeleteOrder.setOnClickListener((View.OnClickListener) context);
+        viewHolder.ivItemFragmentOrderCenterOrderListDeleteOrder.setOnClickListener(this);
         viewHolder.ivItemFragmentOrderCenterOrderListCommodityPic.setOnClickListener((View.OnClickListener) context);
         viewHolder.tvItemFragmentOrderCenterOrderListCommodityName.setOnClickListener((View.OnClickListener) context);
         viewHolder.tvItemFragmentOrderCenterOrderListCommodityQuantity.setOnClickListener((View.OnClickListener) context);
@@ -187,6 +187,24 @@ public class OrderCenterAllFragmentAdapter extends BaseAdapter {
 
 
         return convertView;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.iv_item_fragment_order_center_order_list_delete_order:
+                synchronized (data) {
+                    for (int i = 0; i < data.size(); i++) {
+                        if (i == (Integer) v.getTag()) {
+                            data.remove(i);
+                        } else {
+
+                        }
+                    }
+                }
+                notifyDataSetChanged();
+                break;
+        }
     }
 
 

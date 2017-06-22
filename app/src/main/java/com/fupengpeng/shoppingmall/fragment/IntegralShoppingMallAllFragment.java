@@ -14,9 +14,9 @@ import android.widget.TextView;
 
 import com.fupengpeng.shoppingmall.R;
 import com.fupengpeng.shoppingmall.activity.personcenter.impl.IntegralShoppingMallActivity;
+import com.fupengpeng.shoppingmall.customerview.ScrollViewNestedGridView;
 import com.fupengpeng.shoppingmall.entity.IntegralCommodityList;
 import com.fupengpeng.shoppingmall.entity.IntegralCommodityObject;
-
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,9 +34,10 @@ import butterknife.Unbinder;
 public class IntegralShoppingMallAllFragment extends Fragment {
 
     private static final String TAG = "IntegralShoppingMallAllFragment";
-    @BindView(R.id.gv_fragment_integral_shopping_mall_all)
-    GridView gvFragmentIntegralShoppingMallAll;
+
     Unbinder unbinder;
+    @BindView(R.id.gv_fragment_integral_shopping_mall_all)
+    ScrollViewNestedGridView gvFragmentIntegralShoppingMallAll;
 
     /**
      * 数据对象列表
@@ -50,6 +51,7 @@ public class IntegralShoppingMallAllFragment extends Fragment {
      * 依附的MainActivity
      */
     protected Activity integralShoppingMallActivity = null;
+
     /**
      * 获取Fragment依赖的MainActivity
      *
@@ -60,6 +62,7 @@ public class IntegralShoppingMallAllFragment extends Fragment {
         context = integralShoppingMallActivity;
         return integralShoppingMallActivity;
     }
+
     /**
      * 数据源
      */
@@ -67,9 +70,10 @@ public class IntegralShoppingMallAllFragment extends Fragment {
     /**
      * 适配器
      */
-    IntegralShoppingMallAllFragmentAdapter integralShoppingMallAllFragmentAdapter ;
+    IntegralShoppingMallAllFragmentAdapter integralShoppingMallAllFragmentAdapter;
 
     private View integralShoppingMallAllFragmentView;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -80,7 +84,7 @@ public class IntegralShoppingMallAllFragment extends Fragment {
         parseData();
 
         list = getData();
-        integralShoppingMallAllFragmentAdapter = new IntegralShoppingMallAllFragmentAdapter(getActivity(),list);
+        integralShoppingMallAllFragmentAdapter = new IntegralShoppingMallAllFragmentAdapter(getActivity(), list);
         gvFragmentIntegralShoppingMallAll.setAdapter(integralShoppingMallAllFragmentAdapter);
 
         return integralShoppingMallAllFragmentView;
@@ -106,6 +110,7 @@ public class IntegralShoppingMallAllFragment extends Fragment {
         }
         return list;
     }
+
     /**
      * 数据对象获取
      */
@@ -199,6 +204,7 @@ public class IntegralShoppingMallAllFragment extends Fragment {
 
             return convertView;
         }
+
         //ViewHolder静态类
         static class ViewHolder {
             @BindView(R.id.iv_item_fragment_integral_shopping_mall_commodity_pic)

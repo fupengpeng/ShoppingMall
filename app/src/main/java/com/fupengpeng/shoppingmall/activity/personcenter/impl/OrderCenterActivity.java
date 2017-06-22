@@ -330,13 +330,6 @@ public class OrderCenterActivity extends AppCompatActivity implements IOrderCent
                 startActivity(intent);
                 break;
             /**
-             * 点击删除此订单
-             */
-            case R.id.iv_item_fragment_order_center_order_list_delete_order:
-                // TODO: 2017/6/9 0009  删除订单待实现
-                ToastUtils.showLong(this,"删除订单待实现");
-                break;
-            /**
              * 点击跳转至订单详情界面
              */
             case R.id.iv_item_fragment_order_center_order_list_commodity_pic:
