@@ -5,6 +5,7 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,9 +25,12 @@ import com.fupengpeng.shoppingmall.activity.personcenter.impl.IntegralPersonActi
 import com.fupengpeng.shoppingmall.activity.personcenter.impl.IntegralShoppingMallActivity;
 import com.fupengpeng.shoppingmall.activity.personcenter.impl.MemberCenterActivity;
 import com.fupengpeng.shoppingmall.activity.personcenter.impl.OrderCenterActivity;
+import com.fupengpeng.shoppingmall.activity.personcenter.impl.SetLockActivity;
 import com.fupengpeng.shoppingmall.activity.personcenter.impl.ShoppingCartActivity;
+import com.fupengpeng.shoppingmall.activity.personcenter.impl.UnlockActivity;
 import com.fupengpeng.shoppingmall.activity.personcenter.impl.WinningActivity;
 import com.fupengpeng.shoppingmall.activity.personcenter.impl.WithdrawDepositActivity;
+import com.fupengpeng.shoppingmall.util.PreferenceUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -268,8 +272,29 @@ public class PersonCenterFragment extends Fragment {
                 break;
             case R.id.btn_fragment_person_with_draw_deposit:
                 Log.e(TAG, "onViewClicked: "+"跳转至提现余额界面" );
-                intent = new Intent(getMainActivity(),WithdrawDepositActivity.class);
-                startActivity(intent);
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        String passwordStr = PreferenceUtil.getGesturePassword(getMainActivity());
+
+                        if (passwordStr == "") {
+                            Log.e(TAG, "run: "+"true" );
+                            intent = new Intent(getMainActivity(), SetLockActivity.class);
+                        } else {
+                            Log.e(TAG, "run: "+"false" );
+                            intent = new Intent(getMainActivity(), UnlockActivity.class);
+                        }
+                        startActivity(intent);
+                        getMainActivity().finish();
+                    }
+                }, 2000);
+
+
+
+
+//                intent = new Intent(getMainActivity(),WithdrawDepositActivity.class);
+//                startActivity(intent);
                 break;
             case R.id.ll_fragment_person_order_center_all:
                 Log.e(TAG, "onViewClicked: "+"跳转至 全部订单" );

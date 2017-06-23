@@ -66,6 +66,8 @@
         <activity android:name=".activity.personcenter.impl.BargainActivity"/>
         <activity android:name=".activity.personcenter.impl.GrouponActivity"/>
         <activity android:name=".activity.personcenter.impl.WinningActivity"/>
+        <activity android:name=".activity.personcenter.impl.UnlockActivity"/>
+        <activity android:name=".activity.personcenter.impl.SetLockActivity"/>
 
 
         <!--ShareSDK-->
