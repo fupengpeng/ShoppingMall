@@ -1,9 +1,10 @@
 package com.fupengpeng.shoppingmall;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -69,6 +70,9 @@ public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.iv_title_activity_right)
     ImageView ivTitleActivityRight;
+
+    @BindView(R.id.vp_activity_main_parent)
+    ViewPager vpActivityMainParent;
 
 
     /**
@@ -138,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         //添加一个FragmentTransaction的实例
-        fragmentManager = getFragmentManager();
+        fragmentManager = getSupportFragmentManager();
         // 开启一个Fragment事务
         transaction = fragmentManager.beginTransaction();
 
@@ -186,7 +190,7 @@ public class MainActivity extends AppCompatActivity {
         // 每次选中之前先清楚掉上次的选中状态
         clearSelection();
         //添加一个FragmentTransaction的实例
-        fragmentManager = getFragmentManager();
+        fragmentManager = getSupportFragmentManager();
         // 开启一个Fragment事务
         transaction = fragmentManager.beginTransaction();
         // 先隐藏掉所有的Fragment，以防止有多个Fragment显示在界面上的情况

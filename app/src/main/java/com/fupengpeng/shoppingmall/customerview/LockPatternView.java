@@ -26,7 +26,7 @@ public class LockPatternView extends View {
     private static boolean isFinish = false;
     //判断手指点击屏幕时是否选中了九宫格中的点
     private static boolean isSelect = false;
-    // 创建MyPoint的数组
+    // 创建九宫格点的数组
     private Point[][] mPoints = new Point[3][3];
     // 声明屏幕的宽和高
     private int mScreenHeight;
@@ -35,7 +35,7 @@ public class LockPatternView extends View {
     private float mPointRadius;
     // 声明线的图片的高（即是半径）
     private float mLineHeight;
-    // 声明鼠标移动的x，y坐标
+    // 声明手指移动的x，y坐标
     private float mMoveX, mMoveY;
     // 声明屏幕上的宽和高的偏移量
     private int mScreenHeightOffSet = 0;
@@ -50,10 +50,10 @@ public class LockPatternView extends View {
     private Bitmap mLineError;
     // 创建一个矩阵
     private Matrix mMatrix = new Matrix();
-    // 创建MyPoint的列表
+    // 创建绘制的点的列表
     private List<Point> mPointList = new ArrayList<Point>();
-    // 实例化鼠标点
-    private Point mMousePoint = new Point();
+    // 实例化手指所点的点
+    private Point mPoint = new Point();
     // 用获取从activity中传过来的密码字符串
     private String mPassword = "";
 
@@ -95,7 +95,7 @@ public class LockPatternView extends View {
                 a = b;
             }
             if (!isFinish) {
-                canvasLine(a, mMousePoint, canvas);
+                canvasLine(a, mPoint, canvas);
             }
         }
     }
@@ -108,8 +108,8 @@ public class LockPatternView extends View {
         mMoveX = event.getX();
         mMoveY = event.getY();
         // 设置移动点的坐标
-        mMousePoint.setX(mMoveX);
-        mMousePoint.setY(mMoveY);
+        mPoint.setX(mMoveX);
+        mPoint.setY(mMoveY);
         Point mPoint = null;
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
@@ -326,6 +326,7 @@ public class LockPatternView extends View {
         isInitPoint = true;
     }
 
+    //点的连线方向
     public static float getDegrees(Point a, Point b) {
         float degrees = 0;
         float ax = a.getX();
@@ -375,6 +376,7 @@ public class LockPatternView extends View {
         this.mListener = listener;
     }
 
+    //九宫格的点
     static class Point {
         public static int BITMAP_NORMAL = 0; // 正常
         public static int BITMAP_ERROR = 1;  // 错误

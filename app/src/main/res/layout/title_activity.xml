@@ -6,7 +6,7 @@
 
     <ImageView
         android:id="@+id/iv_title_activity_left"
-        android:layout_width="45dp"
+        android:layout_width="@dimen/dp_45"
         android:layout_height="match_parent" />
     <TextView
         android:id="@+id/tv_title_activity_left"
@@ -21,7 +21,7 @@
         android:gravity="center"
         android:textSize="@dimen/dp_20"
         android:layout_width="match_parent"
-        android:layout_height="45dp" />
+        android:layout_height="@dimen/dp_45" />
     <TextView
         android:id="@+id/tv_title_activity_right"
         android:gravity="center"
@@ -30,7 +30,7 @@
         android:layout_height="match_parent" />
     <ImageView
         android:id="@+id/iv_title_activity_right"
-        android:layout_width="45dp"
+        android:layout_width="@dimen/dp_45"
         android:layout_height="match_parent" />
 
 
