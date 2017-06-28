@@ -373,4 +373,8 @@
     <color name="style_red">#ff4c41</color>
     <color name="style_divider_color">#C9C7CD</color>
 
+
+
+    <color name="menudialog_bg_gray">#f5f5f5</color>
+
 </resources>

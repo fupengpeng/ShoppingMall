@@ -15,31 +15,34 @@
         android:layout_weight="1" />
 
 
-    <LinearLayout
+
+    <RelativeLayout
+        android:id="@+id/rl_fragment_shopping_cart_price_total"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_45"
-        android:orientation="horizontal">
+        android:layout_height="@dimen/dp_45">
 
         <CheckBox
             android:id="@+id/cb_fragment_shopping_cart_select_all"
             style="@style/circlecheckbox"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:scaleX="0.5"
-            android:scaleY="0.5"
-            android:textSize="@dimen/dp_25"
             android:layout_marginBottom="@dimen/dp_4"
             android:layout_marginLeft="@dimen/dp_10"
             android:layout_marginRight="@dimen/dp_5"
             android:layout_marginTop="@dimen/dp_4"
-            android:text="全选" />
+            android:scaleX="0.5"
+            android:scaleY="0.5"
+            android:text="全选"
+            android:layout_alignParentLeft="true"
+            android:textSize="@dimen/dp_25" />
 
         <LinearLayout
             android:id="@+id/ll_fragment_shopping_cart_price_total"
-            android:layout_width="0dp"
+            android:layout_toRightOf="@id/cb_fragment_shopping_cart_select_all"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginLeft="@dimen/dp_5"
-            android:layout_weight="1"
             android:orientation="vertical">
 
             <LinearLayout
@@ -87,10 +90,12 @@
 
         <Button
             android:id="@+id/btn_fragment_shopping_cart_settlement"
+            android:layout_alignParentRight="true"
             android:layout_width="@dimen/dp_120"
             android:layout_height="match_parent"
             android:text="去结算（0）" />
-    </LinearLayout>
+
+    </RelativeLayout>
 
 
 </LinearLayout>

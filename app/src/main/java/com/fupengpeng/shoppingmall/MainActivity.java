@@ -196,7 +196,16 @@ public class MainActivity extends AppCompatActivity {
         // 先隐藏掉所有的Fragment，以防止有多个Fragment显示在界面上的情况
         hideFragments(transaction);
 
+
+
+        if (index == SHOPPING_CART){
+            // TODO: 2017/6/28 0028 判断是否是购物车Fragment在展示，如果是，界面不同地方的改变及事件处理
+        }else {
+
+        }
+
         switch (index) {
+
             /**
              * 首页
              */
@@ -241,6 +250,9 @@ public class MainActivity extends AppCompatActivity {
              */
             case SHOPPING_CART:
                 tvTitleActivityTitle.setText("购物车");
+
+
+
                 tvActivityMainShoppingCart.setTextColor(0xffff0000);
                 if (shoppingCartFragment == null) {
                     shoppingCartFragment = new ShoppingCartFragment();

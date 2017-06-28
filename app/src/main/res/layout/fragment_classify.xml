@@ -1,16 +1,20 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.fupengpeng.shoppingmall.fragment.ClassifyFragment">
+    android:orientation="horizontal">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:gravity="center"
-        android:textSize="@dimen/dp_80"
-        android:layout_width="match_parent"
+    <ListView
+        android:id="@+id/lv_fragment_classify_parent"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:text="分类" />
+        android:layout_weight="0.4" />
 
+    <ListView
+        android:id="@+id/lv_fragment_classify_child"
+        android:layout_weight="0.6"
+        android:layout_width="0dp"
+        android:background="@color/white"
+        android:layout_height="match_parent"/>
 
-</FrameLayout>
+</LinearLayout>
