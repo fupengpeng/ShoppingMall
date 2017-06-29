@@ -24,6 +24,11 @@ import android.widget.Toast;
 import com.fupengpeng.shoppingmall.MainActivity;
 import com.fupengpeng.shoppingmall.R;
 import com.fupengpeng.shoppingmall.entity.DataBean;
+import com.fupengpeng.shoppingmall.entity.eventbusbean.ShoppingCartFragmentEvent;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -130,15 +135,18 @@ public class ShoppingCartFragment extends Fragment implements View.OnClickListen
         initListener();
         loadData();
         refreshListView();
+//        EventBus.getDefault().register(this);//订阅
+
+
         return shoppingCartFragmentView;
     }
 
 
     private void initView() {
         Log.e(TAG, "initView: "+"----0001----" );
+        // TODO: 2017/6/22 0022
         tvTitleActivityRight.setVisibility(View.VISIBLE);
         tvTitleActivityRight.setText("编辑");
-        // TODO: 2017/6/22 0022
         lvFragmentShoppingCart.setSelector(R.drawable.list_selector);
     }
 
@@ -152,6 +160,20 @@ public class ShoppingCartFragment extends Fragment implements View.OnClickListen
     private void loadData() {
         Log.e(TAG, "loadData: "+"----0003----");
         mListData = getData();
+
+//        Log.e(TAG, "loadData:=======------------ "+isBatchModel );
+//        ShoppingCartFragmentEvent shoppingCartFragmentEvent =
+//                new ShoppingCartFragmentEvent(
+//                        isBatchModel,
+//                        btnFragmentShoppingCartSettlement,
+//                        llFragmentShoppingCartPriceTotal,
+//                        totalPrice,
+//                        tvFragmentShoppingCartTotal);
+//
+//        EventBus.getDefault().post(shoppingCartFragmentEvent);
+
+//        EventBus.getDefault().postSticky(shoppingCartFragmentEvent);//发送一个粘性事件
+
     }
 
     private void refreshListView() {
@@ -191,6 +213,7 @@ public class ShoppingCartFragment extends Fragment implements View.OnClickListen
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+        EventBus.getDefault().unregister(this);//解除订阅
     }
 
     @Override
@@ -253,8 +276,14 @@ public class ShoppingCartFragment extends Fragment implements View.OnClickListen
             case R.id.btn_fragment_shopping_cart_settlement:
 
                 Log.e(TAG, "onClick: "+"----0010----" );
-                if (isBatchModel) {
 
+
+
+
+
+
+            if (isBatchModel) {
+                Log.e(TAG, "onClick: "+isBatchModel+"-----------------------" );
                     Iterator it = mListData.iterator();
                     while (it.hasNext()) {
                         // 得到对应集合元素
@@ -287,6 +316,11 @@ public class ShoppingCartFragment extends Fragment implements View.OnClickListen
                 break;
         }
     }
+//    @Subscribe(threadMode = ThreadMode.MAIN) //在ui线程执行
+//    public void onDataSynEvent(ShoppingCartFragmentEvent shoppingCartFragmentEvent) {
+//        isBatchModel = shoppingCartFragmentEvent.isBatchModel();
+//        Log.e(TAG, "onDataSynEvent: ============"+isBatchModel );
+//    }
 
     class ShoppingCartFragmentAdapter extends BaseAdapter implements AdapterView.OnItemClickListener {
 

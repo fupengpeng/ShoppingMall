@@ -10,6 +10,8 @@ import com.yolanda.nohttp.Logger;
 import com.yolanda.nohttp.NoHttp;
 import com.yolanda.nohttp.rest.RequestQueue;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,6 +44,8 @@ public class MyApplication extends MobApplication {
         initCrashHandler();
         // 初始化NoHttp
         initNoHttp();
+
+//        EventBus.builder().addIndex(new MyEventBusIndex()).installDefaultEventBus();
     }
 
     /**

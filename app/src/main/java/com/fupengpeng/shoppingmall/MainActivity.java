@@ -8,15 +8,21 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.fupengpeng.shoppingmall.entity.eventbusbean.ShoppingCartFragmentEvent;
 import com.fupengpeng.shoppingmall.fragment.ClassifyFragment;
 import com.fupengpeng.shoppingmall.fragment.HomeFragment;
 import com.fupengpeng.shoppingmall.fragment.PersonCenterFragment;
 import com.fupengpeng.shoppingmall.fragment.ShareFragment;
 import com.fupengpeng.shoppingmall.fragment.ShoppingCartFragment;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -26,8 +32,21 @@ import cn.sharesdk.onekeyshare.OnekeyShare;
 public class MainActivity extends AppCompatActivity {
 
 
+    @BindView(R.id.iv_title_activity_left)
+    ImageView ivTitleActivityLeft;
+
+    @BindView(R.id.tv_title_activity_left)
+    TextView tvTitleActivityLeft;
+
     @BindView(R.id.tv_title_activity_title)
     TextView tvTitleActivityTitle;
+
+    @BindView(R.id.tv_title_activity_right)
+    TextView tvTitleActivityRight;
+
+    @BindView(R.id.iv_title_activity_right)
+    ImageView ivTitleActivityRight;
+
 
     @BindView(R.id.ll_activity_main_parent)
     LinearLayout llActivityMainParent;
@@ -68,11 +87,11 @@ public class MainActivity extends AppCompatActivity {
     LinearLayout llActivityMainPersonCenter;
 
 
-    @BindView(R.id.iv_title_activity_right)
-    ImageView ivTitleActivityRight;
+
 
     @BindView(R.id.vp_activity_main_parent)
     ViewPager vpActivityMainParent;
+
 
 
     /**
@@ -131,9 +150,17 @@ public class MainActivity extends AppCompatActivity {
     FragmentManager fragmentManager;
     FragmentTransaction transaction;
 
-    public static final String TAG = "OrderCenterActivity";
+    public static final String TAG = "MainActivity";
     private Bundle bundle;
 
+    /**
+     * 用于购物车编辑按钮的处理事件
+     */
+    private boolean batchModel;
+    private Button btnFragmentShoppingCartSettlement;
+    private LinearLayout llFragmentShoppingCartPriceTotal;
+    private double totalPrice;
+    private TextView tvFragmentShoppingCartTotal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -141,12 +168,35 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
+
         //添加一个FragmentTransaction的实例
         fragmentManager = getSupportFragmentManager();
         // 开启一个Fragment事务
         transaction = fragmentManager.beginTransaction();
 
         questionList();
+
+//        EventBus.getDefault().register(this);//订阅
+
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);//解除订阅
+
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN) //在ui线程执行
+    public void onDataSynEvent(ShoppingCartFragmentEvent shoppingCartFragmentEvent) {
+        batchModel = shoppingCartFragmentEvent.isBatchModel();
+        Log.e(TAG, "onDataSynEvent: ---------------------------------"+batchModel );
+        btnFragmentShoppingCartSettlement = shoppingCartFragmentEvent.getBtnFragmentShoppingCartSettlement();
+        llFragmentShoppingCartPriceTotal = shoppingCartFragmentEvent.getLlFragmentShoppingCartPriceTotal();
+        totalPrice = shoppingCartFragmentEvent.getTotalPrice();
+        tvFragmentShoppingCartTotal = shoppingCartFragmentEvent.getTvFragmentShoppingCartTotal();
+        Log.e(TAG, "event---->" + shoppingCartFragmentEvent.getTotalPrice());
 
 
     }
@@ -157,7 +207,8 @@ public class MainActivity extends AppCompatActivity {
             R.id.ll_activity_main_shopping_cart,
             R.id.ll_activity_main_share,
             R.id.ll_activity_main_person_center,
-            R.id.iv_title_activity_right})
+            R.id.iv_title_activity_right,
+            R.id.tv_title_activity_right})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ll_activity_main_home:
@@ -178,6 +229,39 @@ public class MainActivity extends AppCompatActivity {
             case R.id.iv_title_activity_right:
                 showShare();
                 break;
+            case R.id.tv_title_activity_right:
+                // TODO: 2017/6/29 0029  在购物车fragment展示时，此按钮的变化，及相关操作
+
+                Log.e(TAG, "onClick: " + "----0008----");
+                batchModel = !batchModel;
+                if (batchModel) {
+                    tvTitleActivityRight.setText(getResources().getString(R.string.menu_enter));
+                    btnFragmentShoppingCartSettlement.setText(getResources().getString(R.string.menu_del));
+                    llFragmentShoppingCartPriceTotal.setVisibility(View.GONE);
+
+                } else {
+                    tvTitleActivityRight.setText(getResources().getString(R.string.menu_edit));
+
+                    llFragmentShoppingCartPriceTotal.setVisibility(View.VISIBLE);
+                    btnFragmentShoppingCartSettlement.setText(getResources().getString(R.string.menu_sett));
+                    totalPrice = 0;
+                    tvFragmentShoppingCartTotal.setText("￥" + totalPrice);
+
+                }
+
+                Log.e(TAG, "onViewClicked: "+batchModel+"=-=-=-=-=-=-=-=-=-" );
+//                ShoppingCartFragmentEvent shoppingCartFragmentEvent =
+//                        new ShoppingCartFragmentEvent(
+//                                batchModel,
+//                                btnFragmentShoppingCartSettlement,
+//                                llFragmentShoppingCartPriceTotal,
+//                                totalPrice,
+//                                tvFragmentShoppingCartTotal);
+//
+//                EventBus.getDefault().post(shoppingCartFragmentEvent);
+//                EventBus.getDefault().postSticky(new ShoppingCartFragmentEvent());
+
+                break;
         }
     }
 
@@ -197,11 +281,13 @@ public class MainActivity extends AppCompatActivity {
         hideFragments(transaction);
 
 
-
-        if (index == SHOPPING_CART){
+        if (index == SHOPPING_CART) {
             // TODO: 2017/6/28 0028 判断是否是购物车Fragment在展示，如果是，界面不同地方的改变及事件处理
-        }else {
+            tvTitleActivityRight.setVisibility(View.VISIBLE);
+            tvTitleActivityRight.setText("编辑");
 
+        } else {
+            tvTitleActivityRight.setVisibility(View.GONE);
         }
 
         switch (index) {
@@ -250,7 +336,6 @@ public class MainActivity extends AppCompatActivity {
              */
             case SHOPPING_CART:
                 tvTitleActivityTitle.setText("购物车");
-
 
 
                 tvActivityMainShoppingCart.setTextColor(0xffff0000);

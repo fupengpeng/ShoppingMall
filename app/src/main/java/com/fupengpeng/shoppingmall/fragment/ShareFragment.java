@@ -95,17 +95,17 @@ public class ShareFragment extends Fragment {
         ptsFragmentShare.setTabIndicatorColor(this.getResources().getColor(R.color.red));
         ptsFragmentShare.setTextSpacing(100);
 
-        View view1 = LayoutInflater.from(getMainActivity()).inflate(R.layout.tab1, null);
-        View view2 = LayoutInflater.from(getMainActivity()).inflate(R.layout.tab2, null);
-        View view3 = LayoutInflater.from(getMainActivity()).inflate(R.layout.tab3, null);
-        View view4 = LayoutInflater.from(getMainActivity()).inflate(R.layout.tab4, null);
-        View view5 = LayoutInflater.from(getMainActivity()).inflate(R.layout.tab5, null);
-        View view6 = LayoutInflater.from(getMainActivity()).inflate(R.layout.tab6, null);
-        View view7 = LayoutInflater.from(getMainActivity()).inflate(R.layout.tab7, null);
-        View view8 = LayoutInflater.from(getMainActivity()).inflate(R.layout.tab8, null);
-        View view9 = LayoutInflater.from(getMainActivity()).inflate(R.layout.tab9, null);
-        View view10 = LayoutInflater.from(getMainActivity()).inflate(R.layout.tab10, null);
-        //viewpager开始添加view
+        View view1 = LayoutInflater.from(getMainActivity()).inflate(R.layout.item_fragment_share_selection, null);
+        View view2 = LayoutInflater.from(getMainActivity()).inflate(R.layout.item_fragment_share_live_telecase, null);
+        View view3 = LayoutInflater.from(getMainActivity()).inflate(R.layout.item_fragment_share_attention, null);
+        View view4 = LayoutInflater.from(getMainActivity()).inflate(R.layout.item_fragment_share_inventory, null);
+        View view5 = LayoutInflater.from(getMainActivity()).inflate(R.layout.item_fragment_share_consult, null);
+        View view6 = LayoutInflater.from(getMainActivity()).inflate(R.layout.item_fragment_share_video_shopping, null);
+        View view7 = LayoutInflater.from(getMainActivity()).inflate(R.layout.item_fragment_share_good_cargo, null);
+        View view8 = LayoutInflater.from(getMainActivity()).inflate(R.layout.item_fragment_share_community, null);
+        View view9 = LayoutInflater.from(getMainActivity()).inflate(R.layout.item_fragment_share_life, null);
+        View view10 = LayoutInflater.from(getMainActivity()).inflate(R.layout.item_fragment_share_digit, null);
+        //viewpager开始添加view                live telecast  digit
         viewContainter.add(view1);
         viewContainter.add(view2);
         viewContainter.add(view3);
