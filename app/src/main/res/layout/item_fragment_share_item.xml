@@ -2,331 +2,429 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
         <!--精选-->
 
         <!--直播-->
-
-        <!--关注-->
-
-        <!--清单-->
-
-        <!--问答-->
-        <RelativeLayout
-            android:layout_marginRight="@dimen/dp_10"
-            android:layout_marginLeft="@dimen/dp_10"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_120"
-            >
-            <LinearLayout
-                android:layout_alignParentLeft="true"
-                android:orientation="vertical"
-                android:layout_width="@dimen/dp_250"
-                android:layout_height="match_parent">
-                <TextView
-                    android:layout_marginTop="@dimen/dp_10"
-                    android:text="野钓高手分享一个小技巧，据说可提高中鱼率"
-                    android:layout_weight="0.8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp" />
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_weight="0.2"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp">
-                    <ImageView
-                        android:src="@drawable/nvshengtouxiang"
-                        android:layout_width="@dimen/dp_20"
-                        android:layout_height="match_parent" />
-                    <TextView
-                        android:text="花田萌少女 ～ "
-                        android:gravity="center"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent" />
-                    <TextView
-                        android:text="58"
-                        android:gravity="center"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent" />
-                    <TextView
-                        android:text="人阅读"
-                        android:gravity="center|left"
-                        android:layout_weight="1"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent" />
-
-                    <ImageView
-                        android:src="@drawable/nvshengtouxiang"
-                        android:layout_marginRight="@dimen/dp_10"
-                        android:layout_width="@dimen/dp_20"
-                        android:layout_height="match_parent" />
-
-                </LinearLayout>
-            </LinearLayout>
-            <RelativeLayout
-
-                android:layout_width="@dimen/dp_120"
-                android:layout_height="match_parent"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true">
-
-                <ImageView
-                    android:src="@drawable/nvshengtouxiang"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-
-
-            </RelativeLayout>
-
-        </RelativeLayout>
-
-        <!--视频购-->
-
-        <!--好东西-->
         <LinearLayout
-            android:layout_marginRight="@dimen/dp_10"
-            android:layout_marginLeft="@dimen/dp_10"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_150">
-            <ImageView
-                android:src="@drawable/nvshengtouxiang"
-                android:layout_weight="0.5"
-                android:layout_width="0dp"
-                android:layout_height="match_parent" />
-            <LinearLayout
-                android:layout_margin="@dimen/dp_15"
-                android:orientation="vertical"
-                android:layout_weight="0.5"
-                android:layout_width="0dp"
-                android:layout_height="match_parent">
-                <TextView
-                    android:gravity="center|left"
-                    android:text="外星人水冷游戏主机"
-                    android:layout_weight="0.3"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp" />
-                <TextView
-                    android:gravity="center|left"
-                    android:text="三角形设计，配上背景灯光条，极具游戏氛围，有种未来科技的感觉。"
-                    android:layout_weight="0.4"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp" />
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_weight="0.3"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp">
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="match_parent"/>
-                    <ImageView
-                        android:src="@drawable/nvshengtouxiang"
-                        android:layout_width="45dp"
-                        android:layout_height="wrap_content" />
-                    <TextView
-                        android:text="5"
-                        android:gravity="center"
-                        android:textColor="@color/red"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent" />
-                    <TextView
-                        android:text="人说好"
-                        android:gravity="center"
-                        android:textColor="@color/red"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent" />
-                </LinearLayout>
-            </LinearLayout>
-        </LinearLayout>
-
-        <!--社区-->
-
-        <!--生活-->
-        <RelativeLayout
-            android:id="@+id/rl_item_fragment_share_life"
-            android:layout_marginRight="@dimen/dp_10"
-            android:layout_marginLeft="@dimen/dp_10"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_150">
-
-            <TextView
-                android:id="@+id/tv_item_fragment_share_item_title"
-                android:layout_alignParentTop="true"
-                android:gravity="center|left"
-                android:text="精美书架，点亮舒适整齐的家居环境！"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_30" />
-
-            <LinearLayout
-                android:id="@+id/ll_item_fragment_share_item_pic"
-                android:layout_centerInParent="true"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_100">
-
-                <ImageView
-                    android:src="@drawable/nvshengtouxiang"
-                    android:maxWidth="@dimen/dp_70"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent" />
-                <ImageView
-                    android:src="@drawable/nvshengtouxiang"
-                    android:maxWidth="@dimen/dp_70"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent" />
-                <ImageView
-                    android:src="@drawable/nvshengtouxiang"
-                    android:maxWidth="@dimen/dp_70"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/ll_item_fragment_share_item_msg"
-                android:layout_alignParentBottom="true"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_20">
-                <ImageView
-                    android:src="@drawable/nvshengtouxiang"
-                    android:layout_width="@dimen/dp_20"
-                    android:layout_height="match_parent" />
-                <TextView
-                    android:text="花田萌少女 ～ "
-                    android:gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent" />
-                <TextView
-                    android:text="58"
-                    android:gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent" />
-                <TextView
-                    android:text="人阅读"
-                    android:gravity="center|left"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent" />
-
-                <TextView
-                    android:text="2"
-                    android:gravity="center|right"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent" />
-                <TextView
-                    android:text="件宝贝"
-                    android:gravity="center|right"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent" />
-
-            </LinearLayout>
-        </RelativeLayout>
-        <!--数码-->
-        <RelativeLayout
-            android:layout_marginRight="@dimen/dp_10"
-            android:layout_marginLeft="@dimen/dp_10"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_120"
-            >
-            <LinearLayout
-                android:layout_alignParentLeft="true"
-                android:orientation="vertical"
-                android:layout_width="@dimen/dp_250"
-                android:layout_height="match_parent">
-                <TextView
-                    android:layout_marginTop="@dimen/dp_10"
-                    android:text="野钓高手分享一个小技巧，据说可提高中鱼率"
-                    android:layout_weight="0.8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp" />
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_weight="0.2"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp">
-                    <ImageView
-                        android:src="@drawable/nvshengtouxiang"
-                        android:layout_width="@dimen/dp_20"
-                        android:layout_height="match_parent" />
-                    <TextView
-                        android:text="花田萌少女 ～ "
-                        android:gravity="center"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent" />
-                    <TextView
-                        android:text="58"
-                        android:gravity="center"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent" />
-                    <TextView
-                        android:text="人阅读"
-                        android:gravity="center|left"
-                        android:layout_weight="1"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent" />
-
-
-
-                </LinearLayout>
-            </LinearLayout>
-            <RelativeLayout
-
-                android:layout_width="@dimen/dp_120"
-                android:layout_height="match_parent"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true">
-
-                <ImageView
-                    android:id="@+id/iv_item_fragment_share_item_pic"
-                    android:src="@drawable/nvshengtouxiang"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-                <LinearLayout
-                    android:layout_marginBottom="@dimen/dp_5"
-                    android:layout_marginRight="@dimen/dp_5"
-                    android:layout_alignBottom="@id/iv_item_fragment_share_item_pic"
-                    android:layout_alignRight="@id/iv_item_fragment_share_item_pic"
-                    android:orientation="horizontal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:text="2"
-                        android:gravity="center|right"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent" />
-                    <TextView
-                        android:text="件宝贝"
-                        android:gravity="center|right"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent" />
-                </LinearLayout>
-
-            </RelativeLayout>
-
-        </RelativeLayout>
-
-        <LinearLayout
+            android:id="@+id/ll_item_fragment_share_item_live_telecast"
             android:layout_marginRight="@dimen/dp_10"
             android:layout_marginLeft="@dimen/dp_10"
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_200">
-            <VideoView
-                android:id="@+id/vv_item_fragment_share_item_video"
+            android:layout_height="@dimen/dp_215">
+            <View
+                android:background="#cccccc"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="0.8"/>
+                android:layout_height="@dimen/dp_5"/>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_30">
+                <ImageView
+                    android:id="@+id/iv_item_fragment_share_item_live_telecast_user_pic"
+                    android:src="@drawable/nvshengtouxiang"
+                    android:layout_width="@dimen/dp_30"
+                    android:layout_height="match_parent" />
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:id="@+id/tv_item_fragment_share_item_live_telecast_username"
+                        android:text="燕子yy"
+                        android:layout_weight="0.5"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp" />
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_weight="0.5"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp">
+                        <ImageView
+                            android:src="@drawable/nvshengtouxiang"
+                            android:layout_width="@dimen/dp_15"
+                            android:layout_height="@dimen/dp_15" />
+                        <TextView
+                            android:id="@+id/tv_item_fragment_share_item_live_telecast_user_address"
+                            android:text="广东深圳"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_150">
+                <ImageView
+                    android:id="@+id/iv_item_fragment_share_item_live_telecast_title_pic_one"
+                    android:src="@drawable/nvshengtouxiang"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+                <TextView
+                    android:id="@+id/tv_item_fragment_share_item_live_telecast_identifying"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:text="直播中"
+                    android:gravity="center"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_width="@dimen/dp_45"
+                    android:layout_height="@dimen/dp_15" />
+
+                <TextView
+                    android:id="@+id/tv_item_fragment_share_item_live_telecast_title"
+                    android:text="夏日必备的彩妆"
+                    android:layout_marginBottom="@dimen/dp_10"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dp_15" />
+
+                <ImageView
+                    android:src="@drawable/nvshengtouxiang"
+                    android:layout_marginBottom="@dimen/dp_10"
+                    android:layout_marginRight="@dimen/dp_10"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_width="@dimen/dp_15"
+                    android:layout_height="@dimen/dp_15" />
+
+            </RelativeLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_30">
+                <TextView
+                    android:id="@+id/tv_item_fragment_share_item_live_telecast_cowrie_classify"
+                    android:text="萌宝课堂"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+                <View
+                    android:background="#cccccc"
+                    android:layout_width="@dimen/dp_3"
+                    android:layout_height="match_parent"/>
+                <TextView
+                    android:id="@+id/tv_item_fragment_share_item_live_telecast_title_explain"
+                    android:text="儿童字帖--------"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+        </LinearLayout>
+        <!--关注-->
+        <LinearLayout
+            android:id="@+id/ll_item_fragment_share_item_attention"
+            android:orientation="vertical"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_155">
+            <view
+                android:background="#cccccc"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_5"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_120"
+                >
+                <LinearLayout
+                    android:layout_alignParentLeft="true"
+                    android:orientation="vertical"
+                    android:layout_width="@dimen/dp_250"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:id="@+id/tv_item_fragment_share_item_attention_title"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:text="野钓高手分享一个小技巧，据说可提高中鱼率"
+                        android:layout_weight="0.8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp" />
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_weight="0.2"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp">
+                        <ImageView
+                            android:id="@+id/iv_item_fragment_share_item_attention_user_pic"
+                            android:src="@drawable/nvshengtouxiang"
+                            android:layout_width="@dimen/dp_20"
+                            android:layout_height="match_parent" />
+                        <TextView
+                            android:id="@+id/tv_item_fragment_share_item_attention_username"
+                            android:text="花田萌少女 ～ "
+                            android:gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent" />
+                        <TextView
+                            android:id="@+id/tv_item_fragment_share_item_attention_browse_number"
+                            android:text="58"
+                            android:gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent" />
+                        <TextView
+                            android:text="人阅读"
+                            android:gravity="center|left"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent" />
+
+
+
+                    </LinearLayout>
+                </LinearLayout>
+                <RelativeLayout
+
+                    android:layout_width="@dimen/dp_120"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true">
+
+                    <ImageView
+                        android:id="@+id/iv_item_fragment_share_item_attention_title_pic_one"
+                        android:src="@drawable/nvshengtouxiang"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                    <LinearLayout
+                        android:layout_marginBottom="@dimen/dp_5"
+                        android:layout_marginRight="@dimen/dp_5"
+                        android:layout_alignBottom="@id/iv_item_fragment_share_item_attention_title_pic_one"
+                        android:layout_alignRight="@id/iv_item_fragment_share_item_attention_title_pic_one"
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:text="￥"
+                            android:gravity="center|right"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent" />
+                        <TextView
+                            android:id="@+id/tv_item_fragment_share_item_attention_cowrie_price"
+                            android:text="20.00"
+                            android:gravity="center|right"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent" />
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+        </LinearLayout>
+        <!--清单-->
+        <LinearLayout
+            android:id="@+id/ll_item_fragment_share_item_inventory"
+            android:orientation="vertical"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_155">
+            <View
+                android:background="#cccccc"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_5"/>
             <TextView
+                android:id="@+id/tv_item_fragment_share_item_inventory_title"
+                android:text="高性能长续航手机"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_20" />
+            <TextView
+                android:id="@+id/tv_item_fragment_share_item_inventory_title_explain"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_10" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_90">
+
+                <ImageView
+                    android:id="@+id/iv_item_fragment_share_item_inventory_title_pic_one"
+                    android:src="@drawable/nvshengtouxiang"
+                    android:maxWidth="@dimen/dp_70"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+                <ImageView
+                    android:id="@+id/iv_item_fragment_share_item_inventory_title_pic_two"
+                    android:src="@drawable/nvshengtouxiang"
+                    android:maxWidth="@dimen/dp_70"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+                <ImageView
+                    android:id="@+id/iv_item_fragment_share_item_inventory_title_pic_three"
+                    android:src="@drawable/nvshengtouxiang"
+                    android:maxWidth="@dimen/dp_70"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_30">
+                <ImageView
+                    android:id="@+id/iv_item_fragment_share_item_inventory_user_pic"
+                    android:src="@drawable/nvshengtouxiang"
+                    android:layout_width="@dimen/dp_30"
+                    android:layout_height="match_parent" />
+
+                <TextView
+                    android:id="@+id/tv_item_fragment_share_item_inventory_username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="大风车" />
+
+                <TextView
+                    android:text="推荐了"
+                    android:gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+                <TextView
+                    android:id="@+id/tv_item_fragment_share_item_inventory_cowrie_number"
+                    android:text="25"
+                    android:gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+                <TextView
+                    android:text="件单品"
+                    android:gravity="center|left"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+                <ImageView
+                    android:src="@drawable/nvshengtouxiang"
+                    android:layout_width="@dimen/dp_30"
+                    android:layout_height="match_parent" />
+                <TextView
+                    android:id="@+id/tv_item_fragment_share_item_inventory_browse_number"
+                    android:text="5646546"
+                    android:gravity="center"
+                    android:layout_width="@dimen/dp_60"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+        </LinearLayout>
+        <!--问答-->
+        <LinearLayout
+            android:id="@+id/ll_item_fragment_share_item_consult"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_125">
+            <View
+                android:background="#cccccc"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_5"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_120"
+                >
+                <LinearLayout
+                    android:layout_alignParentLeft="true"
+                    android:orientation="vertical"
+                    android:layout_width="@dimen/dp_250"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:id="@+id/tv_item_fragment_share_item_consult_title"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:text="野钓高手分享一个小技巧，据说可提高中鱼率"
+                        android:layout_weight="0.8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp" />
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_weight="0.2"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp">
+                        <ImageView
+                            android:id="@+id/iv_item_fragment_share_item_consult_user_pic"
+                            android:src="@drawable/nvshengtouxiang"
+                            android:layout_width="@dimen/dp_20"
+                            android:layout_height="match_parent" />
+                        <TextView
+                            android:id="@+id/tv_item_fragment_share_item_consult_username"
+                            android:text="花田萌少女 ～ "
+                            android:gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent" />
+                        <TextView
+                            android:text="--"
+                            android:gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent" />
+                        <TextView
+                            android:id="@+id/tv_item_fragment_share_item_consult_user_identifying"
+                            android:text="一加产品经理"
+                            android:gravity="center|left"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent" />
+
+                        <ImageView
+                            android:src="@drawable/nvshengtouxiang"
+                            android:layout_marginRight="@dimen/dp_10"
+                            android:layout_width="@dimen/dp_20"
+                            android:layout_height="match_parent" />
+
+                    </LinearLayout>
+                </LinearLayout>
+                <RelativeLayout
+
+                    android:layout_width="@dimen/dp_120"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true">
+
+                    <ImageView
+                        android:id="@+id/iv_item_fragment_share_item_consult_title_pic_one"
+                        android:src="@drawable/nvshengtouxiang"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+        </LinearLayout>
+        <!--视频购-->
+        <LinearLayout
+            android:id="@+id/ll_item_fragment_share_item_video_shopping"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_205">
+            <View
+                android:background="#cccccc"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_5"/>
+            <RelativeLayout
+                android:layout_weight="0.8"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+                <ImageView
+                    android:id="@+id/vv_item_fragment_share_item_video_shopping_video"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+                <ImageView
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/nvshengtouxiang"
+                    android:layout_width="@dimen/dp_35"
+                    android:layout_height="@dimen/dp_35" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tv_item_fragment_share_item_video_shopping_title"
                 android:layout_marginBottom="@dimen/dp_5"
                 android:layout_marginTop="@dimen/dp_5"
                 android:text="粉糯桂花香，这一世好味道"
@@ -340,15 +438,18 @@
                 android:layout_weight="0.1"
                 android:layout_height="0dp">
                 <ImageView
+                    android:id="@+id/iv_item_fragment_share_item_video_shopping_user_pic"
                     android:src="@drawable/nvshengtouxiang"
                     android:layout_width="@dimen/dp_20"
                     android:layout_height="match_parent" />
                 <TextView
+                    android:id="@+id/tv_item_fragment_share_item_video_shopping_username"
                     android:text="朋朋家的厨房 ～ "
                     android:gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent" />
                 <TextView
+                    android:id="@+id/tv_item_fragment_share_item_video_shopping_browse_number"
                     android:text="58"
                     android:gravity="center"
                     android:layout_width="wrap_content"
@@ -361,6 +462,7 @@
                     android:layout_height="match_parent" />
 
                 <TextView
+                    android:id="@+id/tv_item_fragment_share_item_video_shopping_cowrie_number"
                     android:text="2"
                     android:gravity="center|right"
                     android:layout_width="wrap_content"
@@ -373,7 +475,426 @@
 
             </LinearLayout>
         </LinearLayout>
+        <!--好东西-->
+        <LinearLayout
+            android:id="@+id/ll_item_fragment_share_item_good_cargo"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_155">
+            <View
+                android:background="#cccccc"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_5"/>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_150">
+                <ImageView
+                    android:id="@+id/iv_item_fragment_share_item_good_cargo_title_pic_one"
+                    android:src="@drawable/nvshengtouxiang"
+                    android:layout_weight="0.5"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+                <LinearLayout
+                    android:layout_margin="@dimen/dp_15"
+                    android:orientation="vertical"
+                    android:layout_weight="0.5"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:id="@+id/tv_item_fragment_share_item_good_cargo_title"
+                        android:gravity="center|left"
+                        android:text="外星人水冷游戏主机"
+                        android:layout_weight="0.3"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp" />
+                    <TextView
+                        android:id="@+id/tv_item_fragment_share_item_good_cargo_title_explain"
+                        android:gravity="center|left"
+                        android:text="三角形设计，配上背景灯光条，极具游戏氛围，有种未来科技的感觉。"
+                        android:layout_weight="0.4"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp" />
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_weight="0.3"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp">
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="match_parent"/>
+                        <ImageView
+                            android:src="@drawable/nvshengtouxiang"
+                            android:layout_width="45dp"
+                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:id="@+id/tv_item_fragment_share_item_good_cargo_browse_number"
+                            android:text="5"
+                            android:gravity="center"
+                            android:textColor="@color/red"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent" />
+                        <TextView
+                            android:text="人说好"
+                            android:gravity="center"
+                            android:textColor="@color/red"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+        <!--社区-->
+        <LinearLayout
+            android:id="@+id/ll_item_fragment_share_item_community"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_305">
+            <view
+                android:background="#cccccc"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_5"/>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_60">
+                <ImageView
+                    android:id="@+id/iv_item_fragment_share_item_community_user_pic"
+                    android:src="@drawable/nvshengtouxiang"
+                    android:layout_width="@dimen/dp_60"
+                    android:layout_height="match_parent" />
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:id="@+id/tv_item_fragment_share_item_community_username"
+                        android:text="社区小助手"
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_weight="0.5"
+                        android:layout_height="0dp" />
+                    <TextView
+                        android:id="@+id/tv_item_fragment_share_item_community_user_identifying"
+                        android:text="官方"
+                        android:gravity="center"
+                        android:background="@color/red"
+                        android:layout_width="wrap_content"
+                        android:layout_weight="0.5"
+                        android:layout_height="0dp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:src="@drawable/nvshengtouxiang"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:id="@+id/tv_item_fragment_share_item_community_time"
+                        android:text="时间"
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </LinearLayout>
+            <TextView
+                android:id="@+id/tv_item_fragment_share_item_community_title"
+                android:text="评论有奖"
+                android:gravity="center|left"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_30" />
+            <TextView
+                android:id="@+id/tv_item_fragment_share_item_community_title_explain"
+                android:text="说出爱他的理由"
+                android:gravity="center|left"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_30" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_120">
+                <ImageView
+                    android:id="@+id/iv_item_fragment_share_item_community_title_pic_one"
+                    android:src="@drawable/nvshengtouxiang"
+                    android:layout_weight="0.7"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_weight="0.3"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:id="@+id/iv_item_fragment_share_item_community_title_pic_two"
+                        android:src="@drawable/nvshengtouxiang"
+                        android:layout_width="match_parent"
+                        android:layout_weight="0.5"
+                        android:layout_height="0dp" />
+                    <ImageView
+                        android:id="@+id/iv_item_fragment_share_item_community_title_pic_three"
+                        android:src="@drawable/nvshengtouxiang"
+                        android:layout_width="match_parent"
+                        android:layout_weight="0.5"
+                        android:layout_height="0dp" />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_30">
+                <ImageView
 
+                    android:src="@drawable/nvshengtouxiang"
+                    android:layout_width="@dimen/dp_30"
+                    android:layout_height="@dimen/dp_30" />
+                <ImageView
+                    android:src="@drawable/nvshengtouxiang"
+                    android:layout_width="@dimen/dp_30"
+                    android:layout_height="@dimen/dp_30" />
+                <ImageView
+                    android:src="@drawable/nvshengtouxiang"
+                    android:layout_width="@dimen/dp_30"
+                    android:layout_height="@dimen/dp_30" />
+                <ImageView
+                    android:src="@drawable/nvshengtouxiang"
+                    android:layout_width="@dimen/dp_30"
+                    android:layout_height="@dimen/dp_30" />
+                <ImageView
+                    android:src="@drawable/nvshengtouxiang"
+                    android:layout_width="@dimen/dp_30"
+                    android:layout_height="@dimen/dp_30" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_30">
+                <ImageView
+                    android:src="@drawable/nvshengtouxiang"
+                    android:layout_width="@dimen/dp_30"
+                    android:layout_height="match_parent" />
+
+                <TextView
+                    android:id="@+id/tv_item_fragment_share_item_community_cowrie_number"
+                    android:text="25"
+                    android:gravity="center|left"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+                <ImageView
+                    android:src="@drawable/nvshengtouxiang"
+                    android:layout_width="@dimen/dp_30"
+                    android:layout_height="match_parent" />
+
+                <TextView
+                    android:id="@+id/tv_item_fragment_share_item_community_browse_number"
+                    android:text="159"
+                    android:gravity="center|left"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+        </LinearLayout>
+        <!--生活-->
+        <LinearLayout
+            android:id="@+id/ll_item_fragment_share_item_life"
+            android:orientation="vertical"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_155">
+            <view
+                android:background="#cccccc"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_5"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_150">
+                <TextView
+                    android:id="@+id/tv_item_fragment_share_item_life_title"
+                    android:layout_alignParentTop="true"
+                    android:gravity="center|left"
+                    android:text="精美书架，点亮舒适整齐的家居环境！"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_30" />
+
+                <LinearLayout
+                    android:layout_centerInParent="true"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_100">
+
+                    <ImageView
+                        android:id="@+id/iv_item_fragment_share_item_life_title_pic_one"
+                        android:src="@drawable/nvshengtouxiang"
+                        android:maxWidth="@dimen/dp_70"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent" />
+                    <ImageView
+                        android:id="@+id/iv_item_fragment_share_item_life_title_pic_two"
+                        android:src="@drawable/nvshengtouxiang"
+                        android:maxWidth="@dimen/dp_70"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent" />
+                    <ImageView
+                        android:id="@+id/iv_item_fragment_share_item_life_title_pic_three"
+                        android:src="@drawable/nvshengtouxiang"
+                        android:maxWidth="@dimen/dp_70"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_alignParentBottom="true"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_20">
+                    <ImageView
+                        android:id="@+id/iv_item_fragment_share_item_life_user_pic"
+                        android:src="@drawable/nvshengtouxiang"
+                        android:layout_width="@dimen/dp_20"
+                        android:layout_height="match_parent" />
+                    <TextView
+                        android:id="@+id/tv_item_fragment_share_item_life_username"
+                        android:text="花田萌少女 ～ "
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent" />
+                    <TextView
+                        android:id="@+id/tv_item_fragment_share_item_life_browse_number"
+                        android:text="58"
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent" />
+                    <TextView
+                        android:text="人阅读"
+                        android:gravity="center|left"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent" />
+
+                    <TextView
+                        android:id="@+id/tv_item_fragment_share_item_life_cowrie_number"
+                        android:text="2"
+                        android:gravity="center|right"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent" />
+                    <TextView
+                        android:text="件宝贝"
+                        android:gravity="center|right"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent" />
+
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
+        <!--数码-->
+        <LinearLayout
+            android:id="@+id/ll_item_fragment_share_item_digit"
+            android:orientation="vertical"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_155">
+            <view
+                android:background="#cccccc"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_5"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_120"
+                >
+                <LinearLayout
+                    android:layout_alignParentLeft="true"
+                    android:orientation="vertical"
+                    android:layout_width="@dimen/dp_250"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:id="@+id/tv_item_fragment_share_item_digit_title"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:text="野钓高手分享一个小技巧，据说可提高中鱼率"
+                        android:layout_weight="0.8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp" />
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_weight="0.2"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp">
+                        <ImageView
+                            android:id="@+id/iv_item_fragment_share_item_digit_user_pic"
+                            android:src="@drawable/nvshengtouxiang"
+                            android:layout_width="@dimen/dp_20"
+                            android:layout_height="match_parent" />
+                        <TextView
+                            android:id="@+id/tv_item_fragment_share_item_digit_username"
+                            android:text="花田萌少女 ～ "
+                            android:gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent" />
+                        <TextView
+                            android:id="@+id/tv_item_fragment_share_item_digit_browse_number"
+                            android:text="58"
+                            android:gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent" />
+                        <TextView
+                            android:text="人阅读"
+                            android:gravity="center|left"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent" />
+
+
+
+                    </LinearLayout>
+                </LinearLayout>
+                <RelativeLayout
+
+                    android:layout_width="@dimen/dp_120"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true">
+
+                    <ImageView
+                        android:id="@+id/iv_item_fragment_share_item_digit_title_pic_one"
+                        android:src="@drawable/nvshengtouxiang"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                    <LinearLayout
+                        android:layout_marginBottom="@dimen/dp_5"
+                        android:layout_marginRight="@dimen/dp_5"
+                        android:layout_alignBottom="@id/iv_item_fragment_share_item_digit_title_pic_one"
+                        android:layout_alignRight="@id/iv_item_fragment_share_item_digit_title_pic_one"
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/tv_item_fragment_share_item_digit_cowrie_number"
+                            android:text="2"
+                            android:gravity="center|right"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent" />
+                        <TextView
+                            android:text="件宝贝"
+                            android:gravity="center|right"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+        </LinearLayout>
     </LinearLayout>
 
 
