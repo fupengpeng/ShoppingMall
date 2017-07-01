@@ -13,6 +13,7 @@
         <!--直播-->
         <LinearLayout
             android:id="@+id/ll_item_fragment_share_item_live_telecast"
+            android:background="@color/colorAccent"
             android:layout_marginRight="@dimen/dp_10"
             android:layout_marginLeft="@dimen/dp_10"
             android:orientation="vertical"
@@ -120,13 +121,14 @@
         </LinearLayout>
         <!--关注-->
         <LinearLayout
+            android:background="#ffaa44"
             android:id="@+id/ll_item_fragment_share_item_attention"
             android:orientation="vertical"
             android:layout_marginRight="@dimen/dp_10"
             android:layout_marginLeft="@dimen/dp_10"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_155">
-            <view
+            <View
                 android:background="#cccccc"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_5"/>
@@ -219,6 +221,7 @@
         </LinearLayout>
         <!--清单-->
         <LinearLayout
+            android:background="#445599"
             android:id="@+id/ll_item_fragment_share_item_inventory"
             android:orientation="vertical"
             android:layout_marginRight="@dimen/dp_10"
@@ -314,6 +317,7 @@
         </LinearLayout>
         <!--问答-->
         <LinearLayout
+            android:background="#99aa22"
             android:id="@+id/ll_item_fragment_share_item_consult"
             android:layout_marginRight="@dimen/dp_10"
             android:layout_marginLeft="@dimen/dp_10"
@@ -397,6 +401,7 @@
         </LinearLayout>
         <!--视频购-->
         <LinearLayout
+            android:background="#ad00aa74"
             android:id="@+id/ll_item_fragment_share_item_video_shopping"
             android:layout_marginRight="@dimen/dp_10"
             android:layout_marginLeft="@dimen/dp_10"
@@ -477,6 +482,7 @@
         </LinearLayout>
         <!--好东西-->
         <LinearLayout
+            android:background="#f2d604"
             android:id="@+id/ll_item_fragment_share_item_good_cargo"
             android:layout_marginRight="@dimen/dp_10"
             android:layout_marginLeft="@dimen/dp_10"
@@ -549,13 +555,14 @@
         </LinearLayout>
         <!--社区-->
         <LinearLayout
+            android:background="#07ea0f"
             android:id="@+id/ll_item_fragment_share_item_community"
             android:layout_marginRight="@dimen/dp_10"
             android:layout_marginLeft="@dimen/dp_10"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_305">
-            <view
+            <View
                 android:background="#cccccc"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_5"/>
@@ -702,13 +709,14 @@
         </LinearLayout>
         <!--生活-->
         <LinearLayout
+            android:background="#023cfa"
             android:id="@+id/ll_item_fragment_share_item_life"
             android:orientation="vertical"
             android:layout_marginRight="@dimen/dp_10"
             android:layout_marginLeft="@dimen/dp_10"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_155">
-            <view
+            <View
                 android:background="#cccccc"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_5"/>
@@ -799,13 +807,14 @@
         </LinearLayout>
         <!--数码-->
         <LinearLayout
+            android:background="#a97272"
             android:id="@+id/ll_item_fragment_share_item_digit"
             android:orientation="vertical"
             android:layout_marginRight="@dimen/dp_10"
             android:layout_marginLeft="@dimen/dp_10"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_155">
-            <view
+            <View
                 android:background="#cccccc"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_5"/>

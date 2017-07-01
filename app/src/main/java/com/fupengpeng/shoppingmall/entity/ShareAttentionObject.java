@@ -10,7 +10,7 @@ import java.io.Serializable;
 
 public class ShareAttentionObject implements Serializable{
 
-    private int tag;//布局标签
+    private String tag;//布局标签
     private String username;//用户名
     private int userPic;//用户头像
     private String userAddress;//用户地址
@@ -20,20 +20,20 @@ public class ShareAttentionObject implements Serializable{
     private int titlePicOne;//咨询图片1
     private int titlePicTwo;//咨询图片2
     private int titlePicThree;//咨询图片3
-    private int browseNumber;//咨询浏览量
-    private int cowrieNumber;//咨询宝贝数量
+    private String browseNumber;//咨询浏览量
+    private String cowrieNumber;//咨询宝贝数量
     private String cowrieClassify;//咨询宝贝分类
     private String time;//咨询发布时间
     private double cowriePrice;//宝贝价格
 
     public ShareAttentionObject() {
     }
-    public ShareAttentionObject(int tag, String username,
+    public ShareAttentionObject(String tag, String username,
                                 int userPic, String userAddress,
                                 String userIdentifying, String title,
                                 String titleExplain, int titlePicOne,
                                 int titlePicTwo, int titlePicThree,
-                                int browseNumber, int cowrieNumber,
+                                String browseNumber, String cowrieNumber,
                                 String cowrieClassify, String time,
                                 double cowriePrice) {
         this.tag = tag;
@@ -53,11 +53,11 @@ public class ShareAttentionObject implements Serializable{
         this.cowriePrice = cowriePrice;
     }
 
-    public int getTag() {
+    public String getTag() {
         return tag;
     }
 
-    public void setTag(int tag) {
+    public void setTag(String tag) {
         this.tag = tag;
     }
 
@@ -133,19 +133,19 @@ public class ShareAttentionObject implements Serializable{
         this.titlePicThree = titlePicThree;
     }
 
-    public int getBrowseNumber() {
+    public String getBrowseNumber() {
         return browseNumber;
     }
 
-    public void setBrowseNumber(int browseNumber) {
+    public void setBrowseNumber(String browseNumber) {
         this.browseNumber = browseNumber;
     }
 
-    public int getCowrieNumber() {
+    public String getCowrieNumber() {
         return cowrieNumber;
     }
 
-    public void setCowrieNumber(int cowrieNumber) {
+    public void setCowrieNumber(String cowrieNumber) {
         this.cowrieNumber = cowrieNumber;
     }
 

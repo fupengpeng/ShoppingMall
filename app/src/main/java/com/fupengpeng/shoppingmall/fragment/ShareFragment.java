@@ -2,6 +2,7 @@ package com.fupengpeng.shoppingmall.fragment;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
@@ -11,16 +12,21 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.fupengpeng.shoppingmall.MainActivity;
 import com.fupengpeng.shoppingmall.R;
 import com.fupengpeng.shoppingmall.entity.ShareAttentionList;
 import com.fupengpeng.shoppingmall.entity.ShareAttentionObject;
+import com.fupengpeng.shoppingmall.util.PullToRefreshUtils;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -60,11 +66,22 @@ public class ShareFragment extends Fragment {
     private View shareFragmentView;
     private ShareAttentionList shareAttentionList;
 
-    private ListViewAdapter listViewAdapter01;
+    private ListViewAdapter listViewAdapter01,ptrlvItemFragmentShareSelectionAdapter;
     /**
      * 数据源
      */
-    List<Map<String, Object>> list;
+    List<Map<String, Object>> list01,list02,list03,list04,list05,list06,list07,list08,list09,list10;
+    private ListView listView02,listView03,listView04,listView05,listView06,listView07,listView08,listView09,listView10;
+    private PullToRefreshListView ptrlvItemFragmentShareSelection;
+
+    /**
+     * 当前页
+     */
+    private int currentPage;
+    /**
+     * 总页数
+     */
+    private int totalPage;
 
     /**
      * 获取Fragment依赖的MainActivity
@@ -105,7 +122,6 @@ public class ShareFragment extends Fragment {
         ptsFragmentShare.setTabIndicatorColor(this.getResources().getColor(R.color.red));
         ptsFragmentShare.setTextSpacing(100);
 
-        View view1 = LayoutInflater.from(getMainActivity()).inflate(R.layout.item_fragment_share_selection, null);
         View view2 = LayoutInflater.from(getMainActivity()).inflate(R.layout.item_fragment_share_live_telecast, null);
         View view3 = LayoutInflater.from(getMainActivity()).inflate(R.layout.item_fragment_share_attention, null);
         View view4 = LayoutInflater.from(getMainActivity()).inflate(R.layout.item_fragment_share_inventory, null);
@@ -115,8 +131,20 @@ public class ShareFragment extends Fragment {
         View view8 = LayoutInflater.from(getMainActivity()).inflate(R.layout.item_fragment_share_community, null);
         View view9 = LayoutInflater.from(getMainActivity()).inflate(R.layout.item_fragment_share_life, null);
         View view10 = LayoutInflater.from(getMainActivity()).inflate(R.layout.item_fragment_share_digit, null);
+
+        View selectionView = LayoutInflater.from(getMainActivity()).inflate(R.layout.item_fragment_share_selection, null);
+//        View liveTelecastView = LayoutInflater.from(getMainActivity()).inflate(R.layout.item_fragment_share_live_telecast, null);
+//        View attentionView = LayoutInflater.from(getMainActivity()).inflate(R.layout.item_fragment_share_attention, null);
+//        View inventoryView = LayoutInflater.from(getMainActivity()).inflate(R.layout.item_fragment_share_inventory, null);
+//        View consultView = LayoutInflater.from(getMainActivity()).inflate(R.layout.item_fragment_share_consult, null);
+//        View videoShoppingView = LayoutInflater.from(getMainActivity()).inflate(R.layout.item_fragment_share_video_shopping, null);
+//        View goodCargoView = LayoutInflater.from(getMainActivity()).inflate(R.layout.item_fragment_share_good_cargo, null);
+//        View communityView = LayoutInflater.from(getMainActivity()).inflate(R.layout.item_fragment_share_community, null);
+//        View lifeView = LayoutInflater.from(getMainActivity()).inflate(R.layout.item_fragment_share_life, null);
+//        View digitView = LayoutInflater.from(getMainActivity()).inflate(R.layout.item_fragment_share_digit, null);
+
+
         //viewpager开始添加view
-        viewContainter.add(view1);
         viewContainter.add(view2);
         viewContainter.add(view3);
         viewContainter.add(view4);
@@ -126,6 +154,18 @@ public class ShareFragment extends Fragment {
         viewContainter.add(view8);
         viewContainter.add(view9);
         viewContainter.add(view10);
+
+        viewContainter.add(selectionView);
+//        viewContainter.add(liveTelecastView);
+//        viewContainter.add(attentionView);
+//        viewContainter.add(inventoryView);
+//        viewContainter.add(consultView);
+//        viewContainter.add(videoShoppingView);
+//        viewContainter.add(goodCargoView);
+//        viewContainter.add(communityView);
+//        viewContainter.add(lifeView);
+//        viewContainter.add(digitView);
+
         //页签项
         titleContainer.add("精选");
         titleContainer.add("直播");
@@ -138,15 +178,7 @@ public class ShareFragment extends Fragment {
         titleContainer.add("生活");
         titleContainer.add("数码");
 
-        ListView listView01 = (ListView) view1.findViewById(R.id.lv_tab1);
 
-        // TODO: 2017/6/28 0028 适配器待完善
-
-
-        parseData();
-        list = getData();
-//        listViewAdapter01 = new ListViewAdapter(getMainActivity(), list);
-//        listView01.setAdapter(listViewAdapter01);
 
 
         vpFragmentShare.setAdapter(new PagerAdapter() {
@@ -206,7 +238,262 @@ public class ShareFragment extends Fragment {
             }
         });
 
+        ptrlvItemFragmentShareSelection = (PullToRefreshListView) selectionView.findViewById(R.id.ptrlv_item_fragment_share_selection);
+
+        listView02 = (ListView) view2.findViewById(R.id.lv_tab2);
+        listView03 = (ListView) view3.findViewById(R.id.lv_tab3);
+        listView04 = (ListView) view4.findViewById(R.id.lv_tab4);
+        listView05 = (ListView) view5.findViewById(R.id.lv_tab5);
+        listView06 = (ListView) view6.findViewById(R.id.lv_tab6);
+        listView07 = (ListView) view7.findViewById(R.id.lv_tab7);
+        listView08 = (ListView) view8.findViewById(R.id.lv_tab8);
+        listView09 = (ListView) view9.findViewById(R.id.lv_tab9);
+        listView10 = (ListView) view10.findViewById(R.id.lv_tab10);
+
+
+
+        // TODO: 2017/6/28 0028 适配器待完善
+
+
+        parseData();
+        list01 = getData();
+        Log.e(TAG, "setViewPager:---------- "+list01.get(1).get("tag").toString().trim() );
+        Log.e(TAG, "setViewPager:--------------------------------------- "+list01.get(1).get("title").toString().trim() );
+        listViewAdapter01 = new ListViewAdapter(context, list01);
+
+
+        // 初始化
+        init();
+        // 设置监听器
+        setListeners();
+
+
+        listView02.setAdapter(listViewAdapter01);
+        listView03.setAdapter(listViewAdapter01);
+        listView04.setAdapter(listViewAdapter01);
+        listView05.setAdapter(listViewAdapter01);
+        listView06.setAdapter(listViewAdapter01);
+        listView07.setAdapter(listViewAdapter01);
+        listView08.setAdapter(listViewAdapter01);
+        listView09.setAdapter(listViewAdapter01);
+        listView10.setAdapter(listViewAdapter01);
+
+
     }
+
+
+
+
+
+    /**
+     * 初始化
+     */
+    private void init() {
+        // 绑定数据
+        bindData();
+        // 设置加载模式
+        PullToRefreshUtils.setPullBoth(ptrlvItemFragmentShareSelection);
+        // 刷新数据
+        refreshData(1);
+    }
+
+    /**
+     * 设置监听器
+     */
+    private void setListeners() {
+        Log.e(TAG, "setListeners: "+"777777777777777777777777777777777777777777" );
+        // 刷新监听器
+        ptrlvItemFragmentShareSelection.setOnRefreshListener(new InnerOnRefreshListener2());
+        // 子项点击监听器
+        ptrlvItemFragmentShareSelection.setOnItemClickListener(new InnerOnItemClickListener());
+    }
+
+
+    /**
+     * 刷新监听器
+     */
+    private class InnerOnRefreshListener2 implements PullToRefreshBase.OnRefreshListener2 {
+        @Override
+        public void onPullDownToRefresh(PullToRefreshBase refreshView) {
+            // 下拉刷新
+            refreshData(1);
+            Log.e(TAG, "onPullDownToRefresh: " + "----004");
+
+            ShareAttentionList sal = new ShareAttentionList();
+            List<ShareAttentionObject> shareAttentionObjects = new ArrayList<ShareAttentionObject>();
+            for (int i = 0; i < 3; i++) {
+                ShareAttentionObject shareAttentionObject = new ShareAttentionObject();
+                shareAttentionObject.setTag("2000");
+                shareAttentionObject.setUsername("用户：---" + 2000 + "---");
+                shareAttentionObject.setUserPic(R.drawable.nvshengtouxiang);
+                shareAttentionObject.setUserAddress("用户地址：---" + 2000 + "---");
+                shareAttentionObject.setUserIdentifying("用户标识：---" + 2000 + "---");
+                shareAttentionObject.setTitle("咨询标题：---" + 2000 + "---");
+                shareAttentionObject.setTitleExplain("咨询标题说明：---" + 2000 + "---");
+                shareAttentionObject.setTitlePicOne(R.drawable.nvshengtouxiang);
+                shareAttentionObject.setTitlePicTwo(R.drawable.nvshengtouxiang);
+                shareAttentionObject.setTitlePicThree(R.drawable.nvshengtouxiang);
+                shareAttentionObject.setBrowseNumber("2000");
+                shareAttentionObject.setCowrieNumber("2000");
+                shareAttentionObject.setCowrieClassify("宝贝分类：---" + 2000 + "---");
+                shareAttentionObject.setTime("资讯发布时间：---" + 2000 + "---");
+                shareAttentionObject.setCowriePrice(2000);
+
+                shareAttentionObjects.add(shareAttentionObject);
+            }
+            sal.setShareAttentionObjectList(shareAttentionObjects);
+
+
+
+            List<Map<String, Object>> lista = new ArrayList<Map<String, Object>>();
+            Map<String, Object> map;
+            for (int i = 0; i < sal.getShareAttentionObjectList().size(); i++) {
+                map = new HashMap<String, Object>();
+
+                mapPut(sal, map, i);
+
+                lista.add(map);
+            }
+
+
+            ptrlvItemFragmentShareSelectionAdapter.addFirst(lista);
+            new ShareFragment.FinishRefresh().execute();
+            ptrlvItemFragmentShareSelectionAdapter.notifyDataSetChanged();
+        }
+
+        @Override
+        public void onPullUpToRefresh(PullToRefreshBase refreshView) {
+
+            Log.e(TAG, "onPullUpToRefresh: " + "----005");
+
+            totalPage = 5;
+            // 判断是否还有更多数据
+            if (currentPage >= totalPage) {
+                Toast.makeText(getMainActivity(), "没有更多数据", Toast.LENGTH_SHORT).show();
+                // 加载完成
+                PullToRefreshUtils.refreshComplete(ptrlvItemFragmentShareSelection);
+                return;
+            }
+            // 上拉加载
+            currentPage++;
+            refreshData(currentPage);
+
+            ShareAttentionList sal = new ShareAttentionList();
+            List<ShareAttentionObject> shareAttentionObjects = new ArrayList<ShareAttentionObject>();
+            for (int i = 0; i < 3; i++) {
+                ShareAttentionObject shareAttentionObject = new ShareAttentionObject();
+
+                shareAttentionObject.setTag("2000");
+                shareAttentionObject.setUsername("用户：---" + 2000 + "---");
+                shareAttentionObject.setUserPic(R.drawable.nvshengtouxiang);
+                shareAttentionObject.setUserAddress("用户地址：---" + 2000 + "---");
+                shareAttentionObject.setUserIdentifying("用户标识：---" + 2000 + "---");
+                shareAttentionObject.setTitle("咨询标题：---" + 2000 + "---");
+                shareAttentionObject.setTitleExplain("咨询标题说明：---" + 2000 + "---");
+                shareAttentionObject.setTitlePicOne(R.drawable.nvshengtouxiang);
+                shareAttentionObject.setTitlePicTwo(R.drawable.nvshengtouxiang);
+                shareAttentionObject.setTitlePicThree(R.drawable.nvshengtouxiang);
+                shareAttentionObject.setBrowseNumber("2000");
+                shareAttentionObject.setCowrieNumber("2000");
+                shareAttentionObject.setCowrieClassify("宝贝分类：---" + 2000 + "---");
+                shareAttentionObject.setTime("资讯发布时间：---" + 2000 + "---");
+                shareAttentionObject.setCowriePrice(2000);
+
+                shareAttentionObjects.add(shareAttentionObject);
+            }
+            sal.setShareAttentionObjectList(shareAttentionObjects);
+
+            List<Map<String, Object>> lista = new ArrayList<Map<String, Object>>();
+            Map<String, Object> map;
+            for (int i = 0; i < sal.getShareAttentionObjectList().size(); i++) {
+                map = new HashMap<String, Object>();
+
+                mapPut(sal, map, i);
+
+                lista.add(map);
+            }
+
+
+            ptrlvItemFragmentShareSelectionAdapter.addLast(lista);
+            new ShareFragment.FinishRefresh().execute();
+            ptrlvItemFragmentShareSelectionAdapter.notifyDataSetChanged();
+        }
+    }
+
+    private void mapPut(ShareAttentionList sal, Map<String, Object> map, int i) {
+        map.put("tag", sal.getShareAttentionObjectList().get(i).getTag());
+        map.put("username", sal.getShareAttentionObjectList().get(i).getUsername());
+        map.put("userPic", sal.getShareAttentionObjectList().get(i).getUserPic());
+        map.put("userAddress", sal.getShareAttentionObjectList().get(i).getUserAddress());
+        map.put("userIdentifying", sal.getShareAttentionObjectList().get(i).getUserIdentifying());
+        map.put("title", sal.getShareAttentionObjectList().get(i).getTitle());
+        map.put("titleExplain", sal.getShareAttentionObjectList().get(i).getTitleExplain());
+        map.put("titlePicOne", sal.getShareAttentionObjectList().get(i).getTitlePicOne());
+        map.put("titlePicTwo", sal.getShareAttentionObjectList().get(i).getTitlePicTwo());
+        map.put("titlePicThree", sal.getShareAttentionObjectList().get(i).getTitlePicThree());
+        map.put("browseNumber", sal.getShareAttentionObjectList().get(i).getBrowseNumber());
+        map.put("cowrieNumber", sal.getShareAttentionObjectList().get(i).getCowrieNumber());
+        map.put("cowrieClassify", sal.getShareAttentionObjectList().get(i).getCowrieClassify());
+        map.put("time", sal.getShareAttentionObjectList().get(i).getTime());
+        map.put("cowriePrice", sal.getShareAttentionObjectList().get(i).getCowriePrice());
+    }
+
+    /**
+     * 绑定数据
+     */
+    private void bindData() {
+        list01 = getData();
+        if (list01 == null){
+            ptrlvItemFragmentShareSelection.setVisibility(View.GONE);
+        }else {
+            ptrlvItemFragmentShareSelection.setVisibility(View.VISIBLE);
+            ptrlvItemFragmentShareSelectionAdapter = new ListViewAdapter(context, list01);
+            ptrlvItemFragmentShareSelection.setAdapter(ptrlvItemFragmentShareSelectionAdapter);
+        }
+
+    }
+
+    /**
+     * 子项点击监听器
+     */
+    public class InnerOnItemClickListener implements AdapterView.OnItemClickListener {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            // 数据源当前索引
+            int pos = position - 1;
+            Log.e(TAG, "onItemClick: " + "----007---------------------------------------------" + position);
+
+        }
+    }
+
+    /**
+     * 刷新数据
+     */
+    private void refreshData(int page) {
+        currentPage = page;
+    }
+
+
+    /**
+     * 异步任务，模仿网络请求
+     */
+    private class FinishRefresh extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected Void doInBackground(Void... params) {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            ptrlvItemFragmentShareSelectionAdapter.notifyDataSetChanged();
+            ptrlvItemFragmentShareSelection.onRefreshComplete();
+        }
+    }
+
 
 
     /**
@@ -221,21 +508,7 @@ public class ShareFragment extends Fragment {
 
         for (int i = 0; i < shareAttentionList.getShareAttentionObjectList().size(); i++) {
             map = new HashMap<String, Object>();
-            map.put("tag", shareAttentionList.getShareAttentionObjectList().get(i).getTag());
-            map.put("username", shareAttentionList.getShareAttentionObjectList().get(i).getUsername());
-            map.put("userPic", shareAttentionList.getShareAttentionObjectList().get(i).getUserPic());
-            map.put("userAddress", shareAttentionList.getShareAttentionObjectList().get(i).getUserAddress());
-            map.put("userIdentifying", shareAttentionList.getShareAttentionObjectList().get(i).getUserIdentifying());
-            map.put("title", shareAttentionList.getShareAttentionObjectList().get(i).getTitle());
-            map.put("titleExplain", shareAttentionList.getShareAttentionObjectList().get(i).getTitleExplain());
-            map.put("titlePicOne", shareAttentionList.getShareAttentionObjectList().get(i).getTitlePicOne());
-            map.put("titlePicTwo", shareAttentionList.getShareAttentionObjectList().get(i).getTitlePicTwo());
-            map.put("titlePicThree", shareAttentionList.getShareAttentionObjectList().get(i).getTitlePicThree());
-            map.put("browseNumber", shareAttentionList.getShareAttentionObjectList().get(i).getBrowseNumber());
-            map.put("cowrieNumber", shareAttentionList.getShareAttentionObjectList().get(i).getCowrieNumber());
-            map.put("cowrieClassify", shareAttentionList.getShareAttentionObjectList().get(i).getCowrieClassify());
-            map.put("time", shareAttentionList.getShareAttentionObjectList().get(i).getTime());
-            map.put("cowriePrice", shareAttentionList.getShareAttentionObjectList().get(i).getCowriePrice());
+            mapPut(shareAttentionList, map, i);
             list.add(map);
         }
         Log.e(TAG, "getData: " + "数据设置");
@@ -250,7 +523,7 @@ public class ShareFragment extends Fragment {
         List<ShareAttentionObject> shareAttentionObjects = new ArrayList<ShareAttentionObject>();
 
         ShareAttentionObject shareAttentionObject2000 = new ShareAttentionObject();
-        shareAttentionObject2000.setTag(2000);
+        shareAttentionObject2000.setTag("2000");
         shareAttentionObject2000.setUsername("用户：---" + 2000 + "---");
         shareAttentionObject2000.setUserPic(R.drawable.nvshengtouxiang);
         shareAttentionObject2000.setUserAddress("用户地址：---" + 2000 + "---");
@@ -260,8 +533,8 @@ public class ShareFragment extends Fragment {
         shareAttentionObject2000.setTitlePicOne(R.drawable.nvshengtouxiang);
         shareAttentionObject2000.setTitlePicTwo(R.drawable.nvshengtouxiang);
         shareAttentionObject2000.setTitlePicThree(R.drawable.nvshengtouxiang);
-        shareAttentionObject2000.setBrowseNumber(2000);
-        shareAttentionObject2000.setCowrieNumber(2000);
+        shareAttentionObject2000.setBrowseNumber("2000");
+        shareAttentionObject2000.setCowrieNumber("2000");
         shareAttentionObject2000.setCowrieClassify("宝贝分类：---" + 2000 + "---");
         shareAttentionObject2000.setTime("资讯发布时间：---" + 2000 + "---");
         shareAttentionObject2000.setCowriePrice(2000);
@@ -269,7 +542,7 @@ public class ShareFragment extends Fragment {
         shareAttentionObjects.add(shareAttentionObject2000);
 
         ShareAttentionObject shareAttentionObject3000 = new ShareAttentionObject();
-        shareAttentionObject3000.setTag(3000);
+        shareAttentionObject3000.setTag("3000");
         shareAttentionObject3000.setUsername("用户：---" + 3000 + "---");
         shareAttentionObject3000.setUserPic(R.drawable.nvshengtouxiang);
         shareAttentionObject3000.setUserAddress("用户地址：---" + 3000 + "---");
@@ -279,8 +552,8 @@ public class ShareFragment extends Fragment {
         shareAttentionObject3000.setTitlePicOne(R.drawable.nvshengtouxiang);
         shareAttentionObject3000.setTitlePicTwo(R.drawable.nvshengtouxiang);
         shareAttentionObject3000.setTitlePicThree(R.drawable.nvshengtouxiang);
-        shareAttentionObject3000.setBrowseNumber(3000);
-        shareAttentionObject3000.setCowrieNumber(3000);
+        shareAttentionObject3000.setBrowseNumber("3000");
+        shareAttentionObject3000.setCowrieNumber("3000");
         shareAttentionObject3000.setCowrieClassify("宝贝分类：---" + 3000 + "---");
         shareAttentionObject3000.setTime("资讯发布时间：---" + 3000 + "---");
         shareAttentionObject3000.setCowriePrice(3000);
@@ -288,7 +561,7 @@ public class ShareFragment extends Fragment {
         shareAttentionObjects.add(shareAttentionObject3000);
 
         ShareAttentionObject shareAttentionObject4000 = new ShareAttentionObject();
-        shareAttentionObject4000.setTag(4000);
+        shareAttentionObject4000.setTag("4000");
         shareAttentionObject4000.setUsername("用户：---" + 4000 + "---");
         shareAttentionObject4000.setUserPic(R.drawable.nvshengtouxiang);
         shareAttentionObject4000.setUserAddress("用户地址：---" + 4000 + "---");
@@ -298,8 +571,8 @@ public class ShareFragment extends Fragment {
         shareAttentionObject4000.setTitlePicOne(R.drawable.nvshengtouxiang);
         shareAttentionObject4000.setTitlePicTwo(R.drawable.nvshengtouxiang);
         shareAttentionObject4000.setTitlePicThree(R.drawable.nvshengtouxiang);
-        shareAttentionObject4000.setBrowseNumber(4000);
-        shareAttentionObject4000.setCowrieNumber(4000);
+        shareAttentionObject4000.setBrowseNumber("4000");
+        shareAttentionObject4000.setCowrieNumber("4000");
         shareAttentionObject4000.setCowrieClassify("宝贝分类：---" + 4000 + "---");
         shareAttentionObject4000.setTime("资讯发布时间：---" + 4000 + "---");
         shareAttentionObject4000.setCowriePrice(4000);
@@ -307,7 +580,7 @@ public class ShareFragment extends Fragment {
         shareAttentionObjects.add(shareAttentionObject4000);
 
         ShareAttentionObject shareAttentionObject5000 = new ShareAttentionObject();
-        shareAttentionObject5000.setTag(5000);
+        shareAttentionObject5000.setTag("5000");
         shareAttentionObject5000.setUsername("用户：---" + 5000 + "---");
         shareAttentionObject5000.setUserPic(R.drawable.nvshengtouxiang);
         shareAttentionObject5000.setUserAddress("用户地址：---" + 5000 + "---");
@@ -317,8 +590,8 @@ public class ShareFragment extends Fragment {
         shareAttentionObject5000.setTitlePicOne(R.drawable.nvshengtouxiang);
         shareAttentionObject5000.setTitlePicTwo(R.drawable.nvshengtouxiang);
         shareAttentionObject5000.setTitlePicThree(R.drawable.nvshengtouxiang);
-        shareAttentionObject5000.setBrowseNumber(5000);
-        shareAttentionObject5000.setCowrieNumber(5000);
+        shareAttentionObject5000.setBrowseNumber("5000");
+        shareAttentionObject5000.setCowrieNumber("5000");
         shareAttentionObject5000.setCowrieClassify("宝贝分类：---" + 5000 + "---");
         shareAttentionObject5000.setTime("资讯发布时间：---" + 5000 + "---");
         shareAttentionObject5000.setCowriePrice(5000);
@@ -326,7 +599,7 @@ public class ShareFragment extends Fragment {
         shareAttentionObjects.add(shareAttentionObject5000);
 
         ShareAttentionObject shareAttentionObject6000 = new ShareAttentionObject();
-        shareAttentionObject6000.setTag(6000);
+        shareAttentionObject6000.setTag("6000");
         shareAttentionObject6000.setUsername("用户：---" + 6000 + "---");
         shareAttentionObject6000.setUserPic(R.drawable.nvshengtouxiang);
         shareAttentionObject6000.setUserAddress("用户地址：---" + 6000 + "---");
@@ -336,8 +609,8 @@ public class ShareFragment extends Fragment {
         shareAttentionObject6000.setTitlePicOne(R.drawable.nvshengtouxiang);
         shareAttentionObject6000.setTitlePicTwo(R.drawable.nvshengtouxiang);
         shareAttentionObject6000.setTitlePicThree(R.drawable.nvshengtouxiang);
-        shareAttentionObject6000.setBrowseNumber(6000);
-        shareAttentionObject6000.setCowrieNumber(6000);
+        shareAttentionObject6000.setBrowseNumber("6000");
+        shareAttentionObject6000.setCowrieNumber("6000");
         shareAttentionObject6000.setCowrieClassify("宝贝分类：---" + 6000 + "---");
         shareAttentionObject6000.setTime("资讯发布时间：---" + 6000 + "---");
         shareAttentionObject6000.setCowriePrice(6000);
@@ -345,7 +618,7 @@ public class ShareFragment extends Fragment {
         shareAttentionObjects.add(shareAttentionObject6000);
 
         ShareAttentionObject shareAttentionObject7000 = new ShareAttentionObject();
-        shareAttentionObject7000.setTag(7000);
+        shareAttentionObject7000.setTag("7000");
         shareAttentionObject7000.setUsername("用户：---" + 7000 + "---");
         shareAttentionObject7000.setUserPic(R.drawable.nvshengtouxiang);
         shareAttentionObject7000.setUserAddress("用户地址：---" + 7000 + "---");
@@ -355,8 +628,8 @@ public class ShareFragment extends Fragment {
         shareAttentionObject7000.setTitlePicOne(R.drawable.nvshengtouxiang);
         shareAttentionObject7000.setTitlePicTwo(R.drawable.nvshengtouxiang);
         shareAttentionObject7000.setTitlePicThree(R.drawable.nvshengtouxiang);
-        shareAttentionObject7000.setBrowseNumber(7000);
-        shareAttentionObject7000.setCowrieNumber(7000);
+        shareAttentionObject7000.setBrowseNumber("7000");
+        shareAttentionObject7000.setCowrieNumber("7000");
         shareAttentionObject7000.setCowrieClassify("宝贝分类：---" + 7000 + "---");
         shareAttentionObject7000.setTime("资讯发布时间：---" + 7000 + "---");
         shareAttentionObject7000.setCowriePrice(7000);
@@ -364,7 +637,7 @@ public class ShareFragment extends Fragment {
         shareAttentionObjects.add(shareAttentionObject7000);
 
         ShareAttentionObject shareAttentionObject8000 = new ShareAttentionObject();
-        shareAttentionObject8000.setTag(8000);
+        shareAttentionObject8000.setTag("8000");
         shareAttentionObject8000.setUsername("用户：---" + 8000 + "---");
         shareAttentionObject8000.setUserPic(R.drawable.nvshengtouxiang);
         shareAttentionObject8000.setUserAddress("用户地址：---" + 8000 + "---");
@@ -374,8 +647,8 @@ public class ShareFragment extends Fragment {
         shareAttentionObject8000.setTitlePicOne(R.drawable.nvshengtouxiang);
         shareAttentionObject8000.setTitlePicTwo(R.drawable.nvshengtouxiang);
         shareAttentionObject8000.setTitlePicThree(R.drawable.nvshengtouxiang);
-        shareAttentionObject8000.setBrowseNumber(8000);
-        shareAttentionObject8000.setCowrieNumber(8000);
+        shareAttentionObject8000.setBrowseNumber("8000");
+        shareAttentionObject8000.setCowrieNumber("8000");
         shareAttentionObject8000.setCowrieClassify("宝贝分类：---" + 8000 + "---");
         shareAttentionObject8000.setTime("资讯发布时间：---" + 8000 + "---");
         shareAttentionObject8000.setCowriePrice(8000);
@@ -385,7 +658,7 @@ public class ShareFragment extends Fragment {
 
         for (int i = 0; i < 10; i++) {
             ShareAttentionObject shareAttentionObject = new ShareAttentionObject();
-            shareAttentionObject.setTag(9000);
+            shareAttentionObject.setTag("9000");
             shareAttentionObject.setUsername("用户：-9000--" + i + "---");
             shareAttentionObject.setUserPic(R.drawable.nvshengtouxiang);
             shareAttentionObject.setUserAddress("用户地址：-9000--" + i + "---");
@@ -395,8 +668,8 @@ public class ShareFragment extends Fragment {
             shareAttentionObject.setTitlePicOne(R.drawable.nvshengtouxiang);
             shareAttentionObject.setTitlePicTwo(R.drawable.nvshengtouxiang);
             shareAttentionObject.setTitlePicThree(R.drawable.nvshengtouxiang);
-            shareAttentionObject.setBrowseNumber(i);
-            shareAttentionObject.setCowrieNumber(i);
+            shareAttentionObject.setBrowseNumber("9000---"+i);
+            shareAttentionObject.setCowrieNumber("9000==="+i);
             shareAttentionObject.setCowrieClassify("宝贝分类：-9000--" + i + "---");
             shareAttentionObject.setTime("资讯发布时间：-9000--" + i + "---");
             shareAttentionObject.setCowriePrice(i);
@@ -490,13 +763,13 @@ public class ShareFragment extends Fragment {
             return position;
         }
 
-
+        //Get a View that displays the data at the specified position in the data set.
+        //获取一个在数据集中指定索引的视图来显示数据
+        ViewHolder viewHolder = null;
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             Log.e(TAG, "getView: " + "----009");
-            //Get a View that displays the data at the specified position in the data set.
-            //获取一个在数据集中指定索引的视图来显示数据
-            ViewHolder viewHolder = null;
+
 
             //如果缓存convertView为空，则需要创建View
             if (convertView == null) {
@@ -504,155 +777,227 @@ public class ShareFragment extends Fragment {
                 //根据自定义的Item布局加载布局
 
 
-//                viewHolder = new ViewHolder();
                 convertView = mInflater.inflate(R.layout.item_fragment_share_item, null);
-
+//                viewHolder = new ViewHolder();
 //                viewHolder.ivItemFragmentShareItemLiveTelecastUserPic = (ImageView) convertView.findViewById(R.id.iv_item_fragment_share_item_live_telecast_user_pic);
-//                @BindView(R.id.tv_item_fragment_share_item_live_telecast_username)
-//                TextView tvItemFragmentShareItemLiveTelecastUsername;
-//                @BindView(R.id.tv_item_fragment_share_item_live_telecast_user_address)
-//                TextView tvItemFragmentShareItemLiveTelecastUserAddress;
-//                @BindView(R.id.iv_item_fragment_share_item_live_telecast_title_pic_one)
-//                ImageView ivItemFragmentShareItemLiveTelecastTitlePicOne;
-//                @BindView(R.id.tv_item_fragment_share_item_live_telecast_identifying)
-//                TextView tvItemFragmentShareItemLiveTelecastIdentifying;
-//                @BindView(R.id.tv_item_fragment_share_item_live_telecast_title)
-//                TextView tvItemFragmentShareItemLiveTelecastTitle;
-//                @BindView(R.id.tv_item_fragment_share_item_live_telecast_cowrie_classify)
-//                TextView tvItemFragmentShareItemLiveTelecastCowrieClassify;
-//                @BindView(R.id.tv_item_fragment_share_item_live_telecast_title_explain)
-//                TextView tvItemFragmentShareItemLiveTelecastTitleExplain;
-//                @BindView(R.id.ll_item_fragment_share_item_live_telecast)
-//                LinearLayout llItemFragmentShareItemLiveTelecast;
-//                @BindView(R.id.tv_item_fragment_share_item_attention_title)
-//                TextView tvItemFragmentShareItemAttentionTitle;
-//                @BindView(R.id.iv_item_fragment_share_item_attention_user_pic)
-//                ImageView ivItemFragmentShareItemAttentionUserPic;
-//                @BindView(R.id.tv_item_fragment_share_item_attention_username)
-//                TextView tvItemFragmentShareItemAttentionUsername;
-//                @BindView(R.id.tv_item_fragment_share_item_attention_browse_number)
-//                TextView tvItemFragmentShareItemAttentionBrowseNumber;
-//                @BindView(R.id.iv_item_fragment_share_item_attention_title_pic_one)
-//                ImageView ivItemFragmentShareItemAttentionTitlePicOne;
-//                @BindView(R.id.tv_item_fragment_share_item_attention_cowrie_price)
-//                TextView tvItemFragmentShareItemAttentionCowriePrice;
-//                @BindView(R.id.ll_item_fragment_share_item_attention)
-//                LinearLayout llItemFragmentShareItemAttention;
-//                @BindView(R.id.tv_item_fragment_share_item_inventory_title)
-//                TextView tvItemFragmentShareItemInventoryTitle;
-//                @BindView(R.id.tv_item_fragment_share_item_inventory_title_explain)
-//                TextView tvItemFragmentShareItemInventoryTitleExplain;
-//                @BindView(R.id.iv_item_fragment_share_item_inventory_title_pic_one)
-//                ImageView ivItemFragmentShareItemInventoryTitlePicOne;
-//                @BindView(R.id.iv_item_fragment_share_item_inventory_title_pic_two)
-//                ImageView ivItemFragmentShareItemInventoryTitlePicTwo;
-//                @BindView(R.id.iv_item_fragment_share_item_inventory_title_pic_three)
-//                ImageView ivItemFragmentShareItemInventoryTitlePicThree;
-//                @BindView(R.id.iv_item_fragment_share_item_inventory_user_pic)
-//                ImageView ivItemFragmentShareItemInventoryUserPic;
-//                @BindView(R.id.tv_item_fragment_share_item_inventory_username)
-//                TextView tvItemFragmentShareItemInventoryUsername;
-//                @BindView(R.id.tv_item_fragment_share_item_inventory_cowrie_number)
-//                TextView tvItemFragmentShareItemInventoryCowrieNumber;
-//                @BindView(R.id.tv_item_fragment_share_item_inventory_browse_number)
-//                TextView tvItemFragmentShareItemInventoryBrowseNumber;
-//                @BindView(R.id.ll_item_fragment_share_item_inventory)
-//                LinearLayout llItemFragmentShareItemInventory;
-//                @BindView(R.id.tv_item_fragment_share_item_consult_title)
-//                TextView tvItemFragmentShareItemConsultTitle;
-//                @BindView(R.id.iv_item_fragment_share_item_consult_user_pic)
-//                ImageView ivItemFragmentShareItemConsultUserPic;
-//                @BindView(R.id.tv_item_fragment_share_item_consult_username)
-//                TextView tvItemFragmentShareItemConsultUsername;
-//                @BindView(R.id.tv_item_fragment_share_item_consult_user_identifying)
-//                TextView tvItemFragmentShareItemConsultUserIdentifying;
-//                @BindView(R.id.iv_item_fragment_share_item_consult_title_pic_one)
-//                ImageView ivItemFragmentShareItemConsultTitlePicOne;
-//                @BindView(R.id.ll_item_fragment_share_item_consult)
-//                LinearLayout llItemFragmentShareItemConsult;
-//                @BindView(R.id.vv_item_fragment_share_item_video_shopping_video)
-//                ImageView vvItemFragmentShareItemVideoShoppingVideo;
-//                @BindView(R.id.tv_item_fragment_share_item_video_shopping_title)
-//                TextView tvItemFragmentShareItemVideoShoppingTitle;
-//                @BindView(R.id.iv_item_fragment_share_item_video_shopping_user_pic)
-//                ImageView ivItemFragmentShareItemVideoShoppingUserPic;
-//                @BindView(R.id.tv_item_fragment_share_item_video_shopping_username)
-//                TextView tvItemFragmentShareItemVideoShoppingUsername;
-//                @BindView(R.id.tv_item_fragment_share_item_video_shopping_browse_number)
-//                TextView tvItemFragmentShareItemVideoShoppingBrowseNumber;
-//                @BindView(R.id.tv_item_fragment_share_item_video_shopping_cowrie_number)
-//                TextView tvItemFragmentShareItemVideoShoppingCowrieNumber;
-//                @BindView(R.id.ll_item_fragment_share_item_video_shopping)
-//                LinearLayout llItemFragmentShareItemVideoShopping;
-//                @BindView(R.id.iv_item_fragment_share_item_good_cargo_title_pic_one)
-//                ImageView ivItemFragmentShareItemGoodCargoTitlePicOne;
-//                @BindView(R.id.tv_item_fragment_share_item_good_cargo_title)
-//                TextView tvItemFragmentShareItemGoodCargoTitle;
-//                @BindView(R.id.tv_item_fragment_share_item_good_cargo_title_explain)
-//                TextView tvItemFragmentShareItemGoodCargoTitleExplain;
-//                @BindView(R.id.tv_item_fragment_share_item_good_cargo_browse_number)
-//                TextView tvItemFragmentShareItemGoodCargoBrowseNumber;
-//                @BindView(R.id.ll_item_fragment_share_item_good_cargo)
-//                LinearLayout llItemFragmentShareItemGoodCargo;
-//                @BindView(R.id.iv_item_fragment_share_item_community_user_pic)
-//                ImageView ivItemFragmentShareItemCommunityUserPic;
-//                @BindView(R.id.tv_item_fragment_share_item_community_username)
-//                TextView tvItemFragmentShareItemCommunityUsername;
-//                @BindView(R.id.tv_item_fragment_share_item_community_user_identifying)
-//                TextView tvItemFragmentShareItemCommunityUserIdentifying;
-//                @BindView(R.id.tv_item_fragment_share_item_community_time)
-//                TextView tvItemFragmentShareItemCommunityTime;
-//                @BindView(R.id.tv_item_fragment_share_item_community_title)
-//                TextView tvItemFragmentShareItemCommunityTitle;
-//                @BindView(R.id.tv_item_fragment_share_item_community_title_explain)
-//                TextView tvItemFragmentShareItemCommunityTitleExplain;
-//                @BindView(R.id.iv_item_fragment_share_item_community_title_pic_one)
-//                ImageView ivItemFragmentShareItemCommunityTitlePicOne;
-//                @BindView(R.id.iv_item_fragment_share_item_community_title_pic_two)
-//                ImageView ivItemFragmentShareItemCommunityTitlePicTwo;
-//                @BindView(R.id.iv_item_fragment_share_item_community_title_pic_three)
-//                ImageView ivItemFragmentShareItemCommunityTitlePicThree;
-//                @BindView(R.id.tv_item_fragment_share_item_community_cowrie_number)
-//                TextView tvItemFragmentShareItemCommunityCowrieNumber;
-//                @BindView(R.id.tv_item_fragment_share_item_community_browse_number)
-//                TextView tvItemFragmentShareItemCommunityBrowseNumber;
-//                @BindView(R.id.ll_item_fragment_share_item_community)
-//                LinearLayout llItemFragmentShareItemCommunity;
-//                @BindView(R.id.tv_item_fragment_share_item_life_title)
-//                TextView tvItemFragmentShareItemLifeTitle;
-//                @BindView(R.id.iv_item_fragment_share_item_life_title_pic_one)
-//                ImageView ivItemFragmentShareItemLifeTitlePicOne;
-//                @BindView(R.id.iv_item_fragment_share_item_life_title_pic_two)
-//                ImageView ivItemFragmentShareItemLifeTitlePicTwo;
-//                @BindView(R.id.iv_item_fragment_share_item_life_title_pic_three)
-//                ImageView ivItemFragmentShareItemLifeTitlePicThree;
-//                @BindView(R.id.iv_item_fragment_share_item_life_user_pic)
-//                ImageView ivItemFragmentShareItemLifeUserPic;
-//                @BindView(R.id.tv_item_fragment_share_item_life_username)
-//                TextView tvItemFragmentShareItemLifeUsername;
-//                @BindView(R.id.tv_item_fragment_share_item_life_browse_number)
-//                TextView tvItemFragmentShareItemLifeBrowseNumber;
-//                @BindView(R.id.tv_item_fragment_share_item_life_cowrie_number)
-//                TextView tvItemFragmentShareItemLifeCowrieNumber;
-//                @BindView(R.id.ll_item_fragment_share_item_life)
-//                LinearLayout llItemFragmentShareItemLife;
-//                @BindView(R.id.tv_item_fragment_share_item_digit_title)
-//                TextView tvItemFragmentShareItemDigitTitle;
-//                @BindView(R.id.iv_item_fragment_share_item_digit_user_pic)
-//                ImageView ivItemFragmentShareItemDigitUserPic;
-//                @BindView(R.id.tv_item_fragment_share_item_digit_username)
-//                TextView tvItemFragmentShareItemDigitUsername;
-//                @BindView(R.id.tv_item_fragment_share_item_digit_browse_number)
-//                TextView tvItemFragmentShareItemDigitBrowseNumber;
-//                @BindView(R.id.iv_item_fragment_share_item_digit_title_pic_one)
-//                ImageView ivItemFragmentShareItemDigitTitlePicOne;
-//                @BindView(R.id.tv_item_fragment_share_item_digit_cowrie_number)
-//                TextView tvItemFragmentShareItemDigitCowrieNumber;
-//                @BindView(R.id.ll_item_fragment_share_item_digit)
-//                LinearLayout llItemFragmentShareItemDigit;
+//
+//                viewHolder.tvItemFragmentShareItemLiveTelecastUsername = (TextView) convertView.findViewById(R.id.tv_item_fragment_share_item_live_telecast_username);
+//
+//                viewHolder.tvItemFragmentShareItemLiveTelecastUserAddress = (TextView) convertView.findViewById(R.id.tv_item_fragment_share_item_live_telecast_user_address);
+//
+//                viewHolder.ivItemFragmentShareItemLiveTelecastTitlePicOne = (ImageView) convertView.findViewById(R.id.iv_item_fragment_share_item_live_telecast_title_pic_one);
+//
+//                viewHolder.tvItemFragmentShareItemLiveTelecastIdentifying = (TextView) convertView.findViewById(R.id.tv_item_fragment_share_item_live_telecast_identifying);
+//
+//                viewHolder.tvItemFragmentShareItemLiveTelecastTitle = (TextView) convertView.findViewById(R.id.tv_item_fragment_share_item_live_telecast_title);
+//
+//                viewHolder.tvItemFragmentShareItemLiveTelecastCowrieClassify = (TextView) convertView.findViewById(R.id.tv_item_fragment_share_item_live_telecast_cowrie_classify);
+//
+//                viewHolder.tvItemFragmentShareItemLiveTelecastTitleExplain = (TextView) convertView.findViewById(R.id.tv_item_fragment_share_item_live_telecast_title_explain);
+//
+//                viewHolder.llItemFragmentShareItemLiveTelecast = (LinearLayout) convertView.findViewById(R.id.ll_item_fragment_share_item_live_telecast);
+//
+//
+//
+//
+//                viewHolder.tvItemFragmentShareItemAttentionTitle = (TextView) convertView.findViewById(R.id.tv_item_fragment_share_item_attention_title);
+//
+//                viewHolder.ivItemFragmentShareItemAttentionUserPic = (ImageView) convertView.findViewById(R.id.iv_item_fragment_share_item_attention_user_pic);
+//
+//                viewHolder.tvItemFragmentShareItemAttentionUsername = (TextView) convertView.findViewById(R.id.tv_item_fragment_share_item_attention_username);
+//
+//                viewHolder.tvItemFragmentShareItemAttentionBrowseNumber = (TextView) convertView.findViewById(R.id.tv_item_fragment_share_item_attention_browse_number);
+//
+//                viewHolder.ivItemFragmentShareItemAttentionTitlePicOne = (ImageView) convertView.findViewById(R.id.iv_item_fragment_share_item_attention_title_pic_one);
+//
+//                viewHolder.tvItemFragmentShareItemAttentionCowriePrice = (TextView) convertView.findViewById(R.id.tv_item_fragment_share_item_attention_cowrie_price);
+//
+//                viewHolder.llItemFragmentShareItemAttention = (LinearLayout) convertView.findViewById(R.id.ll_item_fragment_share_item_attention);
+//
+//
+//
+////                @BindView(R.id.tv_item_fragment_share_item_inventory_title)
+//                viewHolder.ivItemFragmentShareItemLiveTelecastUserPic = (ImageView) convertView.findViewById(R.id.iv_item_fragment_share_item_live_telecast_user_pic);
+////                TextView tvItemFragmentShareItemInventoryTitle;
+////                @BindView(R.id.tv_item_fragment_share_item_inventory_title_explain)
+//                viewHolder.ivItemFragmentShareItemLiveTelecastUserPic = (ImageView) convertView.findViewById(R.id.iv_item_fragment_share_item_live_telecast_user_pic);
+////                TextView tvItemFragmentShareItemInventoryTitleExplain;
+////                @BindView(R.id.iv_item_fragment_share_item_inventory_title_pic_one)
+//                viewHolder.ivItemFragmentShareItemLiveTelecastUserPic = (ImageView) convertView.findViewById(R.id.iv_item_fragment_share_item_live_telecast_user_pic);
+////                ImageView ivItemFragmentShareItemInventoryTitlePicOne;
+////                @BindView(R.id.iv_item_fragment_share_item_inventory_title_pic_two)
+//                viewHolder.ivItemFragmentShareItemLiveTelecastUserPic = (ImageView) convertView.findViewById(R.id.iv_item_fragment_share_item_live_telecast_user_pic);
+////                ImageView ivItemFragmentShareItemInventoryTitlePicTwo;
+////                @BindView(R.id.iv_item_fragment_share_item_inventory_title_pic_three)
+//                viewHolder.ivItemFragmentShareItemLiveTelecastUserPic = (ImageView) convertView.findViewById(R.id.iv_item_fragment_share_item_live_telecast_user_pic);
+////                ImageView ivItemFragmentShareItemInventoryTitlePicThree;
+////                @BindView(R.id.iv_item_fragment_share_item_inventory_user_pic)
+//                viewHolder.ivItemFragmentShareItemLiveTelecastUserPic = (ImageView) convertView.findViewById(R.id.iv_item_fragment_share_item_live_telecast_user_pic);
+////                ImageView ivItemFragmentShareItemInventoryUserPic;
+////                @BindView(R.id.tv_item_fragment_share_item_inventory_username)
+//                viewHolder.ivItemFragmentShareItemLiveTelecastUserPic = (ImageView) convertView.findViewById(R.id.iv_item_fragment_share_item_live_telecast_user_pic);
+////                TextView tvItemFragmentShareItemInventoryUsername;
+////                @BindView(R.id.tv_item_fragment_share_item_inventory_cowrie_number)
+//                viewHolder.ivItemFragmentShareItemLiveTelecastUserPic = (ImageView) convertView.findViewById(R.id.iv_item_fragment_share_item_live_telecast_user_pic);
+////                TextView tvItemFragmentShareItemInventoryCowrieNumber;
+////                @BindView(R.id.tv_item_fragment_share_item_inventory_browse_number)
+//                viewHolder.ivItemFragmentShareItemLiveTelecastUserPic = (ImageView) convertView.findViewById(R.id.iv_item_fragment_share_item_live_telecast_user_pic);
+////                TextView tvItemFragmentShareItemInventoryBrowseNumber;
+////                @BindView(R.id.)
+//                viewHolder.llItemFragmentShareItemInventory = (LinearLayout) convertView.findViewById(R.id.ll_item_fragment_share_item_inventory);
+////                 ;
+//
+//
+////                @BindView(R.id.tv_item_fragment_share_item_consult_title)
+//                viewHolder.ivItemFragmentShareItemLiveTelecastUserPic = (ImageView) convertView.findViewById(R.id.iv_item_fragment_share_item_live_telecast_user_pic);
+////                TextView tvItemFragmentShareItemConsultTitle;
+////                @BindView(R.id.iv_item_fragment_share_item_consult_user_pic)
+//                viewHolder.ivItemFragmentShareItemLiveTelecastUserPic = (ImageView) convertView.findViewById(R.id.iv_item_fragment_share_item_live_telecast_user_pic);
+////                ImageView ivItemFragmentShareItemConsultUserPic;
+////                @BindView(R.id.tv_item_fragment_share_item_consult_username)
+//                viewHolder.ivItemFragmentShareItemLiveTelecastUserPic = (ImageView) convertView.findViewById(R.id.iv_item_fragment_share_item_live_telecast_user_pic);
+////                TextView tvItemFragmentShareItemConsultUsername;
+////                @BindView(R.id.tv_item_fragment_share_item_consult_user_identifying)
+//                viewHolder.ivItemFragmentShareItemLiveTelecastUserPic = (ImageView) convertView.findViewById(R.id.iv_item_fragment_share_item_live_telecast_user_pic);
+////                TextView tvItemFragmentShareItemConsultUserIdentifying;
+////                @BindView(R.id.iv_item_fragment_share_item_consult_title_pic_one)
+//                viewHolder.ivItemFragmentShareItemLiveTelecastUserPic = (ImageView) convertView.findViewById(R.id.iv_item_fragment_share_item_live_telecast_user_pic);
+////                ImageView ivItemFragmentShareItemConsultTitlePicOne;
+//
+//                viewHolder.llItemFragmentShareItemConsult = (LinearLayout) convertView.findViewById(R.id.ll_item_fragment_share_item_consult);
+//
+//
+//
+////                @BindView(R.id.vv_item_fragment_share_item_video_shopping_video)
+//                viewHolder.ivItemFragmentShareItemLiveTelecastUserPic = (ImageView) convertView.findViewById(R.id.iv_item_fragment_share_item_live_telecast_user_pic);
+////                ImageView vvItemFragmentShareItemVideoShoppingVideo;
+////                @BindView(R.id.tv_item_fragment_share_item_video_shopping_title)
+//                viewHolder.ivItemFragmentShareItemLiveTelecastUserPic = (ImageView) convertView.findViewById(R.id.iv_item_fragment_share_item_live_telecast_user_pic);
+////                TextView tvItemFragmentShareItemVideoShoppingTitle;
+////                @BindView(R.id.iv_item_fragment_share_item_video_shopping_user_pic)
+//                viewHolder.ivItemFragmentShareItemLiveTelecastUserPic = (ImageView) convertView.findViewById(R.id.iv_item_fragment_share_item_live_telecast_user_pic);
+////                ImageView ivItemFragmentShareItemVideoShoppingUserPic;
+////                @BindView(R.id.tv_item_fragment_share_item_video_shopping_username)
+//                viewHolder.ivItemFragmentShareItemLiveTelecastUserPic = (ImageView) convertView.findViewById(R.id.iv_item_fragment_share_item_live_telecast_user_pic);
+////                TextView tvItemFragmentShareItemVideoShoppingUsername;
+////                @BindView(R.id.tv_item_fragment_share_item_video_shopping_browse_number)
+//                viewHolder.ivItemFragmentShareItemLiveTelecastUserPic = (ImageView) convertView.findViewById(R.id.iv_item_fragment_share_item_live_telecast_user_pic);
+////                TextView tvItemFragmentShareItemVideoShoppingBrowseNumber;
+////                @BindView(R.id.tv_item_fragment_share_item_video_shopping_cowrie_number)
+//                viewHolder.ivItemFragmentShareItemLiveTelecastUserPic = (ImageView) convertView.findViewById(R.id.iv_item_fragment_share_item_live_telecast_user_pic);
+////                TextView tvItemFragmentShareItemVideoShoppingCowrieNumber;
+//
+//                viewHolder.llItemFragmentShareItemVideoShopping = (LinearLayout) convertView.findViewById(R.id.ll_item_fragment_share_item_video_shopping);
+//
+//
+//
+////                @BindView(R.id.iv_item_fragment_share_item_good_cargo_title_pic_one)
+//                viewHolder.ivItemFragmentShareItemLiveTelecastUserPic = (ImageView) convertView.findViewById(R.id.iv_item_fragment_share_item_live_telecast_user_pic);
+////                ImageView ivItemFragmentShareItemGoodCargoTitlePicOne;
+////                @BindView(R.id.tv_item_fragment_share_item_good_cargo_title)
+//                viewHolder.ivItemFragmentShareItemLiveTelecastUserPic = (ImageView) convertView.findViewById(R.id.iv_item_fragment_share_item_live_telecast_user_pic);
+////                TextView tvItemFragmentShareItemGoodCargoTitle;
+////                @BindView(R.id.tv_item_fragment_share_item_good_cargo_title_explain)
+//                viewHolder.ivItemFragmentShareItemLiveTelecastUserPic = (ImageView) convertView.findViewById(R.id.iv_item_fragment_share_item_live_telecast_user_pic);
+////                TextView tvItemFragmentShareItemGoodCargoTitleExplain;
+////                @BindView(R.id.tv_item_fragment_share_item_good_cargo_browse_number)
+//                viewHolder.ivItemFragmentShareItemLiveTelecastUserPic = (ImageView) convertView.findViewById(R.id.iv_item_fragment_share_item_live_telecast_user_pic);
+////                TextView tvItemFragmentShareItemGoodCargoBrowseNumber;
+////                @BindView(R.id.)
+//                viewHolder.llItemFragmentShareItemGoodCargo = (LinearLayout) convertView.findViewById(R.id.ll_item_fragment_share_item_good_cargo);
+////                 ;
+//
+//
+////                @BindView(R.id.iv_item_fragment_share_item_community_user_pic)
+//                viewHolder.ivItemFragmentShareItemLiveTelecastUserPic = (ImageView) convertView.findViewById(R.id.iv_item_fragment_share_item_live_telecast_user_pic);
+////                ImageView ivItemFragmentShareItemCommunityUserPic;
+////                @BindView(R.id.tv_item_fragment_share_item_community_username)
+//                viewHolder.ivItemFragmentShareItemLiveTelecastUserPic = (ImageView) convertView.findViewById(R.id.iv_item_fragment_share_item_live_telecast_user_pic);
+////                TextView tvItemFragmentShareItemCommunityUsername;
+////                @BindView(R.id.tv_item_fragment_share_item_community_user_identifying)
+//                viewHolder.ivItemFragmentShareItemLiveTelecastUserPic = (ImageView) convertView.findViewById(R.id.iv_item_fragment_share_item_live_telecast_user_pic);
+////                TextView tvItemFragmentShareItemCommunityUserIdentifying;
+////                @BindView(R.id.tv_item_fragment_share_item_community_time)
+//                viewHolder.ivItemFragmentShareItemLiveTelecastUserPic = (ImageView) convertView.findViewById(R.id.iv_item_fragment_share_item_live_telecast_user_pic);
+////                TextView tvItemFragmentShareItemCommunityTime;
+////                @BindView(R.id.tv_item_fragment_share_item_community_title)
+//                viewHolder.ivItemFragmentShareItemLiveTelecastUserPic = (ImageView) convertView.findViewById(R.id.iv_item_fragment_share_item_live_telecast_user_pic);
+////                TextView tvItemFragmentShareItemCommunityTitle;
+////                @BindView(R.id.tv_item_fragment_share_item_community_title_explain)
+//                viewHolder.ivItemFragmentShareItemLiveTelecastUserPic = (ImageView) convertView.findViewById(R.id.iv_item_fragment_share_item_live_telecast_user_pic);
+////                TextView tvItemFragmentShareItemCommunityTitleExplain;
+////                @BindView(R.id.iv_item_fragment_share_item_community_title_pic_one)
+//                viewHolder.ivItemFragmentShareItemLiveTelecastUserPic = (ImageView) convertView.findViewById(R.id.iv_item_fragment_share_item_live_telecast_user_pic);
+////                ImageView ivItemFragmentShareItemCommunityTitlePicOne;
+////                @BindView(R.id.iv_item_fragment_share_item_community_title_pic_two)
+//                viewHolder.ivItemFragmentShareItemLiveTelecastUserPic = (ImageView) convertView.findViewById(R.id.iv_item_fragment_share_item_live_telecast_user_pic);
+////                ImageView ivItemFragmentShareItemCommunityTitlePicTwo;
+////                @BindView(R.id.iv_item_fragment_share_item_community_title_pic_three)
+//                viewHolder.ivItemFragmentShareItemLiveTelecastUserPic = (ImageView) convertView.findViewById(R.id.iv_item_fragment_share_item_live_telecast_user_pic);
+////                ImageView ivItemFragmentShareItemCommunityTitlePicThree;
+////                @BindView(R.id.tv_item_fragment_share_item_community_cowrie_number)
+//                viewHolder.ivItemFragmentShareItemLiveTelecastUserPic = (ImageView) convertView.findViewById(R.id.iv_item_fragment_share_item_live_telecast_user_pic);
+////                TextView tvItemFragmentShareItemCommunityCowrieNumber;
+////                @BindView(R.id.tv_item_fragment_share_item_community_browse_number)
+//                viewHolder.ivItemFragmentShareItemLiveTelecastUserPic = (ImageView) convertView.findViewById(R.id.iv_item_fragment_share_item_live_telecast_user_pic);
+////                TextView tvItemFragmentShareItemCommunityBrowseNumber;
+//
+//                viewHolder.llItemFragmentShareItemCommunity = (LinearLayout) convertView.findViewById(R.id.ll_item_fragment_share_item_community);
+//
+//
+//
+////                @BindView(R.id.tv_item_fragment_share_item_life_title)
+//                viewHolder.ivItemFragmentShareItemLiveTelecastUserPic = (ImageView) convertView.findViewById(R.id.iv_item_fragment_share_item_live_telecast_user_pic);
+////                TextView tvItemFragmentShareItemLifeTitle;
+////                @BindView(R.id.iv_item_fragment_share_item_life_title_pic_one)
+//                viewHolder.ivItemFragmentShareItemLiveTelecastUserPic = (ImageView) convertView.findViewById(R.id.iv_item_fragment_share_item_live_telecast_user_pic);
+////                ImageView ivItemFragmentShareItemLifeTitlePicOne;
+////                @BindView(R.id.iv_item_fragment_share_item_life_title_pic_two)
+//                viewHolder.ivItemFragmentShareItemLiveTelecastUserPic = (ImageView) convertView.findViewById(R.id.iv_item_fragment_share_item_live_telecast_user_pic);
+////                ImageView ivItemFragmentShareItemLifeTitlePicTwo;
+////                @BindView(R.id.iv_item_fragment_share_item_life_title_pic_three)
+//                viewHolder.ivItemFragmentShareItemLiveTelecastUserPic = (ImageView) convertView.findViewById(R.id.iv_item_fragment_share_item_live_telecast_user_pic);
+////                ImageView ivItemFragmentShareItemLifeTitlePicThree;
+////                @BindView(R.id.iv_item_fragment_share_item_life_user_pic)
+//                viewHolder.ivItemFragmentShareItemLiveTelecastUserPic = (ImageView) convertView.findViewById(R.id.iv_item_fragment_share_item_live_telecast_user_pic);
+////                ImageView ivItemFragmentShareItemLifeUserPic;
+////                @BindView(R.id.tv_item_fragment_share_item_life_username)
+//                viewHolder.ivItemFragmentShareItemLiveTelecastUserPic = (ImageView) convertView.findViewById(R.id.iv_item_fragment_share_item_live_telecast_user_pic);
+////                TextView tvItemFragmentShareItemLifeUsername;
+////                @BindView(R.id.tv_item_fragment_share_item_life_browse_number)
+//                viewHolder.ivItemFragmentShareItemLiveTelecastUserPic = (ImageView) convertView.findViewById(R.id.iv_item_fragment_share_item_live_telecast_user_pic);
+////                TextView tvItemFragmentShareItemLifeBrowseNumber;
+////                @BindView(R.id.tv_item_fragment_share_item_life_cowrie_number)
+//                viewHolder.ivItemFragmentShareItemLiveTelecastUserPic = (ImageView) convertView.findViewById(R.id.iv_item_fragment_share_item_live_telecast_user_pic);
+////                TextView tvItemFragmentShareItemLifeCowrieNumber;
+//
+//                viewHolder.llItemFragmentShareItemLife = (LinearLayout) convertView.findViewById(R.id.ll_item_fragment_share_item_life);
+//
+//
+//
+////                @BindView(R.id.tv_item_fragment_share_item_digit_title)
+//                viewHolder.ivItemFragmentShareItemLiveTelecastUserPic = (ImageView) convertView.findViewById(R.id.iv_item_fragment_share_item_live_telecast_user_pic);
+////                TextView tvItemFragmentShareItemDigitTitle;
+////                @BindView(R.id.iv_item_fragment_share_item_digit_user_pic)
+//                viewHolder.ivItemFragmentShareItemLiveTelecastUserPic = (ImageView) convertView.findViewById(R.id.iv_item_fragment_share_item_live_telecast_user_pic);
+////                ImageView ivItemFragmentShareItemDigitUserPic;
+////                @BindView(R.id.tv_item_fragment_share_item_digit_username)
+//                viewHolder.ivItemFragmentShareItemLiveTelecastUserPic = (ImageView) convertView.findViewById(R.id.iv_item_fragment_share_item_live_telecast_user_pic);
+////                TextView tvItemFragmentShareItemDigitUsername;
+////                @BindView(R.id.tv_item_fragment_share_item_digit_browse_number)
+//                viewHolder.ivItemFragmentShareItemLiveTelecastUserPic = (ImageView) convertView.findViewById(R.id.iv_item_fragment_share_item_live_telecast_user_pic);
+////                TextView tvItemFragmentShareItemDigitBrowseNumber;
+////                @BindView(R.id.iv_item_fragment_share_item_digit_title_pic_one)
+//                viewHolder.ivItemFragmentShareItemLiveTelecastUserPic = (ImageView) convertView.findViewById(R.id.iv_item_fragment_share_item_live_telecast_user_pic);
+////                ImageView ivItemFragmentShareItemDigitTitlePicOne;
+////                @BindView(R.id.tv_item_fragment_share_item_digit_cowrie_number)
+//                viewHolder.ivItemFragmentShareItemLiveTelecastUserPic = (ImageView) convertView.findViewById(R.id.iv_item_fragment_share_item_live_telecast_user_pic);
+////                TextView tvItemFragmentShareItemDigitCowrieNumber;
+//
+//                viewHolder.llItemFragmentShareItemDigit = (LinearLayout) convertView.findViewById(R.id.ll_item_fragment_share_item_digit);
 
 
-//                viewHolder = new ViewHolder(convertView);
+                viewHolder = new ViewHolder(convertView);
                 //将设置好的布局保存到缓存中，并将其设置在Tag里，以便后面方便取出Tag
                 convertView.setTag(viewHolder);
             } else {
@@ -663,19 +1008,12 @@ public class ShareFragment extends Fragment {
             Log.e(TAG, "getView: " + "适配器数据设置");
 
 
+            Log.e(TAG, "getView: ------------------"+data.get(position).get("tag").toString().trim() );
             if (data.get(position).get("tag") == LIVE_TELECASE) {
-
-                viewHolder.llItemFragmentShareItemCommunity.setVisibility(View.GONE);
-                viewHolder.llItemFragmentShareItemConsult.setVisibility(View.GONE);
-                viewHolder.llItemFragmentShareItemDigit.setVisibility(View.GONE);
-                viewHolder.llItemFragmentShareItemGoodCargo.setVisibility(View.GONE);
-                viewHolder.llItemFragmentShareItemInventory.setVisibility(View.GONE);
-                viewHolder.llItemFragmentShareItemLife.setVisibility(View.GONE);
-                viewHolder.llItemFragmentShareItemLiveTelecast.setVisibility(View.GONE);
-                viewHolder.llItemFragmentShareItemVideoShopping.setVisibility(View.GONE);
-                viewHolder.llItemFragmentShareItemAttention.setVisibility(View.GONE);
-//                hideItemLayout();
+                hideItemLayout();
                 viewHolder.llItemFragmentShareItemLiveTelecast.setVisibility(View.VISIBLE);
+
+                Log.e(TAG, "getView: "+"直播界面数据设置成功" );
                 viewHolder.ivItemFragmentShareItemLiveTelecastUserPic.setImageResource((Integer) data.get(position).get("userPic"));
                 viewHolder.tvItemFragmentShareItemLiveTelecastUsername.setText((String) data.get(position).get("username"));
                 viewHolder.tvItemFragmentShareItemLiveTelecastUserAddress.setText((String) data.get(position).get("userAddress"));
@@ -687,36 +1025,19 @@ public class ShareFragment extends Fragment {
 
 
             } else if (data.get(position).get("tag") == ATTENTION) {
-                viewHolder.llItemFragmentShareItemCommunity.setVisibility(View.GONE);
-                viewHolder.llItemFragmentShareItemConsult.setVisibility(View.GONE);
-                viewHolder.llItemFragmentShareItemDigit.setVisibility(View.GONE);
-                viewHolder.llItemFragmentShareItemGoodCargo.setVisibility(View.GONE);
-                viewHolder.llItemFragmentShareItemInventory.setVisibility(View.GONE);
-                viewHolder.llItemFragmentShareItemLife.setVisibility(View.GONE);
-                viewHolder.llItemFragmentShareItemLiveTelecast.setVisibility(View.GONE);
-                viewHolder.llItemFragmentShareItemVideoShopping.setVisibility(View.GONE);
-                viewHolder.llItemFragmentShareItemAttention.setVisibility(View.GONE);
-//                hideItemLayout();
+                hideItemLayout();
                 viewHolder.llItemFragmentShareItemAttention.setVisibility(View.VISIBLE);
 
+                Log.e(TAG, "getView: "+"关注界面数据设置成功" );
                 viewHolder.ivItemFragmentShareItemAttentionUserPic.setImageResource((Integer) data.get(position).get("userPic"));
                 viewHolder.tvItemFragmentShareItemAttentionUsername.setText((String) data.get(position).get("username"));
                 viewHolder.tvItemFragmentShareItemAttentionBrowseNumber.setText((String) data.get(position).get("browseNumber"));
                 viewHolder.ivItemFragmentShareItemAttentionTitlePicOne.setImageResource((Integer) data.get(position).get("titlePicOne"));
-                viewHolder.tvItemFragmentShareItemAttentionCowriePrice.setText((String) data.get(position).get("cowriePrice"));
+                Log.e(TAG, "getView: " +data.get(position).get("cowriePrice"));
+                viewHolder.tvItemFragmentShareItemAttentionCowriePrice.setText(String.valueOf(data.get(position).get("cowriePrice")));
                 viewHolder.tvItemFragmentShareItemAttentionTitle.setText((String) data.get(position).get("title"));
-
             } else if (data.get(position).get("tag") == INVENTORY) {
-                viewHolder.llItemFragmentShareItemCommunity.setVisibility(View.GONE);
-                viewHolder.llItemFragmentShareItemConsult.setVisibility(View.GONE);
-                viewHolder.llItemFragmentShareItemDigit.setVisibility(View.GONE);
-                viewHolder.llItemFragmentShareItemGoodCargo.setVisibility(View.GONE);
-                viewHolder.llItemFragmentShareItemInventory.setVisibility(View.GONE);
-                viewHolder.llItemFragmentShareItemLife.setVisibility(View.GONE);
-                viewHolder.llItemFragmentShareItemLiveTelecast.setVisibility(View.GONE);
-                viewHolder.llItemFragmentShareItemVideoShopping.setVisibility(View.GONE);
-                viewHolder.llItemFragmentShareItemAttention.setVisibility(View.GONE);
-//                hideItemLayout();
+                hideItemLayout();
                 viewHolder.llItemFragmentShareItemInventory.setVisibility(View.VISIBLE);
 
                 viewHolder.ivItemFragmentShareItemInventoryUserPic.setImageResource((Integer) data.get(position).get("userPic"));
@@ -731,16 +1052,7 @@ public class ShareFragment extends Fragment {
 
 
             } else if (data.get(position).get("tag") == CONSULT) {
-                viewHolder.llItemFragmentShareItemCommunity.setVisibility(View.GONE);
-                viewHolder.llItemFragmentShareItemConsult.setVisibility(View.GONE);
-                viewHolder.llItemFragmentShareItemDigit.setVisibility(View.GONE);
-                viewHolder.llItemFragmentShareItemGoodCargo.setVisibility(View.GONE);
-                viewHolder.llItemFragmentShareItemInventory.setVisibility(View.GONE);
-                viewHolder.llItemFragmentShareItemLife.setVisibility(View.GONE);
-                viewHolder.llItemFragmentShareItemLiveTelecast.setVisibility(View.GONE);
-                viewHolder.llItemFragmentShareItemVideoShopping.setVisibility(View.GONE);
-                viewHolder.llItemFragmentShareItemAttention.setVisibility(View.GONE);
-//                hideItemLayout();
+                hideItemLayout();
                 viewHolder.llItemFragmentShareItemConsult.setVisibility(View.VISIBLE);
 
 
@@ -752,16 +1064,7 @@ public class ShareFragment extends Fragment {
 
 
             } else if (data.get(position).get("tag") == VIDEO_SHOPPING) {
-                viewHolder.llItemFragmentShareItemCommunity.setVisibility(View.GONE);
-                viewHolder.llItemFragmentShareItemConsult.setVisibility(View.GONE);
-                viewHolder.llItemFragmentShareItemDigit.setVisibility(View.GONE);
-                viewHolder.llItemFragmentShareItemGoodCargo.setVisibility(View.GONE);
-                viewHolder.llItemFragmentShareItemInventory.setVisibility(View.GONE);
-                viewHolder.llItemFragmentShareItemLife.setVisibility(View.GONE);
-                viewHolder.llItemFragmentShareItemLiveTelecast.setVisibility(View.GONE);
-                viewHolder.llItemFragmentShareItemVideoShopping.setVisibility(View.GONE);
-                viewHolder.llItemFragmentShareItemAttention.setVisibility(View.GONE);
-//                hideItemLayout();
+                hideItemLayout();
                 viewHolder.llItemFragmentShareItemVideoShopping.setVisibility(View.VISIBLE);
 
 
@@ -775,16 +1078,7 @@ public class ShareFragment extends Fragment {
 
             } else if (data.get(position).get("tag") == GOOD_CARGO) {
 
-                viewHolder.llItemFragmentShareItemCommunity.setVisibility(View.GONE);
-                viewHolder.llItemFragmentShareItemConsult.setVisibility(View.GONE);
-                viewHolder.llItemFragmentShareItemDigit.setVisibility(View.GONE);
-                viewHolder.llItemFragmentShareItemGoodCargo.setVisibility(View.GONE);
-                viewHolder.llItemFragmentShareItemInventory.setVisibility(View.GONE);
-                viewHolder.llItemFragmentShareItemLife.setVisibility(View.GONE);
-                viewHolder.llItemFragmentShareItemLiveTelecast.setVisibility(View.GONE);
-                viewHolder.llItemFragmentShareItemVideoShopping.setVisibility(View.GONE);
-                viewHolder.llItemFragmentShareItemAttention.setVisibility(View.GONE);
-//                hideItemLayout();
+                hideItemLayout();
                 viewHolder.llItemFragmentShareItemGoodCargo.setVisibility(View.VISIBLE);
 
                 viewHolder.ivItemFragmentShareItemGoodCargoTitlePicOne.setImageResource((Integer) data.get(position).get("titlePicOne"));
@@ -793,16 +1087,7 @@ public class ShareFragment extends Fragment {
                 viewHolder.tvItemFragmentShareItemGoodCargoTitleExplain.setText((String) data.get(position).get("titleExplain"));
 
             } else if (data.get(position).get("tag") == COMMUNITY) {
-                viewHolder.llItemFragmentShareItemCommunity.setVisibility(View.GONE);
-                viewHolder.llItemFragmentShareItemConsult.setVisibility(View.GONE);
-                viewHolder.llItemFragmentShareItemDigit.setVisibility(View.GONE);
-                viewHolder.llItemFragmentShareItemGoodCargo.setVisibility(View.GONE);
-                viewHolder.llItemFragmentShareItemInventory.setVisibility(View.GONE);
-                viewHolder.llItemFragmentShareItemLife.setVisibility(View.GONE);
-                viewHolder.llItemFragmentShareItemLiveTelecast.setVisibility(View.GONE);
-                viewHolder.llItemFragmentShareItemVideoShopping.setVisibility(View.GONE);
-                viewHolder.llItemFragmentShareItemAttention.setVisibility(View.GONE);
-//                hideItemLayout();
+                hideItemLayout();
                 viewHolder.llItemFragmentShareItemCommunity.setVisibility(View.VISIBLE);
 
 
@@ -819,16 +1104,7 @@ public class ShareFragment extends Fragment {
                 viewHolder.tvItemFragmentShareItemCommunityTime.setText((String) data.get(position).get("time"));
 
             } else if (data.get(position).get("tag") == LIFE) {
-                viewHolder.llItemFragmentShareItemCommunity.setVisibility(View.GONE);
-                viewHolder.llItemFragmentShareItemConsult.setVisibility(View.GONE);
-                viewHolder.llItemFragmentShareItemDigit.setVisibility(View.GONE);
-                viewHolder.llItemFragmentShareItemGoodCargo.setVisibility(View.GONE);
-                viewHolder.llItemFragmentShareItemInventory.setVisibility(View.GONE);
-                viewHolder.llItemFragmentShareItemLife.setVisibility(View.GONE);
-                viewHolder.llItemFragmentShareItemLiveTelecast.setVisibility(View.GONE);
-                viewHolder.llItemFragmentShareItemVideoShopping.setVisibility(View.GONE);
-                viewHolder.llItemFragmentShareItemAttention.setVisibility(View.GONE);
-//                hideItemLayout();
+                hideItemLayout();
                 viewHolder.llItemFragmentShareItemLife.setVisibility(View.VISIBLE);
 
                 viewHolder.ivItemFragmentShareItemLifeUserPic.setImageResource((Integer) data.get(position).get("userPic"));
@@ -842,16 +1118,7 @@ public class ShareFragment extends Fragment {
 
             } else if (data.get(position).get("tag") == DIGIT) {
 
-                viewHolder.llItemFragmentShareItemCommunity.setVisibility(View.GONE);
-                viewHolder.llItemFragmentShareItemConsult.setVisibility(View.GONE);
-                viewHolder.llItemFragmentShareItemDigit.setVisibility(View.GONE);
-                viewHolder.llItemFragmentShareItemGoodCargo.setVisibility(View.GONE);
-                viewHolder.llItemFragmentShareItemInventory.setVisibility(View.GONE);
-                viewHolder.llItemFragmentShareItemLife.setVisibility(View.GONE);
-                viewHolder.llItemFragmentShareItemLiveTelecast.setVisibility(View.GONE);
-                viewHolder.llItemFragmentShareItemVideoShopping.setVisibility(View.GONE);
-                viewHolder.llItemFragmentShareItemAttention.setVisibility(View.GONE);
-//                hideItemLayout();
+                hideItemLayout();
                 viewHolder.llItemFragmentShareItemDigit.setVisibility(View.VISIBLE);
 
                 viewHolder.ivItemFragmentShareItemDigitUserPic.setImageResource((Integer) data.get(position).get("userPic"));
@@ -868,18 +1135,18 @@ public class ShareFragment extends Fragment {
             return convertView;
         }
 
-//        private void hideItemLayout() {
-//            viewHolder.llItemFragmentShareItemCommunity.setVisibility(View.GONE);
-//            viewHolder.llItemFragmentShareItemConsult.setVisibility(View.GONE);
-//            viewHolder.llItemFragmentShareItemDigit.setVisibility(View.GONE);
-//            viewHolder.llItemFragmentShareItemGoodCargo.setVisibility(View.GONE);
-//            viewHolder.llItemFragmentShareItemInventory.setVisibility(View.GONE);
-//            viewHolder.llItemFragmentShareItemLife.setVisibility(View.GONE);
-//            viewHolder.llItemFragmentShareItemLiveTelecast.setVisibility(View.GONE);
-//            viewHolder.llItemFragmentShareItemVideoShopping.setVisibility(View.GONE);
-//            viewHolder.llItemFragmentShareItemAttention.setVisibility(View.GONE);
-//
-//        }
+        private void hideItemLayout() {
+            viewHolder.llItemFragmentShareItemCommunity.setVisibility(View.GONE);
+            viewHolder.llItemFragmentShareItemConsult.setVisibility(View.GONE);
+            viewHolder.llItemFragmentShareItemDigit.setVisibility(View.GONE);
+            viewHolder.llItemFragmentShareItemGoodCargo.setVisibility(View.GONE);
+            viewHolder.llItemFragmentShareItemInventory.setVisibility(View.GONE);
+            viewHolder.llItemFragmentShareItemLife.setVisibility(View.GONE);
+            viewHolder.llItemFragmentShareItemLiveTelecast.setVisibility(View.GONE);
+            viewHolder.llItemFragmentShareItemVideoShopping.setVisibility(View.GONE);
+            viewHolder.llItemFragmentShareItemAttention.setVisibility(View.GONE);
+
+        }
 
 
         @Override
@@ -900,83 +1167,233 @@ public class ShareFragment extends Fragment {
             }
         }
 
-
-
-         class ViewHolder {
+        class ViewHolder {
+            @BindView(R.id.iv_item_fragment_share_item_live_telecast_user_pic)
             ImageView ivItemFragmentShareItemLiveTelecastUserPic;
+            @BindView(R.id.tv_item_fragment_share_item_live_telecast_username)
             TextView tvItemFragmentShareItemLiveTelecastUsername;
+            @BindView(R.id.tv_item_fragment_share_item_live_telecast_user_address)
             TextView tvItemFragmentShareItemLiveTelecastUserAddress;
+            @BindView(R.id.iv_item_fragment_share_item_live_telecast_title_pic_one)
             ImageView ivItemFragmentShareItemLiveTelecastTitlePicOne;
+            @BindView(R.id.tv_item_fragment_share_item_live_telecast_identifying)
             TextView tvItemFragmentShareItemLiveTelecastIdentifying;
+            @BindView(R.id.tv_item_fragment_share_item_live_telecast_title)
             TextView tvItemFragmentShareItemLiveTelecastTitle;
+            @BindView(R.id.tv_item_fragment_share_item_live_telecast_cowrie_classify)
             TextView tvItemFragmentShareItemLiveTelecastCowrieClassify;
+            @BindView(R.id.tv_item_fragment_share_item_live_telecast_title_explain)
             TextView tvItemFragmentShareItemLiveTelecastTitleExplain;
+            @BindView(R.id.ll_item_fragment_share_item_live_telecast)
             LinearLayout llItemFragmentShareItemLiveTelecast;
+            @BindView(R.id.tv_item_fragment_share_item_attention_title)
             TextView tvItemFragmentShareItemAttentionTitle;
+            @BindView(R.id.iv_item_fragment_share_item_attention_user_pic)
             ImageView ivItemFragmentShareItemAttentionUserPic;
+            @BindView(R.id.tv_item_fragment_share_item_attention_username)
             TextView tvItemFragmentShareItemAttentionUsername;
+            @BindView(R.id.tv_item_fragment_share_item_attention_browse_number)
             TextView tvItemFragmentShareItemAttentionBrowseNumber;
+            @BindView(R.id.iv_item_fragment_share_item_attention_title_pic_one)
             ImageView ivItemFragmentShareItemAttentionTitlePicOne;
+            @BindView(R.id.tv_item_fragment_share_item_attention_cowrie_price)
             TextView tvItemFragmentShareItemAttentionCowriePrice;
+            @BindView(R.id.ll_item_fragment_share_item_attention)
             LinearLayout llItemFragmentShareItemAttention;
+            @BindView(R.id.tv_item_fragment_share_item_inventory_title)
             TextView tvItemFragmentShareItemInventoryTitle;
+            @BindView(R.id.tv_item_fragment_share_item_inventory_title_explain)
             TextView tvItemFragmentShareItemInventoryTitleExplain;
+            @BindView(R.id.iv_item_fragment_share_item_inventory_title_pic_one)
             ImageView ivItemFragmentShareItemInventoryTitlePicOne;
+            @BindView(R.id.iv_item_fragment_share_item_inventory_title_pic_two)
             ImageView ivItemFragmentShareItemInventoryTitlePicTwo;
+            @BindView(R.id.iv_item_fragment_share_item_inventory_title_pic_three)
             ImageView ivItemFragmentShareItemInventoryTitlePicThree;
+            @BindView(R.id.iv_item_fragment_share_item_inventory_user_pic)
             ImageView ivItemFragmentShareItemInventoryUserPic;
+            @BindView(R.id.tv_item_fragment_share_item_inventory_username)
             TextView tvItemFragmentShareItemInventoryUsername;
+            @BindView(R.id.tv_item_fragment_share_item_inventory_cowrie_number)
             TextView tvItemFragmentShareItemInventoryCowrieNumber;
+            @BindView(R.id.tv_item_fragment_share_item_inventory_browse_number)
             TextView tvItemFragmentShareItemInventoryBrowseNumber;
+            @BindView(R.id.ll_item_fragment_share_item_inventory)
             LinearLayout llItemFragmentShareItemInventory;
+            @BindView(R.id.tv_item_fragment_share_item_consult_title)
             TextView tvItemFragmentShareItemConsultTitle;
+            @BindView(R.id.iv_item_fragment_share_item_consult_user_pic)
             ImageView ivItemFragmentShareItemConsultUserPic;
+            @BindView(R.id.tv_item_fragment_share_item_consult_username)
             TextView tvItemFragmentShareItemConsultUsername;
+            @BindView(R.id.tv_item_fragment_share_item_consult_user_identifying)
             TextView tvItemFragmentShareItemConsultUserIdentifying;
+            @BindView(R.id.iv_item_fragment_share_item_consult_title_pic_one)
             ImageView ivItemFragmentShareItemConsultTitlePicOne;
+            @BindView(R.id.ll_item_fragment_share_item_consult)
             LinearLayout llItemFragmentShareItemConsult;
+            @BindView(R.id.vv_item_fragment_share_item_video_shopping_video)
             ImageView vvItemFragmentShareItemVideoShoppingVideo;
+            @BindView(R.id.tv_item_fragment_share_item_video_shopping_title)
             TextView tvItemFragmentShareItemVideoShoppingTitle;
+            @BindView(R.id.iv_item_fragment_share_item_video_shopping_user_pic)
             ImageView ivItemFragmentShareItemVideoShoppingUserPic;
+            @BindView(R.id.tv_item_fragment_share_item_video_shopping_username)
             TextView tvItemFragmentShareItemVideoShoppingUsername;
+            @BindView(R.id.tv_item_fragment_share_item_video_shopping_browse_number)
             TextView tvItemFragmentShareItemVideoShoppingBrowseNumber;
+            @BindView(R.id.tv_item_fragment_share_item_video_shopping_cowrie_number)
             TextView tvItemFragmentShareItemVideoShoppingCowrieNumber;
+            @BindView(R.id.ll_item_fragment_share_item_video_shopping)
             LinearLayout llItemFragmentShareItemVideoShopping;
+            @BindView(R.id.iv_item_fragment_share_item_good_cargo_title_pic_one)
             ImageView ivItemFragmentShareItemGoodCargoTitlePicOne;
+            @BindView(R.id.tv_item_fragment_share_item_good_cargo_title)
             TextView tvItemFragmentShareItemGoodCargoTitle;
+            @BindView(R.id.tv_item_fragment_share_item_good_cargo_title_explain)
             TextView tvItemFragmentShareItemGoodCargoTitleExplain;
+            @BindView(R.id.tv_item_fragment_share_item_good_cargo_browse_number)
             TextView tvItemFragmentShareItemGoodCargoBrowseNumber;
+            @BindView(R.id.ll_item_fragment_share_item_good_cargo)
             LinearLayout llItemFragmentShareItemGoodCargo;
+            @BindView(R.id.iv_item_fragment_share_item_community_user_pic)
             ImageView ivItemFragmentShareItemCommunityUserPic;
+            @BindView(R.id.tv_item_fragment_share_item_community_username)
             TextView tvItemFragmentShareItemCommunityUsername;
+            @BindView(R.id.tv_item_fragment_share_item_community_user_identifying)
             TextView tvItemFragmentShareItemCommunityUserIdentifying;
+            @BindView(R.id.tv_item_fragment_share_item_community_time)
             TextView tvItemFragmentShareItemCommunityTime;
+            @BindView(R.id.tv_item_fragment_share_item_community_title)
             TextView tvItemFragmentShareItemCommunityTitle;
+            @BindView(R.id.tv_item_fragment_share_item_community_title_explain)
             TextView tvItemFragmentShareItemCommunityTitleExplain;
+            @BindView(R.id.iv_item_fragment_share_item_community_title_pic_one)
             ImageView ivItemFragmentShareItemCommunityTitlePicOne;
+            @BindView(R.id.iv_item_fragment_share_item_community_title_pic_two)
             ImageView ivItemFragmentShareItemCommunityTitlePicTwo;
+            @BindView(R.id.iv_item_fragment_share_item_community_title_pic_three)
             ImageView ivItemFragmentShareItemCommunityTitlePicThree;
+            @BindView(R.id.tv_item_fragment_share_item_community_cowrie_number)
             TextView tvItemFragmentShareItemCommunityCowrieNumber;
+            @BindView(R.id.tv_item_fragment_share_item_community_browse_number)
             TextView tvItemFragmentShareItemCommunityBrowseNumber;
+            @BindView(R.id.ll_item_fragment_share_item_community)
             LinearLayout llItemFragmentShareItemCommunity;
+            @BindView(R.id.tv_item_fragment_share_item_life_title)
             TextView tvItemFragmentShareItemLifeTitle;
+            @BindView(R.id.iv_item_fragment_share_item_life_title_pic_one)
             ImageView ivItemFragmentShareItemLifeTitlePicOne;
+            @BindView(R.id.iv_item_fragment_share_item_life_title_pic_two)
             ImageView ivItemFragmentShareItemLifeTitlePicTwo;
+            @BindView(R.id.iv_item_fragment_share_item_life_title_pic_three)
             ImageView ivItemFragmentShareItemLifeTitlePicThree;
+            @BindView(R.id.iv_item_fragment_share_item_life_user_pic)
             ImageView ivItemFragmentShareItemLifeUserPic;
+            @BindView(R.id.tv_item_fragment_share_item_life_username)
             TextView tvItemFragmentShareItemLifeUsername;
+            @BindView(R.id.tv_item_fragment_share_item_life_browse_number)
             TextView tvItemFragmentShareItemLifeBrowseNumber;
+            @BindView(R.id.tv_item_fragment_share_item_life_cowrie_number)
             TextView tvItemFragmentShareItemLifeCowrieNumber;
+            @BindView(R.id.ll_item_fragment_share_item_life)
             LinearLayout llItemFragmentShareItemLife;
+            @BindView(R.id.tv_item_fragment_share_item_digit_title)
             TextView tvItemFragmentShareItemDigitTitle;
+            @BindView(R.id.iv_item_fragment_share_item_digit_user_pic)
             ImageView ivItemFragmentShareItemDigitUserPic;
+            @BindView(R.id.tv_item_fragment_share_item_digit_username)
             TextView tvItemFragmentShareItemDigitUsername;
+            @BindView(R.id.tv_item_fragment_share_item_digit_browse_number)
             TextView tvItemFragmentShareItemDigitBrowseNumber;
+            @BindView(R.id.iv_item_fragment_share_item_digit_title_pic_one)
             ImageView ivItemFragmentShareItemDigitTitlePicOne;
+            @BindView(R.id.tv_item_fragment_share_item_digit_cowrie_number)
             TextView tvItemFragmentShareItemDigitCowrieNumber;
+            @BindView(R.id.ll_item_fragment_share_item_digit)
             LinearLayout llItemFragmentShareItemDigit;
 
+            ViewHolder(View view) {
+                ButterKnife.bind(this, view);
+            }
         }
+
+
+//         class ViewHolder {
+//            ImageView ivItemFragmentShareItemLiveTelecastUserPic;
+//            TextView tvItemFragmentShareItemLiveTelecastUsername;
+//            TextView tvItemFragmentShareItemLiveTelecastUserAddress;
+//            ImageView ivItemFragmentShareItemLiveTelecastTitlePicOne;
+//            TextView tvItemFragmentShareItemLiveTelecastIdentifying;
+//            TextView tvItemFragmentShareItemLiveTelecastTitle;
+//            TextView tvItemFragmentShareItemLiveTelecastCowrieClassify;
+//            TextView tvItemFragmentShareItemLiveTelecastTitleExplain;
+//            LinearLayout llItemFragmentShareItemLiveTelecast;
+//            TextView tvItemFragmentShareItemAttentionTitle;
+//            ImageView ivItemFragmentShareItemAttentionUserPic;
+//            TextView tvItemFragmentShareItemAttentionUsername;
+//            TextView tvItemFragmentShareItemAttentionBrowseNumber;
+//            ImageView ivItemFragmentShareItemAttentionTitlePicOne;
+//            TextView tvItemFragmentShareItemAttentionCowriePrice;
+//            LinearLayout llItemFragmentShareItemAttention;
+//            TextView tvItemFragmentShareItemInventoryTitle;
+//            TextView tvItemFragmentShareItemInventoryTitleExplain;
+//            ImageView ivItemFragmentShareItemInventoryTitlePicOne;
+//            ImageView ivItemFragmentShareItemInventoryTitlePicTwo;
+//            ImageView ivItemFragmentShareItemInventoryTitlePicThree;
+//            ImageView ivItemFragmentShareItemInventoryUserPic;
+//            TextView tvItemFragmentShareItemInventoryUsername;
+//            TextView tvItemFragmentShareItemInventoryCowrieNumber;
+//            TextView tvItemFragmentShareItemInventoryBrowseNumber;
+//            LinearLayout llItemFragmentShareItemInventory;
+//            TextView tvItemFragmentShareItemConsultTitle;
+//            ImageView ivItemFragmentShareItemConsultUserPic;
+//            TextView tvItemFragmentShareItemConsultUsername;
+//            TextView tvItemFragmentShareItemConsultUserIdentifying;
+//            ImageView ivItemFragmentShareItemConsultTitlePicOne;
+//            LinearLayout llItemFragmentShareItemConsult;
+//            ImageView vvItemFragmentShareItemVideoShoppingVideo;
+//            TextView tvItemFragmentShareItemVideoShoppingTitle;
+//            ImageView ivItemFragmentShareItemVideoShoppingUserPic;
+//            TextView tvItemFragmentShareItemVideoShoppingUsername;
+//            TextView tvItemFragmentShareItemVideoShoppingBrowseNumber;
+//            TextView tvItemFragmentShareItemVideoShoppingCowrieNumber;
+//            LinearLayout llItemFragmentShareItemVideoShopping;
+//            ImageView ivItemFragmentShareItemGoodCargoTitlePicOne;
+//            TextView tvItemFragmentShareItemGoodCargoTitle;
+//            TextView tvItemFragmentShareItemGoodCargoTitleExplain;
+//            TextView tvItemFragmentShareItemGoodCargoBrowseNumber;
+//            LinearLayout llItemFragmentShareItemGoodCargo;
+//            ImageView ivItemFragmentShareItemCommunityUserPic;
+//            TextView tvItemFragmentShareItemCommunityUsername;
+//            TextView tvItemFragmentShareItemCommunityUserIdentifying;
+//            TextView tvItemFragmentShareItemCommunityTime;
+//            TextView tvItemFragmentShareItemCommunityTitle;
+//            TextView tvItemFragmentShareItemCommunityTitleExplain;
+//            ImageView ivItemFragmentShareItemCommunityTitlePicOne;
+//            ImageView ivItemFragmentShareItemCommunityTitlePicTwo;
+//            ImageView ivItemFragmentShareItemCommunityTitlePicThree;
+//            TextView tvItemFragmentShareItemCommunityCowrieNumber;
+//            TextView tvItemFragmentShareItemCommunityBrowseNumber;
+//            LinearLayout llItemFragmentShareItemCommunity;
+//            TextView tvItemFragmentShareItemLifeTitle;
+//            ImageView ivItemFragmentShareItemLifeTitlePicOne;
+//            ImageView ivItemFragmentShareItemLifeTitlePicTwo;
+//            ImageView ivItemFragmentShareItemLifeTitlePicThree;
+//            ImageView ivItemFragmentShareItemLifeUserPic;
+//            TextView tvItemFragmentShareItemLifeUsername;
+//            TextView tvItemFragmentShareItemLifeBrowseNumber;
+//            TextView tvItemFragmentShareItemLifeCowrieNumber;
+//            LinearLayout llItemFragmentShareItemLife;
+//            TextView tvItemFragmentShareItemDigitTitle;
+//            ImageView ivItemFragmentShareItemDigitUserPic;
+//            TextView tvItemFragmentShareItemDigitUsername;
+//            TextView tvItemFragmentShareItemDigitBrowseNumber;
+//            ImageView ivItemFragmentShareItemDigitTitlePicOne;
+//            TextView tvItemFragmentShareItemDigitCowrieNumber;
+//            LinearLayout llItemFragmentShareItemDigit;
+//
+//        }
     }
 
 }
