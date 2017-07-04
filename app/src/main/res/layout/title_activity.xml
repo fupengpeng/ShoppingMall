@@ -15,6 +15,7 @@
         android:layout_height="match_parent" />
 
     <TextView
+        android:text="asfdasdfasdf"
         android:id="@+id/tv_title_activity_title"
         android:layout_weight="1"
         android:gravity="center"
