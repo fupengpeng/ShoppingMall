@@ -2,6 +2,7 @@ package com.fupengpeng.shoppingmall.fragment;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -23,6 +24,7 @@ import android.widget.Toast;
 
 import com.fupengpeng.shoppingmall.MainActivity;
 import com.fupengpeng.shoppingmall.R;
+import com.fupengpeng.shoppingmall.activity.personcenter.impl.SettleAccountsActivity;
 import com.fupengpeng.shoppingmall.entity.DataBean;
 import com.fupengpeng.shoppingmall.entity.eventbusbean.ShoppingCartFragmentEvent;
 
@@ -209,7 +211,6 @@ public class ShoppingCartFragment extends Fragment
 
     @Override
     public void onClick(View v) {
-        // TODO Auto-generated method stub
         switch (v.getId()) {
             case R.id.cb_fragment_shopping_cart_select_all:
                 Log.e(TAG, "onClick: "+"----0009----" );
@@ -276,8 +277,8 @@ public class ShoppingCartFragment extends Fragment
 
                 } else {
                     if (totalPrice != 0) {
-                        Toast.makeText(getMainActivity(), "跳转至结算界面",
-                                Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getMainActivity(),SettleAccountsActivity.class);
+                        startActivity(intent);
 
                     } else {
                         Toast.makeText(getMainActivity(), "请选择要支付的商品",

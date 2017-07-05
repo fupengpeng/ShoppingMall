@@ -29,6 +29,7 @@
             android:layout_width="@dimen/dp_45"
             android:layout_height="match_parent" />
     </LinearLayout>
+    <include layout="@layout/title_activity"/>
     <LinearLayout
         android:background="#F35D5D"
         android:orientation="vertical"

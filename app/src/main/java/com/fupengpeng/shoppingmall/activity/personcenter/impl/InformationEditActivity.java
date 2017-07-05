@@ -23,9 +23,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.fupengpeng.shoppingmall.R;
-import com.fupengpeng.shoppingmall.activity.BaseActivity;
 import com.fupengpeng.shoppingmall.activity.personcenter.view.IInformationEditView;
 import com.fupengpeng.shoppingmall.util.AppUtils;
 import com.fupengpeng.shoppingmall.util.ToastUtils;
@@ -66,8 +66,8 @@ public class InformationEditActivity extends AppCompatActivity implements IInfor
     /**
      * 返回至PersonActivity按钮
      */
-    @BindView(R.id.iv_activity_information_return)
-    ImageView ivActivityInformationReturn;
+    @BindView(R.id.iv_title_activity_left)
+    ImageView ivTitleActivityLeft;
     /**
      * 修改密码dialog的关闭按钮
      */
@@ -88,6 +88,11 @@ public class InformationEditActivity extends AppCompatActivity implements IInfor
      * 修改密码dialog的确认修改密码按钮
      */
     Button btnItemActivityInformationEditChangePasswordConfirm;
+    /**
+     * 标题
+     */
+    @BindView(R.id.tv_title_activity_title)
+    TextView tvTitleActivityTitle;
 
 
     /**
@@ -107,7 +112,8 @@ public class InformationEditActivity extends AppCompatActivity implements IInfor
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_information_edit);
         unbinder = ButterKnife.bind(this);
-
+        tvTitleActivityTitle.setText("请选择修改内容");
+        ivTitleActivityLeft.setImageResource(R.drawable.ic_left_return_black_24dp);
 
     }
 
@@ -131,15 +137,15 @@ public class InformationEditActivity extends AppCompatActivity implements IInfor
              */
             case R.id.btn_item_activity_information_edit_change_password_confirm:
 
-                if (TextUtils.isEmpty(etItemActivityInformationEditChangePasswordOld.getText().toString().trim())){
-                    ToastUtils.showLong(InformationEditActivity.this,"请输入原密码");
-                }else if (!(etItemActivityInformationEditChangePasswordNew.getText().toString().trim())
-                        .equals(etItemActivityInformationEditChangePasswordConfirm.getText().toString().trim())){
+                if (TextUtils.isEmpty(etItemActivityInformationEditChangePasswordOld.getText().toString().trim())) {
+                    ToastUtils.showLong(InformationEditActivity.this, "请输入原密码");
+                } else if (!(etItemActivityInformationEditChangePasswordNew.getText().toString().trim())
+                        .equals(etItemActivityInformationEditChangePasswordConfirm.getText().toString().trim())) {
                     ToastUtils.showLong(InformationEditActivity.this, "两次输入不同，请重新输入");
                     etItemActivityInformationEditChangePasswordNew.setText("");
                     etItemActivityInformationEditChangePasswordConfirm.setText("");
                     etItemActivityInformationEditChangePasswordOld.setText("");
-                }else {
+                } else {
                     // 密码
                     String newPassword = etItemActivityInformationEditChangePasswordNew.getText().toString().trim();
                     // 验证原密码
@@ -147,7 +153,7 @@ public class InformationEditActivity extends AppCompatActivity implements IInfor
 
                     // 确认提交
                     // TODO: 2017/6/6 验证原密码是否正确，正确，修改密码，错误，提示原密码输入错误
-                    ToastUtils.showLong(this, "原密码：----" + oldPassword + "----    新密码：----" + newPassword+"----");
+                    ToastUtils.showLong(this, "原密码：----" + oldPassword + "----    新密码：----" + newPassword + "----");
                     // TODO: 2017/6/8 0008 修改成功  提示，失败  提示
 
                     dialog.dismiss();
@@ -160,7 +166,7 @@ public class InformationEditActivity extends AppCompatActivity implements IInfor
             R.id.ll_activity_information_edit_address,
             R.id.ll_activity_information_edit_pic,
             R.id.ll_activity_information_edit_password,
-            R.id.iv_activity_information_return})
+            R.id.iv_title_activity_left})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             /**
@@ -253,6 +259,9 @@ public class InformationEditActivity extends AppCompatActivity implements IInfor
                 builder.setView(viewDialog);//添加自定义View
                 builder.create();
                 dialog = builder.show();
+                break;
+            case R.id.tv_title_activity_left:
+                // TODO: 2017/7/5 0005   返回待实现 
                 break;
         }
     }
@@ -447,7 +456,6 @@ public class InformationEditActivity extends AppCompatActivity implements IInfor
     public void setCropPhoto(Bitmap bitmap) {
 
     }
-
 
 
 }

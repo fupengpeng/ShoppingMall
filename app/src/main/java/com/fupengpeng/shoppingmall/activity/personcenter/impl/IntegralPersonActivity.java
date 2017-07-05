@@ -9,10 +9,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-
 import com.fupengpeng.shoppingmall.MainActivity;
 import com.fupengpeng.shoppingmall.R;
-import com.fupengpeng.shoppingmall.activity.BaseActivity;
 import com.fupengpeng.shoppingmall.activity.personcenter.view.IIntegralPersonView;
 
 import butterknife.BindView;
@@ -27,8 +25,8 @@ public class IntegralPersonActivity extends AppCompatActivity implements IIntegr
     /**
      * 返回个人中心
      */
-    @BindView(R.id.iv_activity_integral_person_return)
-    ImageView ivActivityIntegralPersonReturn;
+    @BindView(R.id.iv_title_activity_left)
+    ImageView ivTitleActivityLeft;
     /**
      * 用户图像
      */
@@ -89,6 +87,12 @@ public class IntegralPersonActivity extends AppCompatActivity implements IIntegr
      */
     @BindView(R.id.ll_activity_integral_person_integral_particulars)
     LinearLayout llActivityIntegralPersonIntegralParticulars;
+
+    /**
+     * 标题
+     */
+    @BindView(R.id.tv_title_activity_title)
+    TextView tvTitleActivityTitle;
     private Intent intent;
 
 
@@ -97,9 +101,11 @@ public class IntegralPersonActivity extends AppCompatActivity implements IIntegr
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_integral_person);
         ButterKnife.bind(this);
+        ivTitleActivityLeft.setImageResource(R.drawable.ic_left_return_black_24dp);
+        tvTitleActivityTitle.setText("积分中心");
     }
 
-    @OnClick({R.id.iv_activity_integral_person_return,
+    @OnClick({R.id.iv_title_activity_left,
             R.id.btn_activity_integral_person_member_center,
             R.id.ll_activity_integral_person_integral_sequence,
             R.id.ll_activity_integral_person_integral_shopping_mall,
@@ -111,50 +117,50 @@ public class IntegralPersonActivity extends AppCompatActivity implements IIntegr
             /**
              * 返回个人中心
              */
-            case R.id.iv_activity_integral_person_return:
-                intent = new Intent(IntegralPersonActivity.this,MainActivity.class);
+            case R.id.iv_title_activity_left:
+                intent = new Intent(IntegralPersonActivity.this, MainActivity.class);
                 startActivity(intent);
                 break;
             /**
              * 跳转至会员中心
              */
             case R.id.btn_activity_integral_person_member_center:
-                intent = new Intent(IntegralPersonActivity.this,MemberCenterActivity.class);
+                intent = new Intent(IntegralPersonActivity.this, MemberCenterActivity.class);
                 startActivity(intent);
                 break;
             /**
              * 跳转至积分榜界面
              */
             case R.id.ll_activity_integral_person_integral_sequence:
-                intent = new Intent(IntegralPersonActivity.this,IntegralSequenceActivity.class);
+                intent = new Intent(IntegralPersonActivity.this, IntegralSequenceActivity.class);
                 startActivity(intent);
                 break;
             /**
              * 跳转至积分商城界面
              */
             case R.id.ll_activity_integral_person_integral_shopping_mall:
-                intent = new Intent(IntegralPersonActivity.this,IntegralShoppingMallActivity.class);
+                intent = new Intent(IntegralPersonActivity.this, IntegralShoppingMallActivity.class);
                 startActivity(intent);
                 break;
             /**
              * 跳转至基础任务界面
              */
             case R.id.ll_activity_integral_person_integral_task:
-                intent = new Intent(IntegralPersonActivity.this,IntegralTaskActivity.class);
+                intent = new Intent(IntegralPersonActivity.this, IntegralTaskActivity.class);
                 startActivity(intent);
                 break;
             /**
              * 跳转至积分用途介绍界面
              */
             case R.id.ll_activity_integral_person_integral_use:
-                intent = new Intent(IntegralPersonActivity.this,IntegralUseActivity.class);
+                intent = new Intent(IntegralPersonActivity.this, IntegralUseActivity.class);
                 startActivity(intent);
                 break;
             /**
              * 跳转至积分明细界面
              */
             case R.id.ll_activity_integral_person_integral_particulars:
-                intent = new Intent(IntegralPersonActivity.this,IntegralParticularsActivity.class);
+                intent = new Intent(IntegralPersonActivity.this, IntegralParticularsActivity.class);
                 startActivity(intent);
                 break;
         }

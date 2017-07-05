@@ -357,9 +357,11 @@ public class PersonCenterFragment extends Fragment {
                 startActivity(intent);
                 break;
             case R.id.ll_fragment_person_shopping_cart:
+                // TODO: 2017/7/5 0005 待实现
                 Log.e(TAG, "onViewClicked: "+"跳转至 购物车" );
                 intent = new Intent(getMainActivity(),ShoppingCartActivity.class);
                 startActivity(intent);
+
                 break;
             case R.id.ll_fragment_person_discount_coupon:
                 Log.e(TAG, "onViewClicked: "+"跳转至 优惠券" );

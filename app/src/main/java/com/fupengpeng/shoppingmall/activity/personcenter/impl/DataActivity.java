@@ -19,9 +19,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-
 import com.fupengpeng.shoppingmall.R;
-import com.fupengpeng.shoppingmall.activity.BaseActivity;
 import com.fupengpeng.shoppingmall.activity.personcenter.view.IDataView;
 import com.fupengpeng.shoppingmall.util.ToastUtils;
 import com.lljjcoder.citypickerview.widget.CityPicker;
@@ -83,8 +81,16 @@ public class DataActivity extends AppCompatActivity implements IDataView {
     /**
      * 返回资料修改界面
      */
-    @BindView(R.id.iv_activity_data_return)
-    ImageView ivActivityDataReturn;
+    @BindView(R.id.iv_title_activity_left)
+    ImageView ivTitleActivityLeft;
+    /**
+     * 标题
+     */
+    @BindView(R.id.tv_title_activity_title)
+    TextView tvTitleActivityTitle;
+
+
+
     private String sex;
     private String provinceCity;
     private String username;
@@ -105,7 +111,8 @@ public class DataActivity extends AppCompatActivity implements IDataView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_data);
         unbinder = ButterKnife.bind(this);
-
+        tvTitleActivityTitle.setText("完善会员资料");
+        ivTitleActivityLeft.setImageResource(R.drawable.ic_left_return_black_24dp);
         etActivityDataUsername.addTextChangedListener(new TextWatcher() {
 
 
@@ -158,7 +165,7 @@ public class DataActivity extends AppCompatActivity implements IDataView {
     @OnClick({R.id.tv_activity_data_province_city,
             R.id.btn_activity_data_confirm,
             R.id.tv_activity_data_birthday,
-            R.id.iv_activity_data_return})
+            R.id.iv_title_activity_left})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_activity_data_province_city:
@@ -172,7 +179,7 @@ public class DataActivity extends AppCompatActivity implements IDataView {
                 intent = new Intent(DataActivity.this, InformationEditActivity.class);
                 startActivity(intent);
                 break;
-            case  R.id.tv_activity_data_birthday:
+            case R.id.tv_activity_data_birthday:
 
                 datePickerDialog = new DatePickerDialog(this);
                 datePickerDialog.show();
@@ -204,7 +211,7 @@ public class DataActivity extends AppCompatActivity implements IDataView {
                 });
 
                 break;
-            case R.id.iv_activity_data_return:
+            case R.id.iv_title_activity_left:
                 intent = new Intent(DataActivity.this, InformationEditActivity.class);
                 startActivity(intent);
                 break;
@@ -250,4 +257,6 @@ public class DataActivity extends AppCompatActivity implements IDataView {
         super.onDestroy();
         unbinder.unbind();
     }
+
+
 }

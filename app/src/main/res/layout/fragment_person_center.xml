@@ -207,6 +207,10 @@
                 android:layout_height="match_parent" />
 
         </LinearLayout>
+        <View
+            android:background="#dddddd"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_5"/>
 
         <!--普通订单-->
         <LinearLayout
@@ -237,6 +241,10 @@
                 android:layout_width="@dimen/dp_40"
                 android:layout_height="match_parent" />
         </LinearLayout>
+        <View
+            android:background="#dddddd"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_1"/>
 
         <!--订单状态-->
         <LinearLayout
@@ -356,6 +364,10 @@
             </LinearLayout>
 
         </LinearLayout>
+        <View
+            android:background="#dddddd"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_5"/>
 
         <!--我的购物车-->
         <LinearLayout
@@ -386,6 +398,10 @@
                 android:layout_width="@dimen/dp_50"
                 android:layout_height="match_parent" />
         </LinearLayout>
+        <View
+            android:background="#dddddd"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_1"/>
 
         <!--我的优惠券-->
         <LinearLayout
@@ -410,6 +426,10 @@
                 android:layout_width="@dimen/dp_50"
                 android:layout_height="match_parent" />
         </LinearLayout>
+        <View
+            android:background="#dddddd"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_5"/>
 
         <!--我的砍价-->
         <LinearLayout
@@ -434,6 +454,10 @@
                 android:layout_width="@dimen/dp_50"
                 android:layout_height="match_parent" />
         </LinearLayout>
+        <View
+            android:background="#dddddd"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_1"/>
 
         <!--拼团订单-->
         <LinearLayout
@@ -458,6 +482,10 @@
                 android:layout_width="@dimen/dp_50"
                 android:layout_height="match_parent" />
         </LinearLayout>
+        <View
+            android:background="#dddddd"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_1"/>
 
         <!--中奖纪录-->
         <LinearLayout
@@ -481,7 +509,10 @@
                 android:layout_width="@dimen/dp_50"
                 android:layout_height="match_parent" />
         </LinearLayout>
-
+        <View
+            android:background="#dddddd"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_1"/>
         <!--积分商城-->
         <LinearLayout
             android:id="@+id/ll_fragment_person_integral_shopping"
@@ -505,6 +536,10 @@
                 android:layout_width="@dimen/dp_50"
                 android:layout_height="match_parent" />
         </LinearLayout>
+        <View
+            android:background="#dddddd"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_5"/>
 
     </LinearLayout>
 

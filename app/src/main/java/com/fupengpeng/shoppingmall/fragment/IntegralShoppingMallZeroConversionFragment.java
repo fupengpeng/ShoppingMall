@@ -3,16 +3,19 @@ package com.fupengpeng.shoppingmall.fragment;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.fupengpeng.shoppingmall.R;
+import com.fupengpeng.shoppingmall.activity.personcenter.impl.CommodityParticularsActivity;
 import com.fupengpeng.shoppingmall.activity.personcenter.impl.IntegralShoppingMallActivity;
 import com.fupengpeng.shoppingmall.customerview.ScrollViewNestedGridView;
 import com.fupengpeng.shoppingmall.entity.IntegralCommodityList;
@@ -28,7 +31,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
- * 积分商城0元兑换Fragment
+ * 积分商城0元兑换商品Fragment
  */
 public class IntegralShoppingMallZeroConversionFragment extends Fragment {
 
@@ -87,6 +90,15 @@ public class IntegralShoppingMallZeroConversionFragment extends Fragment {
         list = getData();
         integralShoppingMallZeroConversionFragmentAdapter = new IntegralShoppingMallZeroConversionFragmentAdapter(getActivity(), list);
         gvFragmentIntegralShoppingMallZeroConversion.setAdapter(integralShoppingMallZeroConversionFragmentAdapter);
+
+        gvFragmentIntegralShoppingMallZeroConversion.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getActivity(), CommodityParticularsActivity.class);
+                startActivity(intent);
+            }
+        });
+
         return integralShoppingMallZeroConversionView;
     }
 

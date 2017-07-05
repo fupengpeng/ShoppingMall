@@ -31,20 +31,20 @@ import butterknife.OnClick;
 public class IntegralShoppingMallActivity extends AppCompatActivity implements IIntegralView {
 
     /**
-     * 返回个人中心
+     * 返回按钮
      */
-    @BindView(R.id.iv_activity_integral_shopping_mall_return)
-    ImageView ivActivityIntegralShoppingMallReturn;
+    @BindView(R.id.iv_title_activity_left)
+    ImageView ivTitleActivityLeft;
     /**
-     * 积分商城标题
+     * 标题
      */
-    @BindView(R.id.tv_activity_integral_shopping_mall_title)
-    TextView tvActivityIntegralShoppingMallTitle;
+    @BindView(R.id.tv_title_activity_title)
+    TextView tvTitleActivityTitle;
     /**
      * 分享
      */
-    @BindView(R.id.iv_activity_integral_shopping_mall_share)
-    ImageView ivActivityIntegralShoppingMallShare;
+    @BindView(R.id.iv_title_activity_right)
+    ImageView ivTitleActivityRight;
     /**
      * 店铺首页图片
      */
@@ -109,6 +109,7 @@ public class IntegralShoppingMallActivity extends AppCompatActivity implements I
     ScrollView scvActivityIntegralShoppingMall;
 
 
+
     private Intent intent;
 
     private int setFragment = 500;
@@ -140,7 +141,6 @@ public class IntegralShoppingMallActivity extends AppCompatActivity implements I
     FragmentTransaction transaction;
 
     public static final String TAG = "GrouponActivity";
-    private Intent intent1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -148,15 +148,19 @@ public class IntegralShoppingMallActivity extends AppCompatActivity implements I
         setContentView(R.layout.activity_integral_shopping_mall);
         ButterKnife.bind(this);
 
-        scvActivityIntegralShoppingMall.requestChildFocus(llActivityIntegralShoppingMallScrollview,null);
+        tvTitleActivityTitle.setText("积分商城");
+        ivTitleActivityLeft.setImageResource(R.drawable.ic_left_return_black_24dp);
+        ivTitleActivityRight.setImageResource(R.drawable.ic_more_vert_black_24dp);
+
+        scvActivityIntegralShoppingMall.requestChildFocus(llActivityIntegralShoppingMallScrollview, null);
         Log.e(TAG, "onCreate: " + "进入积分商城");
         setTabSelection(1);
 
     }
 
 
-    @OnClick({R.id.iv_activity_integral_shopping_mall_return,
-            R.id.iv_activity_integral_shopping_mall_share,
+    @OnClick({R.id.iv_title_activity_left,
+            R.id.iv_title_activity_right,
             R.id.ll_activity_integral_shopping_mall_store_home,
             R.id.tv_activity_integral_shopping_mall_integral_gain,
             R.id.btn_activity_integral_shopping_mall_order,
@@ -168,11 +172,11 @@ public class IntegralShoppingMallActivity extends AppCompatActivity implements I
             /**
              * 返回和分享
              */
-            case R.id.iv_activity_integral_shopping_mall_return:
-                intent1 = new Intent(IntegralShoppingMallActivity.this, MainActivity.class);
-                startActivity(intent1);
+            case R.id.iv_title_activity_left:
+                intent = new Intent(IntegralShoppingMallActivity.this, IntegralPersonActivity.class);
+                startActivity(intent);
                 break;
-            case R.id.iv_activity_integral_shopping_mall_share:
+            case R.id.iv_title_activity_right:
                 // TODO: 2017/6/15 0015 分享待实现
                 ToastUtils.showLong(IntegralShoppingMallActivity.this, "分享待实现");
                 break;
@@ -180,7 +184,8 @@ public class IntegralShoppingMallActivity extends AppCompatActivity implements I
              * 店铺首页
              */
             case R.id.ll_activity_integral_shopping_mall_store_home:
-                ToastUtils.showLong(IntegralShoppingMallActivity.this, "店铺首页待实现");
+                intent = new Intent(IntegralShoppingMallActivity.this, MainActivity.class);
+                startActivity(intent);
                 break;
             /**
              * 获取积分

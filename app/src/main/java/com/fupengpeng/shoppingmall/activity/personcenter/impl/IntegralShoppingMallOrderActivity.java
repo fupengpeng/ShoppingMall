@@ -31,15 +31,19 @@ public class IntegralShoppingMallOrderActivity extends AppCompatActivity impleme
     /**
      * 返回
      */
-    @BindView(R.id.iv_activity_integral_shopping_mall_return)
-    ImageView ivActivityIntegralShoppingMallReturn;
-    @BindView(R.id.tv_activity_integral_shopping_mall_title)
-    TextView tvActivityIntegralShoppingMallTitle;
+    @BindView(R.id.iv_title_activity_left)
+    ImageView ivTitleActivityLeft;
+    /**
+     * 标题
+     */
+    @BindView(R.id.tv_title_activity_title)
+    TextView tvTitleActivityTitle;
     /**
      * 分享
      */
-    @BindView(R.id.iv_activity_integral_shopping_mall_share)
-    ImageView ivActivityIntegralShoppingMallShare;
+    @BindView(R.id.iv_title_activity_right)
+    ImageView ivTitleActivityRight;
+
     /**
      * 全部订单Fragment控制按钮
      */
@@ -81,6 +85,7 @@ public class IntegralShoppingMallOrderActivity extends AppCompatActivity impleme
      */
     @BindView(R.id.ll_activity_integral_shopping_mall_order_parent)
     LinearLayout llActivityIntegralShoppingMallOrderParent;
+
 
 
     /**
@@ -139,10 +144,9 @@ public class IntegralShoppingMallOrderActivity extends AppCompatActivity impleme
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_integral_shopping_mall_order);
         ButterKnife.bind(this);
-        //添加一个FragmentTransaction的实例
-        fragmentManager = getFragmentManager();
-        // 开启一个Fragment事务
-        transaction = fragmentManager.beginTransaction();
+        tvTitleActivityTitle.setText("积分商城订单中心");
+        ivTitleActivityLeft.setImageResource(R.drawable.ic_left_return_black_24dp);
+        ivTitleActivityRight.setImageResource(R.drawable.ic_more_vert_black_24dp);
 
         questionList();
 
@@ -425,8 +429,8 @@ public class IntegralShoppingMallOrderActivity extends AppCompatActivity impleme
     }
 
 
-    @OnClick({R.id.iv_activity_integral_shopping_mall_return,
-            R.id.iv_activity_integral_shopping_mall_share,
+    @OnClick({R.id.iv_title_activity_left,
+            R.id.iv_title_activity_right,
             R.id.ll_activity_integral_shopping_mall_all,
             R.id.ll_activity_integral_shopping_mall_wait_shipments,
             R.id.ll_activity_integral_shopping_mall_wait_receiving,
@@ -436,11 +440,11 @@ public class IntegralShoppingMallOrderActivity extends AppCompatActivity impleme
             /**
              * 返回个人中心界面
              */
-            case R.id.iv_activity_integral_shopping_mall_return:
+            case R.id.iv_title_activity_left:
                 intent = new Intent(IntegralShoppingMallOrderActivity.this, MainActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.iv_activity_integral_shopping_mall_share:
+            case R.id.iv_title_activity_right:
                 // TODO: 2017/6/15 0015 分享待实现
                 break;
             /**

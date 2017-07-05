@@ -3,16 +3,19 @@ package com.fupengpeng.shoppingmall.fragment;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.fupengpeng.shoppingmall.R;
+import com.fupengpeng.shoppingmall.activity.personcenter.impl.CommodityParticularsActivity;
 import com.fupengpeng.shoppingmall.activity.personcenter.impl.IntegralShoppingMallActivity;
 import com.fupengpeng.shoppingmall.customerview.ScrollViewNestedGridView;
 import com.fupengpeng.shoppingmall.entity.IntegralCommodityList;
@@ -28,7 +31,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
- * 积分抽奖的Fragment
+ * 积分抽奖商品的Fragment
  */
 public class IntegralShoppingMallIntegralLottoFragment extends Fragment {
 
@@ -84,6 +87,14 @@ public class IntegralShoppingMallIntegralLottoFragment extends Fragment {
         list = getData();
         integralShoppingMallIntegralLottoFragmentAdapter = new IntegralShoppingMallIntegralLottoFragmentAdapter(getActivity(), list);
         gvFragmentIntegralShoppingMallIntegralLotto.setAdapter(integralShoppingMallIntegralLottoFragmentAdapter);
+
+        gvFragmentIntegralShoppingMallIntegralLotto.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getActivity(), CommodityParticularsActivity.class);
+                startActivity(intent);
+            }
+        });
 
         return integralShoppingMallIntegralLottoFragmentView;
     }

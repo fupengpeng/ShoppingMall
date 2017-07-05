@@ -9,28 +9,10 @@ android:layout_height="match_parent">
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_45">
 
-        <ImageView
-            android:id="@+id/iv_activity_information_return"
-            android:src="@drawable/ic_left_return_black_24dp"
-            android:layout_width="@dimen/dp_45"
-            android:layout_height="@dimen/dp_45" />
 
-        <TextView
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="请选择修改内容"
-            android:textSize="@dimen/dp_20"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_45" />
-        <ImageView
-            android:layout_width="@dimen/dp_45"
-            android:layout_height="match_parent" />
-    </LinearLayout>
+    <include layout="@layout/title_activity"/>
+
 
     <View
         android:background="#dddddd"
@@ -62,8 +44,8 @@ android:layout_height="match_parent">
         <ImageView
             android:src="@drawable/ic_chevron_right_black_24dp"
             android:layout_gravity="center"
-            android:layout_width="@dimen/dp_35"
-            android:layout_height="@dimen/dp_35" />
+            android:layout_width="@dimen/dp_24"
+            android:layout_height="@dimen/dp_24" />
     </LinearLayout>
     <View
         android:background="#dddddd"
@@ -88,8 +70,8 @@ android:layout_height="match_parent">
         <ImageView
             android:src="@drawable/ic_chevron_right_black_24dp"
             android:layout_gravity="center"
-            android:layout_width="@dimen/dp_35"
-            android:layout_height="@dimen/dp_35" />
+            android:layout_width="@dimen/dp_24"
+            android:layout_height="@dimen/dp_24" />
     </LinearLayout>
     <View
         android:background="#dddddd"
@@ -113,8 +95,8 @@ android:layout_height="match_parent">
         <ImageView
             android:src="@drawable/ic_chevron_right_black_24dp"
             android:layout_gravity="center"
-            android:layout_width="@dimen/dp_35"
-            android:layout_height="@dimen/dp_35" />
+            android:layout_width="@dimen/dp_24"
+            android:layout_height="@dimen/dp_24" />
     </LinearLayout>
     <View
         android:background="#dddddd"
@@ -138,13 +120,13 @@ android:layout_height="match_parent">
         <ImageView
             android:src="@drawable/ic_chevron_right_black_24dp"
             android:layout_gravity="center"
-            android:layout_width="@dimen/dp_35"
-            android:layout_height="@dimen/dp_35" />
+            android:layout_width="@dimen/dp_24"
+            android:layout_height="@dimen/dp_24" />
     </LinearLayout>
     <View
         android:background="#dddddd"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_300"/>
+        android:layout_height="@dimen/dp_325"/>
 </LinearLayout>
 
 </ScrollView>

@@ -13,8 +13,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fupengpeng.shoppingmall.R;
@@ -44,8 +44,8 @@ public class AddressEditActivity extends AppCompatActivity
     /**
      * 返回
      */
-    @BindView(R.id.iv_activity_address_edit_return)
-    ImageView ivActivityAddressEditReturn;
+    @BindView(R.id.iv_title_activity_left)
+    ImageView ivTitleActivityLeft;
     /**
      * 地址列表
      */
@@ -61,7 +61,11 @@ public class AddressEditActivity extends AppCompatActivity
      */
     @BindView(R.id.btn_activity_address_edit_obtain)
     Button btnActivityAddressEditObtain;
-
+    /**
+     * 标题
+     */
+    @BindView(R.id.tv_title_activity_title)
+    TextView tvTitleActivityTitle;
 
 
     /**
@@ -106,7 +110,7 @@ public class AddressEditActivity extends AppCompatActivity
     private String postCode;
 
     /**
-     * 手机号的正则判断
+     * 手机号的正则判断              SettleAccountsActivity
      */
     private String telRegex;
     private Intent intent;
@@ -123,6 +127,9 @@ public class AddressEditActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_address_edit);
         unbinder = ButterKnife.bind(this);
+
+        tvTitleActivityTitle.setText("资料编辑");
+        ivTitleActivityLeft.setImageResource(R.drawable.ic_left_return_black_24dp);
         /**
          * 模拟地址数据
          */
@@ -233,7 +240,7 @@ public class AddressEditActivity extends AppCompatActivity
 //        }
     }
 
-    @OnClick({R.id.iv_activity_address_edit_return,
+    @OnClick({R.id.iv_title_activity_left,
             R.id.btn_activity_address_edit_add,
             R.id.btn_activity_address_edit_obtain})
     public void onViewClicked(View view) {
@@ -241,7 +248,7 @@ public class AddressEditActivity extends AppCompatActivity
             /**
              * 地址管理界面的返回按钮
              */
-            case R.id.iv_activity_address_edit_return:
+            case R.id.iv_title_activity_left:
                 Toast.makeText(
                         AddressEditActivity.this,
                         "点击返回按钮",
@@ -557,4 +564,6 @@ public class AddressEditActivity extends AppCompatActivity
         Toast.makeText(this, "点击的条目位置是-->" + position, Toast.LENGTH_SHORT)
                 .show();
     }
+
+
 }

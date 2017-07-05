@@ -11,10 +11,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-
 import com.fupengpeng.shoppingmall.MainActivity;
 import com.fupengpeng.shoppingmall.R;
-import com.fupengpeng.shoppingmall.activity.BaseActivity;
 import com.fupengpeng.shoppingmall.activity.personcenter.view.IOrderCenterView;
 import com.fupengpeng.shoppingmall.fragment.OrderCenterAllFragment;
 import com.fupengpeng.shoppingmall.fragment.OrderCenterRefundAfterSalesFragment;
@@ -32,18 +30,24 @@ import butterknife.OnClick;
 /**
  * 订单管理界面
  */
-public class OrderCenterActivity extends AppCompatActivity implements IOrderCenterView,View.OnClickListener {
+public class OrderCenterActivity extends AppCompatActivity implements IOrderCenterView, View.OnClickListener {
 
     /**
      * 返回个人中心界面
      */
-    @BindView(R.id.iv_activity_order_center_return)
-    ImageView ivActivityOrderCenterReturn;
+    @BindView(R.id.iv_title_activity_left)
+    ImageView ivTitleActivityLeft;
+    /**
+     * 标题
+     */
+    @BindView(R.id.tv_title_activity_title)
+    TextView tvTitleActivityTitle;
+
     /**
      * 关闭订单管理界面
      */
-    @BindView(R.id.iv_activity_order_center_close)
-    ImageView ivActivityOrderCenterClose;
+    @BindView(R.id.iv_title_activity_right)
+    ImageView ivTitleActivityRight;
 
     /**
      * 全部订单按钮TextView
@@ -142,6 +146,7 @@ public class OrderCenterActivity extends AppCompatActivity implements IOrderCent
     @BindView(R.id.ll_activity_order_center_parent)
     LinearLayout llActivityOrderCenterParent;
 
+
     /**
      * 全部订单Fragment
      */
@@ -224,13 +229,17 @@ public class OrderCenterActivity extends AppCompatActivity implements IOrderCent
         setContentView(R.layout.activity_order_center);
         ButterKnife.bind(this);
 
+        ivTitleActivityLeft.setImageResource(R.drawable.ic_left_return_black_24dp);
+        tvTitleActivityTitle.setText("订单中心");
+        ivTitleActivityRight.setImageResource(R.drawable.ic_close_black_24dp);
+
 
         questionList();
 
     }
 
-    @OnClick({R.id.iv_activity_order_center_return,
-            R.id.iv_activity_order_center_close,
+    @OnClick({R.id.iv_title_activity_left,
+            R.id.iv_title_activity_right,
             R.id.tv_activity_order_center_all,
             R.id.tv_activity_order_center_wait_payment,
             R.id.tv_activity_order_center_wait_shipments,
@@ -243,9 +252,12 @@ public class OrderCenterActivity extends AppCompatActivity implements IOrderCent
             /**
              * 返回个人中心界面
              */
-            case R.id.iv_activity_order_center_return:
-                intent = new Intent(OrderCenterActivity.this,MainActivity.class);
+            case R.id.iv_title_activity_left:
+                intent = new Intent(OrderCenterActivity.this, MainActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.iv_title_activity_right:
+                finish();
                 break;
             /**
              * 点击展示全部订单Fragment
@@ -298,14 +310,14 @@ public class OrderCenterActivity extends AppCompatActivity implements IOrderCent
      */
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             /**
              * 点击跳转至订单详情界面
              */
             case R.id.tv_item_fragment_order_center_order_list_order_number_explain:
                 intent = new Intent(this, OrderParticularsActivity.class);
                 bundle = new Bundle();
-                bundle.putInt("setFragment",setFragment);
+                bundle.putInt("setFragment", setFragment);
                 intent.putExtras(bundle);
                 startActivity(intent);
                 break;
@@ -315,7 +327,7 @@ public class OrderCenterActivity extends AppCompatActivity implements IOrderCent
             case R.id.tv_item_fragment_order_center_order_list_order_number:
                 intent = new Intent(this, OrderParticularsActivity.class);
                 bundle = new Bundle();
-                bundle.putInt("setFragment",setFragment);
+                bundle.putInt("setFragment", setFragment);
                 intent.putExtras(bundle);
                 startActivity(intent);
                 break;
@@ -325,7 +337,7 @@ public class OrderCenterActivity extends AppCompatActivity implements IOrderCent
             case R.id.tv_item_fragment_order_center_order_list_order_state:
                 intent = new Intent(this, OrderParticularsActivity.class);
                 bundle = new Bundle();
-                bundle.putInt("setFragment",setFragment);
+                bundle.putInt("setFragment", setFragment);
                 intent.putExtras(bundle);
                 startActivity(intent);
                 break;
@@ -335,7 +347,7 @@ public class OrderCenterActivity extends AppCompatActivity implements IOrderCent
             case R.id.iv_item_fragment_order_center_order_list_commodity_pic:
                 intent = new Intent(this, OrderParticularsActivity.class);
                 bundle = new Bundle();
-                bundle.putInt("setFragment",setFragment);
+                bundle.putInt("setFragment", setFragment);
                 intent.putExtras(bundle);
                 startActivity(intent);
                 break;
@@ -345,7 +357,7 @@ public class OrderCenterActivity extends AppCompatActivity implements IOrderCent
             case R.id.tv_item_fragment_order_center_order_list_commodity_name:
                 intent = new Intent(this, OrderParticularsActivity.class);
                 bundle = new Bundle();
-                bundle.putInt("setFragment",setFragment);
+                bundle.putInt("setFragment", setFragment);
                 intent.putExtras(bundle);
                 startActivity(intent);
                 break;
@@ -355,7 +367,7 @@ public class OrderCenterActivity extends AppCompatActivity implements IOrderCent
             case R.id.tv_item_fragment_order_center_order_list_commodity_quantity:
                 intent = new Intent(this, OrderParticularsActivity.class);
                 bundle = new Bundle();
-                bundle.putInt("setFragment",setFragment);
+                bundle.putInt("setFragment", setFragment);
                 intent.putExtras(bundle);
                 startActivity(intent);
                 break;
@@ -365,7 +377,7 @@ public class OrderCenterActivity extends AppCompatActivity implements IOrderCent
             case R.id.tv_item_fragment_order_center_order_list_commodity_pay:
                 intent = new Intent(this, OrderParticularsActivity.class);
                 bundle = new Bundle();
-                bundle.putInt("setFragment",setFragment);
+                bundle.putInt("setFragment", setFragment);
                 intent.putExtras(bundle);
                 startActivity(intent);
                 break;
@@ -375,7 +387,7 @@ public class OrderCenterActivity extends AppCompatActivity implements IOrderCent
             case R.id.tv_item_fragment_order_center_order_list_commodity_aggregate_price:
                 intent = new Intent(this, OrderParticularsActivity.class);
                 bundle = new Bundle();
-                bundle.putInt("setFragment",setFragment);
+                bundle.putInt("setFragment", setFragment);
                 intent.putExtras(bundle);
                 startActivity(intent);
                 break;
@@ -385,7 +397,7 @@ public class OrderCenterActivity extends AppCompatActivity implements IOrderCent
             case R.id.v_item_fragment_order_center_order_list_blank:
                 intent = new Intent(this, OrderParticularsActivity.class);
                 bundle = new Bundle();
-                bundle.putInt("setFragment",setFragment);
+                bundle.putInt("setFragment", setFragment);
                 intent.putExtras(bundle);
                 startActivity(intent);
                 break;
@@ -394,19 +406,19 @@ public class OrderCenterActivity extends AppCompatActivity implements IOrderCent
              */
             case R.id.btn_item_fragment_order_center_order_list_one:
                 // TODO: 2017/6/9 0009 订单相关操作待实现
-                ToastUtils.showLong(this,"再次购买待实现");
+                ToastUtils.showLong(this, "再次购买待实现");
                 break;
             /**
              * 点击按钮two实现对应操作
              */
             case R.id.btn_item_fragment_order_center_order_list_two:
-                ToastUtils.showLong(this,"取消订单待实现");
+                ToastUtils.showLong(this, "取消订单待实现");
                 break;
             /**
              * 点击按钮three实现对应操作
              */
             case R.id.btn_item_fragment_order_center_order_list_three:
-                ToastUtils.showLong(this,"待付款待实现");
+                ToastUtils.showLong(this, "待付款待实现");
                 break;
 
         }
@@ -613,17 +625,17 @@ public class OrderCenterActivity extends AppCompatActivity implements IOrderCent
     /**
      * 初始化展示和点击筛选之后的fragment展示
      */
-    private void questionList(){
+    private void questionList() {
         Intent intent = this.getIntent();
-        setFragment = intent.getIntExtra("setFragment",0);
-        Log.e(TAG, "questionList: --------"+ setFragment);
-        switch (setFragment){
+        setFragment = intent.getIntExtra("setFragment", 0);
+        Log.e(TAG, "questionList: --------" + setFragment);
+        switch (setFragment) {
             /**
              * 订单管理界面
              */
             case 100:
                 //展示OrderCenterWaitPaymentFragment
-                Log.e(TAG, "questionList: "+"001" );
+                Log.e(TAG, "questionList: " + "001");
                 setTabSelection(ALL);
                 break;
             /**
@@ -631,7 +643,7 @@ public class OrderCenterActivity extends AppCompatActivity implements IOrderCent
              */
             case 200:
                 //展示OrderCenterWaitPaymentFragment
-                Log.e(TAG, "questionList: "+"002" );
+                Log.e(TAG, "questionList: " + "002");
                 setTabSelection(WAIT_PAYMENT);
                 break;
             /**
@@ -639,7 +651,7 @@ public class OrderCenterActivity extends AppCompatActivity implements IOrderCent
              */
             case 300:
                 //展示OrderCenterWaitShipmentsFragment
-                Log.e(TAG, "questionList: "+"003" );
+                Log.e(TAG, "questionList: " + "003");
                 setTabSelection(WAIT_SHIPMENTS);
                 break;
             /**
@@ -647,7 +659,7 @@ public class OrderCenterActivity extends AppCompatActivity implements IOrderCent
              */
             case 400:
                 //展示我的已解决问题Fragment
-                Log.e(TAG, "questionList: "+"004" );
+                Log.e(TAG, "questionList: " + "004");
                 setTabSelection(WAIT_RECEIVING);
                 break;
             /**
@@ -655,7 +667,7 @@ public class OrderCenterActivity extends AppCompatActivity implements IOrderCent
              */
             case 500:
                 //展示OrderCenterWaitPaymentFragment
-                Log.e(TAG, "questionList: "+"005" );
+                Log.e(TAG, "questionList: " + "005");
                 setTabSelection(WAIT_PICKING);
                 break;
             /**
@@ -663,7 +675,7 @@ public class OrderCenterActivity extends AppCompatActivity implements IOrderCent
              */
             case 600:
                 //展示我的未解决Fragment
-                Log.e(TAG, "questionList: "+"006" );
+                Log.e(TAG, "questionList: " + "006");
                 setTabSelection(WAIT_EVALUATION);
                 break;
             /**
@@ -671,7 +683,7 @@ public class OrderCenterActivity extends AppCompatActivity implements IOrderCent
              */
             case 700:
                 //展示我的未解决Fragment
-                Log.e(TAG, "questionList: "+"007" );
+                Log.e(TAG, "questionList: " + "007");
                 setTabSelection(REFUND_AFTER_SALES);
                 break;
             /**
@@ -679,7 +691,7 @@ public class OrderCenterActivity extends AppCompatActivity implements IOrderCent
              */
             default:
                 //展示ResolvedFragment
-                Log.e(TAG, "questionList: "+"001" );
+                Log.e(TAG, "questionList: " + "001");
                 setTabSelection(ALL);
                 break;
         }

@@ -8,6 +8,7 @@
     android:orientation="vertical">
 
     <include layout="@layout/title_activity"/>
+
     <LinearLayout
         android:id="@+id/ll_activity_main_parent"
         android:orientation="vertical"

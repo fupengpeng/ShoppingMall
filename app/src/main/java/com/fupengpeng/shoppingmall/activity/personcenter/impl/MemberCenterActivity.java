@@ -12,9 +12,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-
 import com.fupengpeng.shoppingmall.R;
-import com.fupengpeng.shoppingmall.activity.BaseActivity;
 import com.fupengpeng.shoppingmall.activity.personcenter.view.IMemgerCenterView;
 import com.fupengpeng.shoppingmall.fragment.MemberCenterGradeListFragment;
 import com.fupengpeng.shoppingmall.fragment.MemberCenterStrategyFragment;
@@ -26,7 +24,7 @@ import butterknife.OnClick;
 /**
  * 会员中心界面
  */
-public class MemberCenterActivity extends AppCompatActivity implements IMemgerCenterView,View.OnClickListener{
+public class MemberCenterActivity extends AppCompatActivity implements IMemgerCenterView, View.OnClickListener {
 
     /**
      * 会员成长值疑问？？？
@@ -68,6 +66,16 @@ public class MemberCenterActivity extends AppCompatActivity implements IMemgerCe
      * dialog 关闭按钮
      */
     ImageView ivItemActivityMemberCenterQuery;
+    /**
+     * 返回按钮
+     */
+    @BindView(R.id.iv_title_activity_left)
+    ImageView ivTitleActivityLeft;
+    /**
+     * 标题
+     */
+    @BindView(R.id.tv_title_activity_title)
+    TextView tvTitleActivityTitle;
     private Intent intent;
     private static final int GRADE_LIST = 1;
     private static final int STRATEGY = 2;
@@ -96,11 +104,8 @@ public class MemberCenterActivity extends AppCompatActivity implements IMemgerCe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_member_center);
         ButterKnife.bind(this);
-
-        //添加一个FragmentTransaction的实例
-        fragmentManager = getFragmentManager();
-        // 开启一个Fragment事务
-        transaction = fragmentManager.beginTransaction();
+        tvTitleActivityTitle.setText("会员中心");
+        ivTitleActivityLeft.setImageResource(R.drawable.ic_left_return_black_24dp);
 
         setTabSelection(1);
 
@@ -108,7 +113,8 @@ public class MemberCenterActivity extends AppCompatActivity implements IMemgerCe
 
     @OnClick({R.id.iv_activity_member_center_query,
             R.id.ll_activity_member_center_grade_list,
-            R.id.ll_activity_member_center_strategy})
+            R.id.ll_activity_member_center_strategy,
+            R.id.iv_title_activity_left})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_activity_member_center_query:
@@ -131,6 +137,11 @@ public class MemberCenterActivity extends AppCompatActivity implements IMemgerCe
                 break;
             case R.id.ll_activity_member_center_strategy:
                 setTabSelection(2);
+                break;
+
+            case R.id.iv_title_activity_left:
+                intent = new Intent(MemberCenterActivity.this,IntegralPersonActivity.class);
+                startActivity(intent);
                 break;
         }
     }
@@ -209,7 +220,7 @@ public class MemberCenterActivity extends AppCompatActivity implements IMemgerCe
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.iv_item_activity_member_center_query:
                 dialog.dismiss();
                 break;

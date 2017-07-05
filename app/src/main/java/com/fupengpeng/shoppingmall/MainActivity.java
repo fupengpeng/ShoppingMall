@@ -165,11 +165,6 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
 
-        //添加一个FragmentTransaction的实例
-        fragmentManager = getSupportFragmentManager();
-        // 开启一个Fragment事务
-        transaction = fragmentManager.beginTransaction();
-
         questionList();
 
         EventBus.getDefault().register(this);//订阅
@@ -262,7 +257,6 @@ public class MainActivity extends AppCompatActivity {
 
 
         if (index == SHOPPING_CART) {
-            // TODO: 2017/6/28 0028 判断是否是购物车Fragment在展示，如果是，界面不同地方的改变及事件处理
             tvTitleActivityRight.setVisibility(View.VISIBLE);
             tvTitleActivityRight.setText("编辑");
 

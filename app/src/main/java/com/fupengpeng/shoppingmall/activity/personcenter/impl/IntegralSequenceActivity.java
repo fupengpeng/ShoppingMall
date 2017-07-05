@@ -1,10 +1,10 @@
 package com.fupengpeng.shoppingmall.activity.personcenter.impl;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +13,6 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 
 import com.fupengpeng.shoppingmall.R;
 import com.fupengpeng.shoppingmall.entity.IntegralSequenceList;
@@ -29,6 +28,7 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * 积分榜界面
@@ -36,12 +36,31 @@ import butterknife.ButterKnife;
 public class IntegralSequenceActivity extends AppCompatActivity {
 
     private static final String TAG = "IntegralSequenceActivity";
+    /**
+     * 积分数量
+     */
     @BindView(R.id.tv_activity_integral_sequence_integral)
     TextView tvActivityIntegralSequenceIntegral;
+    /**
+     * 积分排名
+     */
     @BindView(R.id.tv_activity_integral_sequence_ranking)
     TextView tvActivityIntegralSequenceRanking;
+    /**
+     * 排名数据
+     */
     @BindView(R.id.ptrlv_activity_integral_sequence)
     PullToRefreshListView ptrlvActivityIntegralSequence;
+    /**
+     * 返回按钮
+     */
+    @BindView(R.id.iv_title_activity_left)
+    ImageView ivTitleActivityLeft;
+    /**
+     * 标题
+     */
+    @BindView(R.id.tv_title_activity_title)
+    TextView tvTitleActivityTitle;
 
     private IntegralSequenceActivityAdapter integralSequenceActivityAdapter;
 
@@ -61,6 +80,8 @@ public class IntegralSequenceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_integral_sequence);
         ButterKnife.bind(this);
+        tvTitleActivityTitle.setText("积分排行榜");
+        ivTitleActivityLeft.setImageResource(R.drawable.ic_left_return_black_24dp);
 
         parseData();
         // 初始化
@@ -69,7 +90,6 @@ public class IntegralSequenceActivity extends AppCompatActivity {
         setListeners();
 
     }
-
 
 
     /**
@@ -92,6 +112,7 @@ public class IntegralSequenceActivity extends AppCompatActivity {
         }
         return list;
     }
+
     /**
      * 数据对象获取
      */
@@ -134,11 +155,16 @@ public class IntegralSequenceActivity extends AppCompatActivity {
         ptrlvActivityIntegralSequence.setOnItemClickListener(new InnerOnItemClickListener());
     }
 
+    @OnClick(R.id.iv_title_activity_left)
+    public void onViewClicked() {
+        Intent intent = new Intent(IntegralSequenceActivity.this,IntegralPersonActivity.class);
+        startActivity(intent);
+    }
+
     /**
      * 刷新监听器
      */
     private class InnerOnRefreshListener2 implements PullToRefreshBase.OnRefreshListener2 {
-
 
 
         @Override
@@ -223,14 +249,15 @@ public class IntegralSequenceActivity extends AppCompatActivity {
             integralSequenceActivityAdapter.notifyDataSetChanged();
         }
     }
+
     /**
      * 绑定数据
      */
     private void bindData() {
         list = getData();
-        if (list == null){
+        if (list == null) {
             ptrlvActivityIntegralSequence.setVisibility(View.GONE);
-        }else {
+        } else {
             ptrlvActivityIntegralSequence.setVisibility(View.VISIBLE);
             integralSequenceActivityAdapter = new IntegralSequenceActivityAdapter(this, list);
             ptrlvActivityIntegralSequence.setAdapter(integralSequenceActivityAdapter);
@@ -277,13 +304,6 @@ public class IntegralSequenceActivity extends AppCompatActivity {
             ptrlvActivityIntegralSequence.onRefreshComplete();
         }
     }
-
-
-
-
-
-
-
 
 
     class IntegralSequenceActivityAdapter extends BaseAdapter {
@@ -370,17 +390,17 @@ public class IntegralSequenceActivity extends AppCompatActivity {
             viewHolder.tvItemActivityIntegralSequenceIntegral.setText((String) data.get(position).get("integralSequenceIntegral"));
 
             // TODO: 2017/6/13 0013  存在bug待研究解决
-            if (position == 0){
+            if (position == 0) {
                 viewHolder.tvItemActivityIntegralSequenceRanking.setTextColor(0xffff0000);
                 viewHolder.tvItemActivityIntegralSequenceUsername.setTextColor(0xffeeeeee);
                 viewHolder.ivItemActivityIntegralSequenceRankingPic.setImageResource(R.drawable.nvshengtouxiangxiaoqingxin);
-            }else if (position == 1){
+            } else if (position == 1) {
                 viewHolder.tvItemActivityIntegralSequenceRanking.setTextColor(0xffeeeeee);
                 viewHolder.ivItemActivityIntegralSequenceRankingPic.setImageResource(R.drawable.magua);
-            }else if (position == 2){
+            } else if (position == 2) {
                 viewHolder.tvItemActivityIntegralSequenceRanking.setTextColor(0xffcc00ee);
                 viewHolder.ivItemActivityIntegralSequenceRankingPic.setImageResource(R.drawable.laoshu);
-            }else {
+            } else {
 
             }
 
