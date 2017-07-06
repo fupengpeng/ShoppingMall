@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/title_activity"/>
+    <!--支付方式-->
+    <LinearLayout
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_45">
+        <ImageView
+            android:src="@drawable/nvshengtouxiang"
+            android:layout_gravity="center"
+            android:layout_width="@dimen/dp_35"
+            android:layout_height="@dimen/dp_35" />
+        <TextView
+            android:layout_marginLeft="@dimen/dp_10"
+            android:gravity="center"
+            android:text="支付方式"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_45">
+        <TextView
+            android:id="@+id/tv_activity_dispatching_message_online_payment"
+            android:gravity="center"
+            android:text="在线支付"
+            android:layout_width="@dimen/dp_80"
+            android:layout_height="match_parent" />
+        <TextView
+            android:id="@+id/tv_activity_dispatching_message_pay_on_delivery"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:gravity="center"
+            android:text="货到付款"
+            android:layout_width="@dimen/dp_80"
+            android:layout_height="match_parent" />
+        <TextView
+            android:id="@+id/tv_activity_dispatching_message_company_transfers"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:gravity="center"
+            android:text="公司转账"
+            android:layout_width="@dimen/dp_80"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <TextView
+        android:id="@+id/tv_activity_dispatching_message_payment_mode_privilege"
+        android:gravity="center|left"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:text="收货时扫码支付享随机减，最高减999"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_35" />
+    <!--配送方式-->
+    <LinearLayout
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_45">
+        <ImageView
+            android:src="@drawable/nvshengtouxiang"
+            android:layout_gravity="center"
+            android:layout_width="@dimen/dp_35"
+            android:layout_height="@dimen/dp_35" />
+        <TextView
+            android:layout_marginLeft="@dimen/dp_10"
+            android:gravity="center"
+            android:text="配送方式"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_45">
+        <TextView
+            android:id="@+id/tv_activity_dispatching_message_express_one"
+            android:gravity="center"
+            android:text="京东快递"
+            android:layout_width="@dimen/dp_80"
+            android:layout_height="match_parent" />
+        <TextView
+            android:id="@+id/tv_activity_dispatching_message_express_two"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:gravity="center"
+            android:text="顺丰快递"
+            android:layout_width="@dimen/dp_80"
+            android:layout_height="match_parent" />
+        <TextView
+            android:id="@+id/tv_activity_dispatching_message_express_three"
+            android:gravity="center"
+            android:text="圆通快递"
+            android:layout_width="@dimen/dp_80"
+            android:layout_height="match_parent" />
+        <TextView
+            android:id="@+id/tv_activity_dispatching_message_express_four"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:gravity="center"
+            android:text="申通快递"
+            android:layout_width="@dimen/dp_80"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_activity_dispatching_message_delivery_time"
+        android:layout_marginRight="@dimen/dp_10"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_80">
+        <LinearLayout
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_weight="0.5"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+                <TextView
+                    android:gravity="center"
+                    android:text="送货时间"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+                <TextView
+                    android:gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+            <TextView
+                android:text="工作日、双休日与节假日均可送货"
+                android:gravity="center|left"
+                android:layout_weight="0.5"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp" />
+        </LinearLayout>
+        <TextView
+            android:text="修改时间"
+            android:gravity="center"
+            android:layout_width="@dimen/dp_60"
+            android:layout_height="match_parent" />
+
+        <ImageView
+            android:src="@drawable/ic_chevron_right_black_24dp"
+            android:layout_gravity="center"
+            android:layout_width="@dimen/dp_30"
+            android:layout_height="@dimen/dp_30" />
+    </LinearLayout>
+
+</LinearLayout>

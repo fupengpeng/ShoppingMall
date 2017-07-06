@@ -277,7 +277,7 @@ public class ShoppingCartFragment extends Fragment
 
                 } else {
                     if (totalPrice != 0) {
-                        Intent intent = new Intent(getMainActivity(),SettleAccountsActivity.class);
+                        Intent intent = new Intent(mainActivity,SettleAccountsActivity.class);
                         startActivity(intent);
 
                     } else {

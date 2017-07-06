@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/title_activity"/>
+    <ScrollView
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_marginRight="@dimen/dp_10"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:gravity="center|left"
+                android:text="发票类型"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_45" />
+            <LinearLayout
+                android:layout_marginRight="@dimen/dp_10"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_45">
+
+                <TextView
+                    android:id="@+id/tv_activity_invoice_message_paper_invoice"
+                    android:layout_width="@dimen/dp_80"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="纸质发票" />
+
+                <TextView
+                    android:id="@+id/tv_activity_invoice_message_electron_invoice"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:gravity="center"
+                    android:text="电子发票"
+                    android:layout_width="@dimen/dp_80"
+                    android:layout_height="match_parent" />
+                <TextView
+                    android:id="@+id/tv_activity_invoice_message_added_value_tax_invoice"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:gravity="center"
+                    android:text="增值税发票"
+                    android:layout_width="@dimen/dp_80"
+                    android:layout_height="match_parent" />
+
+            </LinearLayout>
+            <TextView
+                android:gravity="center|left"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10"
+                android:text="电子发票与纸质发票具备同等法律效力，可支持报销入账"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_35" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_35"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10"
+                android:gravity="center|left"
+                android:text="发票抬头" />
+
+            <LinearLayout
+                android:layout_marginRight="@dimen/dp_10"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_45">
+                <CheckBox
+                    android:id="@+id/cb_activity_invoice_message_personage"
+                    android:text="个人"
+                    style="@style/circlecheckbox"
+                    android:scaleX="0.8"
+                    android:scaleY="0.8"
+                    android:layout_width="@dimen/dp_100"
+                    android:layout_height="match_parent" />
+                <CheckBox
+                    android:id="@+id/cb_activity_invoice_message_corporation"
+                    android:text="单位"
+                    style="@style/circlecheckbox"
+                    android:scaleX="0.8"
+                    android:scaleY="0.8"
+                    android:layout_width="@dimen/dp_100"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+
+
+            <EditText
+                android:hint="请输入发票抬头"
+                android:layout_marginRight="@dimen/dp_10"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:id="@+id/et_activity_invoice_message_name"
+                android:background="@null"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_45" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_45"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10"
+                android:gravity="center|left"
+                android:text="收票人信息" />
+
+            <LinearLayout
+                android:layout_marginRight="@dimen/dp_10"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_45">
+                <TextView
+                    android:gravity="center"
+                    android:text="*"
+                    android:layout_width="@dimen/dp_10"
+                    android:layout_height="match_parent" />
+                <TextView
+                    android:gravity="center|left"
+                    android:text="收票人手机"
+                    android:layout_weight="0.3"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+                <EditText
+                    android:hint="请输入收票人手机号"
+                    android:id="@+id/et_activity_invoice_message_phone_number"
+                    android:background="@null"
+                    android:layout_weight="0.7"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginRight="@dimen/dp_10"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_45">
+                <TextView
+                    android:gravity="center"
+                    android:layout_width="@dimen/dp_10"
+                    android:layout_height="match_parent" />
+                <TextView
+                    android:gravity="center|left"
+                    android:text="收票人邮箱"
+                    android:layout_weight="0.3"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+                <EditText
+                    android:hint="请输入收票人电子邮箱"
+                    android:id="@+id/et_activity_invoice_message_mailbox"
+                    android:background="@null"
+                    android:layout_weight="0.7"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_activity_invoice_message_ex"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_35"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10"
+                android:gravity="center|left"
+                android:text="发票抬头" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_35"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10"
+                android:gravity="center|left"
+                android:text="非图书商品"
+                android:textColor="#999999" />
+
+            <LinearLayout
+                android:layout_marginRight="@dimen/dp_10"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <CheckBox
+                    android:id="@+id/cb_activity_invoice_message_un_books_particulars"
+                    android:text="明细"
+                    style="@style/circlecheckbox"
+                    android:scaleX="0.8"
+                    android:scaleY="0.8"
+                    android:layout_width="@dimen/dp_120"
+                    android:layout_height="match_parent" />
+                <CheckBox
+                    android:id="@+id/cb_activity_invoice_message_un_books_consumable"
+                    android:text="耗材"
+                    style="@style/circlecheckbox"
+                    android:scaleX="0.8"
+                    android:scaleY="0.8"
+                    android:layout_width="@dimen/dp_120"
+                    android:layout_height="match_parent" />
+                <CheckBox
+                    android:id="@+id/cb_activity_invoice_message_un_books_office_supplies"
+                    android:text="办公用品"
+                    style="@style/circlecheckbox"
+                    android:scaleX="0.8"
+                    android:scaleY="0.8"
+                    android:layout_width="@dimen/dp_120"
+                    android:layout_height="match_parent" />
+                <CheckBox
+                    android:id="@+id/cb_activity_invoice_message_un_books_computer_fittings"
+                    android:text="电脑配件"
+                    style="@style/circlecheckbox"
+                    android:scaleX="0.8"
+                    android:scaleY="0.8"
+                    android:layout_width="@dimen/dp_120"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_35"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10"
+                android:gravity="center|left"
+                android:text="图书商品"
+                android:textColor="#999999" />
+
+            <LinearLayout
+                android:layout_marginRight="@dimen/dp_10"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <CheckBox
+                    android:id="@+id/cb_activity_invoice_message_books_particulars"
+                    android:text="明细"
+                    style="@style/circlecheckbox"
+                    android:scaleX="0.8"
+                    android:scaleY="0.8"
+                    android:layout_width="@dimen/dp_120"
+                    android:layout_height="match_parent" />
+                <CheckBox
+                    android:id="@+id/cb_activity_invoice_message_books_book"
+                    android:text="图书"
+                    style="@style/circlecheckbox"
+                    android:scaleX="0.8"
+                    android:scaleY="0.8"
+                    android:layout_width="@dimen/dp_120"
+                    android:layout_height="match_parent" />
+                <CheckBox
+                    android:id="@+id/cb_activity_invoice_message_books_video"
+                    android:text="音像"
+                    style="@style/circlecheckbox"
+                    android:scaleX="0.8"
+                    android:scaleY="0.8"
+                    android:layout_width="@dimen/dp_120"
+                    android:layout_height="match_parent" />
+                <CheckBox
+                    android:id="@+id/cb_activity_invoice_message_books_textbook"
+                    android:text="教材"
+                    style="@style/circlecheckbox"
+                    android:scaleX="0.8"
+                    android:scaleY="0.8"
+                    android:layout_width="@dimen/dp_120"
+                    android:layout_height="match_parent" />
+                <CheckBox
+                    android:id="@+id/cb_activity_invoice_message_books_data"
+                    android:text="资料"
+                    style="@style/circlecheckbox"
+                    android:scaleX="0.8"
+                    android:scaleY="0.8"
+                    android:layout_width="@dimen/dp_120"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+    <Button
+        android:id="@+id/btn_activity_invoice_message_confirm"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginBottom="@dimen/dp_10"
+        android:textSize="@dimen/dp_25"
+        android:background="#ff0000"
+        android:textColor="#ffffff"
+        android:text="确定"
+        android:layout_marginRight="@dimen/dp_100"
+        android:layout_marginLeft="@dimen/dp_100"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_45" />
+
+
+
+
+
+
+
+
+
+</LinearLayout>

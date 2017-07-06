@@ -10,6 +10,7 @@
         <include layout="@layout/title_activity"/>
         <!--收货信息-->
         <LinearLayout
+            android:id="@+id/ll_activity_settle_accounts_address"
             android:layout_marginRight="@dimen/dp_10"
             android:layout_marginLeft="@dimen/dp_10"
             android:orientation="horizontal"
@@ -73,6 +74,7 @@
             android:layout_height="@dimen/dp_5"/>
         <!--商品信息-->
         <LinearLayout
+            android:id="@+id/ll_activity_settle_accounts_commodity_inventory"
             android:layout_marginRight="@dimen/dp_10"
             android:layout_marginLeft="@dimen/dp_10"
             android:orientation="horizontal"
@@ -96,10 +98,11 @@
 
             <TextView
                 android:id="@+id/tv_activity_settle_accounts_commodity_number"
-                android:text="共2件"
-                android:gravity="center"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="共2件" />
+
             <ImageView
                 android:src="@drawable/ic_chevron_right_black_24dp"
                 android:layout_gravity="center"
@@ -112,6 +115,7 @@
             android:layout_height="@dimen/dp_1"/>
         <!--配送信息-->
         <LinearLayout
+            android:id="@+id/ll_activity_settle_accounts_dispatching_message"
             android:layout_marginRight="@dimen/dp_10"
             android:layout_marginLeft="@dimen/dp_10"
             android:orientation="horizontal"
@@ -135,6 +139,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent" />
                     <TextView
+                        android:id="@+id/tv_activity_settle_accounts_payment_mode"
                         android:text="在线支付"
                         android:gravity="center|right"
                         android:layout_weight="0.2"
@@ -142,6 +147,7 @@
                         android:layout_height="match_parent" />
                 </LinearLayout>
                 <TextView
+                    android:id="@+id/tv_activity_settle_accounts_dispatching_mode"
                     android:text="顺丰快递"
                     android:gravity="center|right"
                     android:layout_weight="1"
@@ -168,6 +174,7 @@
             android:layout_height="@dimen/dp_5"/>
         <!--发票信息-->
         <LinearLayout
+            android:id="@+id/ll_activity_settle_accounts_invoice_message"
             android:layout_marginRight="@dimen/dp_10"
             android:layout_marginLeft="@dimen/dp_10"
             android:orientation="horizontal"
@@ -191,6 +198,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent" />
                     <TextView
+                        android:id="@+id/tv_activity_settle_accounts_invoice_type"
                         android:text="电子发票-个人"
                         android:gravity="center|right"
                         android:layout_weight="0.3"
@@ -198,6 +206,7 @@
                         android:layout_height="match_parent" />
                 </LinearLayout>
                 <TextView
+                    android:id="@+id/tv_activity_settle_accounts_invoice_content"
                     android:text="明细"
                     android:gravity="center|right"
                     android:layout_weight="1"
@@ -217,6 +226,7 @@
             android:layout_height="@dimen/dp_5"/>
         <!--优惠券-->
         <LinearLayout
+            android:id="@+id/ll_activity_settle_accounts_discount_coupon"
             android:layout_marginRight="@dimen/dp_10"
             android:layout_marginLeft="@dimen/dp_10"
             android:orientation="horizontal"
@@ -252,6 +262,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent" />
             <TextView
+                android:id="@+id/tv_activity_settle_accounts_commodity_price"
                 android:text="￥48.00"
                 android:gravity="center|right"
                 android:layout_weight="1"
@@ -271,6 +282,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent" />
             <TextView
+                android:id="@+id/tv_activity_settle_accounts_freight"
                 android:text="￥10.00"
                 android:gravity="center|right"
                 android:layout_weight="1"
@@ -292,13 +304,17 @@
                 android:layout_weight="0.6"
                 android:layout_width="0dp"
                 android:layout_height="match_parent" />
+
             <TextView
-                android:text="25.00"
-                android:gravity="center|left"
-                android:layout_weight="0.1"
+                android:id="@+id/tv_activity_settle_accounts_aggregate"
                 android:layout_width="0dp"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:layout_weight="0.1"
+                android:gravity="center|left"
+                android:text="25.00" />
+
             <Button
+                android:id="@+id/btn_activity_settle_accounts_immediately_place_an_order"
                 android:textColor="#ffffff"
                 android:background="#ff0000"
                 android:text="立即下单"

@@ -68,6 +68,10 @@
         <activity android:name=".activity.personcenter.impl.WinningActivity"/>
         <activity android:name=".activity.personcenter.impl.UnlockActivity"/>
         <activity android:name=".activity.personcenter.impl.SetLockActivity"/>
+        <activity android:name=".activity.personcenter.impl.SettleAccountsActivity"/>
+        <activity android:name=".activity.personcenter.impl.DispatchingMessageActivity"/>
+        <activity android:name=".activity.personcenter.impl.CommodityInventoryActivity"/>
+        <activity android:name=".activity.personcenter.impl.InvoiceMessageActivity"/>
 
 
         <!--ShareSDK-->

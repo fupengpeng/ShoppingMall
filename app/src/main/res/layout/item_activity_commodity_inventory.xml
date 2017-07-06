@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_100">
+        <ImageView
+            android:id="@+id/iv_item_activity_commodity_inventory_commodity_pic"
+            android:src="@drawable/nvshengtouxiang"
+            android:layout_width="@dimen/dp_100"
+            android:layout_height="match_parent" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:text="标题"
+                android:layout_weight="0.2"
+                android:layout_width="match_parent"
+                android:layout_height="0dp" />
+            <TextView
+                android:text="规格"
+                android:layout_weight="0.1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp" />
+            <LinearLayout
+
+                android:layout_weight="0.1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+                <TextView
+                    android:text="￥："
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:text="58.60"
+                    android:gravity="center|left"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+                <TextView
+                    android:gravity="center"
+                    android:text="*5"
+                    android:layout_width="@dimen/dp_50"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_45">
+                <ImageView
+                    android:src="@drawable/nvshengtouxiang"
+                    android:layout_width="@dimen/dp_35"
+                    android:layout_gravity="center"
+                    android:layout_height="match_parent" />
+                <TextView
+                    android:text="支持7天无理由退货"
+                    android:gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>
