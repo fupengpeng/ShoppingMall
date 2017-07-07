@@ -1,4 +1,4 @@
-package com.fupengpeng.shoppingmall.presenter.personcenter;
+package com.fupengpeng.shoppingmall.presenter;
 
 import android.app.Activity;
 import android.app.Dialog;

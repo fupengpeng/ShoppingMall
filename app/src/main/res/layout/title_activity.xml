@@ -26,6 +26,12 @@
         android:gravity="center"
         android:layout_width="@dimen/dp_45"
         android:layout_height="match_parent" />
+    <TextView
+        android:id="@+id/tv_title_activity_right_edit"
+        android:visibility="gone"
+        android:gravity="center"
+        android:layout_width="@dimen/dp_45"
+        android:layout_height="match_parent" />
     <ImageView
         android:id="@+id/iv_title_activity_right"
         android:layout_width="@dimen/dp_35"

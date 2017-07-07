@@ -4,11 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -86,12 +84,8 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.ll_activity_main_person_center)
     LinearLayout llActivityMainPersonCenter;
 
-
-
-
-    @BindView(R.id.vp_activity_main_parent)
-    ViewPager vpActivityMainParent;
-
+    @BindView(R.id.tv_title_activity_right_edit)
+    TextView tvTitleActivityRightEdit;
 
 
     /**
@@ -182,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
     @Subscribe(threadMode = ThreadMode.MAIN) //在ui线程执行
     public void onDataSynEvent(ShoppingCartFragmentEvent shoppingCartFragmentEvent) {
         isBatchModel = shoppingCartFragmentEvent.isBatchModel();
-        Log.e(TAG, "onDataSynEvent: ---------------------------------"+isBatchModel );
+        Log.e(TAG, "onDataSynEvent: ---------------------------------" + isBatchModel);
 
 
     }
@@ -194,7 +188,7 @@ public class MainActivity extends AppCompatActivity {
             R.id.ll_activity_main_share,
             R.id.ll_activity_main_person_center,
             R.id.iv_title_activity_right,
-            R.id.tv_title_activity_right})
+            R.id.tv_title_activity_right_edit})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ll_activity_main_home:
@@ -215,20 +209,15 @@ public class MainActivity extends AppCompatActivity {
             case R.id.iv_title_activity_right:
                 showShare();
                 break;
-            case R.id.tv_title_activity_right:
-                // TODO: 2017/6/29 0029  在购物车fragment展示时，此按钮的变化，及相关操作
-
+            case R.id.tv_title_activity_right_edit:
                 Log.e(TAG, "onClick: " + "----0008----");
                 isBatchModel = !isBatchModel;
                 if (isBatchModel) {
-                    tvTitleActivityRight.setText(getResources().getString(R.string.menu_enter));
-
+                    tvTitleActivityRightEdit.setText(getResources().getString(R.string.menu_enter));
                 } else {
-                    tvTitleActivityRight.setText(getResources().getString(R.string.menu_edit));
-
+                    tvTitleActivityRightEdit.setText(getResources().getString(R.string.menu_edit));
                 }
 
-                Log.e(TAG, "onViewClicked: "+isBatchModel+"=-=-=-=-=-=-=-=-=-" );
                 ShoppingCartFragmentEvent shoppingCartFragmentEvent =
                         new ShoppingCartFragmentEvent(
                                 isBatchModel);
@@ -257,11 +246,14 @@ public class MainActivity extends AppCompatActivity {
 
 
         if (index == SHOPPING_CART) {
-            tvTitleActivityRight.setVisibility(View.VISIBLE);
-            tvTitleActivityRight.setText("编辑");
+            tvTitleActivityRight.setVisibility(View.GONE);
+            tvTitleActivityRightEdit.setVisibility(View.VISIBLE);
+            tvTitleActivityRightEdit.setText(getResources().getString(R.string.menu_edit));
 
         } else {
-            tvTitleActivityRight.setVisibility(View.GONE);
+            tvTitleActivityRightEdit.setText(getResources().getString(R.string.menu_enter));
+            tvTitleActivityRight.setVisibility(View.VISIBLE);
+            tvTitleActivityRightEdit.setVisibility(View.GONE);
         }
 
         switch (index) {
@@ -310,8 +302,6 @@ public class MainActivity extends AppCompatActivity {
              */
             case SHOPPING_CART:
                 tvTitleActivityTitle.setText("购物车");
-
-
                 tvActivityMainShoppingCart.setTextColor(0xffff0000);
                 if (shoppingCartFragment == null) {
                     shoppingCartFragment = new ShoppingCartFragment();

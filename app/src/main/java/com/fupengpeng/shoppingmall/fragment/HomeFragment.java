@@ -15,11 +15,12 @@ import com.fupengpeng.shoppingmall.R;
  */
 public class HomeFragment extends Fragment {
 
+    View homeFragmentView;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        homeFragmentView = inflater.inflate(R.layout.fragment_home, container, false);
+        return homeFragmentView;
     }
 
 }

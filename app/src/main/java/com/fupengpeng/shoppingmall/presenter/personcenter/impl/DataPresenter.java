@@ -4,7 +4,7 @@ package com.fupengpeng.shoppingmall.presenter.personcenter.impl;
 import com.fupengpeng.shoppingmall.activity.personcenter.view.IDataView;
 import com.fupengpeng.shoppingmall.model.personcenter.factory.DataModelFactory;
 import com.fupengpeng.shoppingmall.model.personcenter.interf.IDataModel;
-import com.fupengpeng.shoppingmall.presenter.personcenter.BaseActivityPresenter;
+import com.fupengpeng.shoppingmall.presenter.BaseActivityPresenter;
 import com.fupengpeng.shoppingmall.presenter.personcenter.interf.IDataPresenter;
 
 /**

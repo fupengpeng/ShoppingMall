@@ -7,7 +7,7 @@ import com.fupengpeng.shoppingmall.common.Consts;
 import com.fupengpeng.shoppingmall.common.ObjectCallBack;
 import com.fupengpeng.shoppingmall.model.personcenter.factory.PhoneNumberBindModelFactory;
 import com.fupengpeng.shoppingmall.model.personcenter.interf.IPhoneNumberBindModel;
-import com.fupengpeng.shoppingmall.presenter.personcenter.BaseActivityPresenter;
+import com.fupengpeng.shoppingmall.presenter.BaseActivityPresenter;
 import com.fupengpeng.shoppingmall.presenter.personcenter.interf.IPhoneNumberBindPresenter;
 import com.fupengpeng.shoppingmall.util.ToastUtils;
 

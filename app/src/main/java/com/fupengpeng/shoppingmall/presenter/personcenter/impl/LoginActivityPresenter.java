@@ -7,7 +7,7 @@ import com.fupengpeng.shoppingmall.common.Consts;
 import com.fupengpeng.shoppingmall.common.ObjectCallBack;
 import com.fupengpeng.shoppingmall.model.personcenter.factory.UserModelFactory;
 import com.fupengpeng.shoppingmall.model.personcenter.interf.IUserModel;
-import com.fupengpeng.shoppingmall.presenter.personcenter.BaseActivityPresenter;
+import com.fupengpeng.shoppingmall.presenter.BaseActivityPresenter;
 import com.fupengpeng.shoppingmall.presenter.personcenter.interf.ILoginActivityPresenter;
 import com.fupengpeng.shoppingmall.util.InfoUtils;
 

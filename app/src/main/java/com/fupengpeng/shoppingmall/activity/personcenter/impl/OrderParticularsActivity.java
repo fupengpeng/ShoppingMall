@@ -13,9 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import com.fupengpeng.shoppingmall.R;
-import com.fupengpeng.shoppingmall.activity.BaseActivity;
 import com.fupengpeng.shoppingmall.util.ToastUtils;
 
 import butterknife.BindView;
@@ -30,8 +28,8 @@ public class OrderParticularsActivity extends AppCompatActivity {
     /**
      * 返回订单列表
      */
-    @BindView(R.id.iv_activity_order_particulars_return)
-    ImageView ivActivityOrderParticularsReturn;
+    @BindView(R.id.iv_title_activity_left)
+    ImageView ivTitleActivityLeft;
     /**
      * 订单物流
      */
@@ -96,6 +94,9 @@ public class OrderParticularsActivity extends AppCompatActivity {
      */
     @BindView(R.id.tv_activity_order_particulars_order_number)
     TextView tvActivityOrderParticularsOrderNumber;
+
+    @BindView(R.id.tv_title_activity_title)
+    TextView tvTitleActivityTitle;
     /**
      * 接收订单号的字符串
      */
@@ -113,6 +114,8 @@ public class OrderParticularsActivity extends AppCompatActivity {
         mClipboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
         orderParticulars();
         ButterKnife.bind(this);
+        ivTitleActivityLeft.setImageResource(R.drawable.ic_left_return_black_24dp);
+        tvTitleActivityTitle.setText("订单详情");
     }
 
     /**
@@ -123,7 +126,7 @@ public class OrderParticularsActivity extends AppCompatActivity {
         setFragment = intent.getIntExtra("setFragment", 0);
     }
 
-    @OnClick({R.id.iv_activity_order_particulars_return,
+    @OnClick({R.id.iv_title_activity_left,
             R.id.ll_activity_order_particulars_logistics_particulars,
             R.id.iv_activity_order_particulars_commodity_pic,
             R.id.tv_activity_order_particulars_commodity_name,
@@ -140,7 +143,7 @@ public class OrderParticularsActivity extends AppCompatActivity {
             /**
              * 返回订单列表
              */
-            case R.id.iv_activity_order_particulars_return:
+            case R.id.iv_title_activity_left:
                 intent = new Intent(OrderParticularsActivity.this, OrderCenterActivity.class);
                 Bundle bundle = new Bundle();
                 //将网络请求获取到的分类对象传递给ScreenActivity用于展示数据
@@ -152,35 +155,35 @@ public class OrderParticularsActivity extends AppCompatActivity {
              * 订单物流
              */
             case R.id.ll_activity_order_particulars_logistics_particulars:
-                intent = new Intent(OrderParticularsActivity.this,OrderTrackingActivity.class);
+                intent = new Intent(OrderParticularsActivity.this, OrderTrackingActivity.class);
                 startActivity(intent);
                 break;
             /**
              * 商品图片
              */
             case R.id.iv_activity_order_particulars_commodity_pic:
-                intent = new Intent(OrderParticularsActivity.this,CommodityParticularsActivity.class);
+                intent = new Intent(OrderParticularsActivity.this, CommodityParticularsActivity.class);
                 startActivity(intent);
                 break;
             /**
              * 商品名称
              */
             case R.id.tv_activity_order_particulars_commodity_name:
-                intent = new Intent(OrderParticularsActivity.this,CommodityParticularsActivity.class);
+                intent = new Intent(OrderParticularsActivity.this, CommodityParticularsActivity.class);
                 startActivity(intent);
                 break;
             /**
              * 商品参数
              */
             case R.id.ll_activity_order_particulars_commodity_parameter:
-                intent = new Intent(OrderParticularsActivity.this,CommodityParticularsActivity.class);
+                intent = new Intent(OrderParticularsActivity.this, CommodityParticularsActivity.class);
                 startActivity(intent);
                 break;
             /**
              * 商品价格
              */
             case R.id.tv_activity_order_particulars_commodity_price:
-                intent = new Intent(OrderParticularsActivity.this,CommodityParticularsActivity.class);
+                intent = new Intent(OrderParticularsActivity.this, CommodityParticularsActivity.class);
                 startActivity(intent);
                 break;
             /**
@@ -193,7 +196,7 @@ public class OrderParticularsActivity extends AppCompatActivity {
              * 退换无忧保险
              */
             case R.id.ll_activity_order_particulars_alteration_insurance:
-                intent = new Intent(OrderParticularsActivity.this,AlterationInsuranceActivity.class);
+                intent = new Intent(OrderParticularsActivity.this, AlterationInsuranceActivity.class);
                 startActivity(intent);
                 break;
             /**
@@ -212,7 +215,7 @@ public class OrderParticularsActivity extends AppCompatActivity {
                     //获取到内容
                     ClipData.Item item = mClipData.getItemAt(0);
                     String text = item.getText().toString();
-                }else {
+                } else {
                     Toast.makeText(OrderParticularsActivity.this, "订单号为空，复制失败。",
                             Toast.LENGTH_SHORT).show();
                 }
@@ -235,7 +238,7 @@ public class OrderParticularsActivity extends AppCompatActivity {
              * 再次购买
              */
             case R.id.btn_activity_order_particulars_buy_again:
-                intent = new Intent(OrderParticularsActivity.this,ShoppingCartActivity.class);
+                intent = new Intent(OrderParticularsActivity.this, ShoppingCartActivity.class);
                 startActivity(intent);
                 break;
         }

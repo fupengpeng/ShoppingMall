@@ -6,27 +6,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
     <!--标题栏-->
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_45">
-        <ImageView
-            android:id="@+id/iv_activity_order_particulars_return"
-            android:layout_width="@dimen/dp_45"
-            android:layout_height="match_parent" />
+    <include layout="@layout/title_activity"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="订单详情"
-            android:textSize="@dimen/dp_20" />
-
-        <ImageView
-            android:layout_width="@dimen/dp_45"
-            android:layout_height="match_parent" />
-    </LinearLayout>
 
     <!--订单详情内容-->
     <ScrollView

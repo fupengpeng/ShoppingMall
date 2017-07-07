@@ -7,27 +7,7 @@
     android:orientation="vertical">
 
     <!--标题栏-->
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_45">
-        <ImageView
-            android:id="@+id/iv_activity_data_return"
-            android:layout_width="@dimen/dp_45"
-            android:layout_height="match_parent" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="订单跟踪"
-            android:textSize="@dimen/dp_20" />
-
-        <ImageView
-            android:layout_width="@dimen/dp_45"
-            android:layout_height="match_parent" />
-    </LinearLayout>
+    <include layout="@layout/title_activity"/>
 
     <TextView
         android:gravity="center"

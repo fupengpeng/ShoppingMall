@@ -4,7 +4,7 @@ package com.fupengpeng.shoppingmall.presenter.personcenter.impl;
 import com.fupengpeng.shoppingmall.activity.personcenter.view.IGrouponView;
 import com.fupengpeng.shoppingmall.model.personcenter.factory.GrouponModelFactory;
 import com.fupengpeng.shoppingmall.model.personcenter.interf.IGrouponModel;
-import com.fupengpeng.shoppingmall.presenter.personcenter.BaseActivityPresenter;
+import com.fupengpeng.shoppingmall.presenter.BaseActivityPresenter;
 import com.fupengpeng.shoppingmall.presenter.personcenter.interf.IGrouponPresenter;
 
 /**

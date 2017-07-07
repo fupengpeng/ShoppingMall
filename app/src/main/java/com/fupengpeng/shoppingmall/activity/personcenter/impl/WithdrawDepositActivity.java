@@ -14,10 +14,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
 import com.fupengpeng.shoppingmall.MainActivity;
 import com.fupengpeng.shoppingmall.R;
-import com.fupengpeng.shoppingmall.activity.BaseActivity;
 import com.fupengpeng.shoppingmall.activity.personcenter.view.IWithdrawDepositView;
 import com.fupengpeng.shoppingmall.util.ToastUtils;
 
@@ -30,18 +28,18 @@ import butterknife.Unbinder;
 /**
  * 提现余额界面
  */
-public class WithdrawDepositActivity extends AppCompatActivity implements IWithdrawDepositView,View.OnClickListener{
+public class WithdrawDepositActivity extends AppCompatActivity implements IWithdrawDepositView, View.OnClickListener {
     private static final String TAG = "WithdrawDepositActivity";
     /**
      * 返回个人中心界面
      */
-    @BindView(R.id.iv_activity_withdraw_deposit_return)
-    ImageView ivActivityWithdrawDepositReturn;
+    @BindView(R.id.iv_title_activity_left)
+    ImageView ivTitleActivityLeft;
     /**
      * 分享
      */
-    @BindView(R.id.iv_activity_withdraw_deposit_share)
-    ImageView ivActivityWithdrawDepositShare;
+    @BindView(R.id.iv_title_activity_right)
+    ImageView ivTitleActivityRight;
     /**
      * 提现金额
      */
@@ -65,6 +63,10 @@ public class WithdrawDepositActivity extends AppCompatActivity implements IWithd
 
     Button btnItemActivityWithdrawDepositNotSufficientFundsReturn;
 
+    @BindView(R.id.tv_title_activity_title)
+    TextView tvTitleActivityTitle;
+
+
     private String withdrawDepositSum;
     private AlertDialog dialog;
     private Intent intent;
@@ -75,6 +77,9 @@ public class WithdrawDepositActivity extends AppCompatActivity implements IWithd
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_withdraw_deposit);
         unbinder = ButterKnife.bind(this);
+        tvTitleActivityTitle.setText("提现");
+        ivTitleActivityLeft.setImageResource(R.drawable.ic_left_return_black_24dp);
+        ivTitleActivityRight.setImageResource(R.drawable.ic_more_vert_black_24dp);
         initEditText();
         initDialog();
     }
@@ -106,7 +111,7 @@ public class WithdrawDepositActivity extends AppCompatActivity implements IWithd
     }
 
     private void initDialog() {
-        if (!(Double.parseDouble(tvActivityWithdrawDepositAccountRemainingSum.getText().toString()) >= 10)){
+        if (!(Double.parseDouble(tvActivityWithdrawDepositAccountRemainingSum.getText().toString()) >= 10)) {
             AlertDialog.Builder builder = new AlertDialog.Builder(WithdrawDepositActivity.this);
             LayoutInflater inflater = getLayoutInflater();
             View viewDialog = inflater.inflate(R.layout.item_activity_withdraw_deposit_not_sufficient_funds, null);
@@ -115,25 +120,24 @@ public class WithdrawDepositActivity extends AppCompatActivity implements IWithd
             builder.setView(viewDialog);//添加自定义View
             builder.create();
             dialog = builder.show();
-        }else {
+        } else {
 
         }
 
 
-
     }
 
-    @OnClick({R.id.iv_activity_withdraw_deposit_return,
-            R.id.iv_activity_withdraw_deposit_share,
+    @OnClick({R.id.iv_title_activity_left,
+            R.id.iv_title_activity_right,
             R.id.tv_activity_withdraw_deposit_withdraw_deposit_all,
             R.id.btn_activity_withdraw_deposit_withdraw_deposit_affirm})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.iv_activity_withdraw_deposit_return:
-                intent = new Intent(WithdrawDepositActivity.this,MainActivity.class);
+            case R.id.iv_title_activity_left:
+                intent = new Intent(WithdrawDepositActivity.this, MainActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.iv_activity_withdraw_deposit_share:
+            case R.id.iv_title_activity_right:
                 ToastUtils.showLong(this, "分享待实现");
                 break;
             case R.id.tv_activity_withdraw_deposit_withdraw_deposit_all:
@@ -141,23 +145,23 @@ public class WithdrawDepositActivity extends AppCompatActivity implements IWithd
                 break;
             case R.id.btn_activity_withdraw_deposit_withdraw_deposit_affirm:
 
-                if (!TextUtils.isEmpty(etActivityWithdrawDepositWithdrawDepositSum.getText().toString().trim())){
+                if (!TextUtils.isEmpty(etActivityWithdrawDepositWithdrawDepositSum.getText().toString().trim())) {
                     // TODO: 2017/6/13 0013  执行提现操作
 
-                }else {
-                    ToastUtils.showLong(WithdrawDepositActivity.this,"请输入提现金额");
+                } else {
+                    ToastUtils.showLong(WithdrawDepositActivity.this, "请输入提现金额");
                 }
 
-                ToastUtils.showLong(WithdrawDepositActivity.this,"确认提现");
+                ToastUtils.showLong(WithdrawDepositActivity.this, "确认提现");
                 break;
         }
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.btn_item_activity_withdraw_deposit_not_sufficient_funds_return:
-                intent = new Intent(WithdrawDepositActivity.this,MainActivity.class);
+                intent = new Intent(WithdrawDepositActivity.this, MainActivity.class);
                 startActivity(intent);
                 dialog.dismiss();
                 break;

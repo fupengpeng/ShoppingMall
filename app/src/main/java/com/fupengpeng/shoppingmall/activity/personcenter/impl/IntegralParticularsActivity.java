@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-
 import com.fupengpeng.shoppingmall.R;
 import com.fupengpeng.shoppingmall.fragment.IntegralParticularsAllFragment;
 import com.fupengpeng.shoppingmall.fragment.IntegralParticularsExpendFragment;
@@ -28,8 +27,8 @@ public class IntegralParticularsActivity extends AppCompatActivity {
     /**
      * 返回积分中心
      */
-    @BindView(R.id.iv_activity_integral_particulars_return)
-    ImageView ivActivityIntegralParticularsReturn;
+    @BindView(R.id.iv_title_activity_left)
+    ImageView ivTitleActivityLeft;
     /**
      * 全部积分的按钮
      */
@@ -72,6 +71,10 @@ public class IntegralParticularsActivity extends AppCompatActivity {
     public static final String TAG = "IntegralParticularsActivity";
 
 
+    @BindView(R.id.tv_title_activity_title)
+    TextView tvTitleActivityTitle;
+
+
     private Intent intent;
     private static final int ALL = 1;
     private static final int GAIN = 2;
@@ -98,22 +101,20 @@ public class IntegralParticularsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_integral_particulars);
         ButterKnife.bind(this);
 
-        //添加一个FragmentTransaction的实例
-        fragmentManager = getFragmentManager();
-        // 开启一个Fragment事务
-        transaction = fragmentManager.beginTransaction();
+        tvTitleActivityTitle.setText("积分任务");
+        ivTitleActivityLeft.setImageResource(R.drawable.ic_left_return_black_24dp);
 
         setTabSelection(1);
     }
 
-    @OnClick({R.id.iv_activity_integral_particulars_return,
+    @OnClick({R.id.iv_title_activity_left,
             R.id.ll_activity_integral_particulars_all,
             R.id.ll_activity_integral_particulars_gain,
             R.id.ll_activity_integral_particulars_expend})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.iv_activity_integral_particulars_return:
-                intent = new Intent(IntegralParticularsActivity.this,IntegralPersonActivity.class);
+            case R.id.iv_title_activity_left:
+                intent = new Intent(IntegralParticularsActivity.this, IntegralPersonActivity.class);
                 startActivity(intent);
                 break;
             case R.id.ll_activity_integral_particulars_all:
@@ -219,17 +220,6 @@ public class IntegralParticularsActivity extends AppCompatActivity {
             transaction.hide(integralParticularsExpendFragment);
         }
     }
-
-
-
-
-
-
-
-
-
-
-
 
 
 }

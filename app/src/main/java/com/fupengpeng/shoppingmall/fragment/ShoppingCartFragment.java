@@ -435,7 +435,7 @@ public class ShoppingCartFragment extends Fragment
                     holder.tvItemFragmentShoppingCartCommodityListNumber.setText("" + currentNum);
                     notifyDataSetChanged();
                 }
-                count();
+                number();
             }
 
         }
@@ -471,7 +471,7 @@ public class ShoppingCartFragment extends Fragment
                     }
 
                 }
-                count();
+                number();
             }
 
         }
