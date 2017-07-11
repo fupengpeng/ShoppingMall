@@ -1,4 +1,4 @@
-package com.fupengpeng.shoppingmall.fragment;
+package com.fupengpeng.shoppingmall.fragment.personcenter;
 
 import android.app.Activity;
 import android.content.Context;

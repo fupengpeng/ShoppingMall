@@ -7,8 +7,8 @@ import com.fupengpeng.shoppingmall.activity.personcenter.impl.LoginActivity;
 import com.fupengpeng.shoppingmall.activity.personcenter.view.IRegisterView;
 import com.fupengpeng.shoppingmall.common.Consts;
 import com.fupengpeng.shoppingmall.common.ObjectCallBack;
-import com.fupengpeng.shoppingmall.model.personcenter.factory.RegisterModelFactory;
-import com.fupengpeng.shoppingmall.model.personcenter.interf.IRegisterModel;
+import com.fupengpeng.shoppingmall.model.personcenter.factory.UserModelFactory;
+import com.fupengpeng.shoppingmall.model.personcenter.interf.IUserModel;
 import com.fupengpeng.shoppingmall.presenter.BaseActivityPresenter;
 import com.fupengpeng.shoppingmall.presenter.personcenter.interf.IRegisterPresenter;
 import com.fupengpeng.shoppingmall.util.InfoUtils;
@@ -28,7 +28,7 @@ public class RegisterPresenter extends BaseActivityPresenter implements IRegiste
     /**
      * 注册信息业务
      */
-    private IRegisterModel registerModel;
+    private IUserModel userModel;
 
     /**
      * 有参主导器构造
@@ -38,7 +38,7 @@ public class RegisterPresenter extends BaseActivityPresenter implements IRegiste
         super(registerView);
         Log.e(TAG, "RegisterPresenter: "+"创建RegisterPresenter对象" );
         this.registerView = registerView;
-        this.registerModel = RegisterModelFactory.newInstance();
+        this.userModel = UserModelFactory.newInstance();
     }
 
 
@@ -51,7 +51,7 @@ public class RegisterPresenter extends BaseActivityPresenter implements IRegiste
         // 显示等待对话框
         showWaitDialog(Consts.WaitDialogMessage.LOGIN);
         // 获取验证码
-        registerModel.getVerificationCode(mobilePhoneNumber, new ObjectCallBack<String>() {
+        userModel.getVerificationCode(mobilePhoneNumber, new ObjectCallBack<String>() {
 
             @Override
             public void onSuccess(String userId) { // 获取验证码成功
@@ -81,7 +81,7 @@ public class RegisterPresenter extends BaseActivityPresenter implements IRegiste
         // 显示等待对话框
         showWaitDialog(Consts.WaitDialogMessage.LOGIN);
         // 注册
-        registerModel.register(tel, password, new ObjectCallBack<String>() {
+        userModel.register(tel, password, new ObjectCallBack<String>() {
             @Override
             public void onSuccess(String userId) { // 注册成功
                 // 关闭等待对话框

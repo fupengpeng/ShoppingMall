@@ -173,15 +173,13 @@ public class InformationEditActivity extends AppCompatActivity implements IInfor
              * 资料完善跳转
              */
             case R.id.ll_activity_information_edit_data:
-                intent = new Intent(InformationEditActivity.this, DataActivity.class);
-                startActivity(intent);
+                setData();
                 break;
             /**
              * 收货地址管理跳转
              */
             case R.id.ll_activity_information_edit_address:
-                intent = new Intent(InformationEditActivity.this, AddressEditActivity.class);
-                startActivity(intent);
+                setAddress();
                 break;
             /**
              * 修改头像跳转
@@ -189,76 +187,14 @@ public class InformationEditActivity extends AppCompatActivity implements IInfor
             case R.id.ll_activity_information_edit_pic:
 //                showChoicePhotoWindow();
                 // 从相册中选择
-                selectFromAlbum();
+                setPic();
 
                 break;
             /**
              * 修改密码点击事件
              */
             case R.id.ll_activity_information_edit_password:
-                AlertDialog.Builder builder = new AlertDialog.Builder(InformationEditActivity.this);
-                LayoutInflater inflater = getLayoutInflater();
-                View viewDialog = inflater.inflate(R.layout.item_activity_information_edit_change_password, null);
-                ivItemActivityInformationEditChangePasswordClose = (ImageView) viewDialog.findViewById(R.id.iv_item_activity_information_edit_change_password_close);
-                btnItemActivityInformationEditChangePasswordConfirm = (Button) viewDialog.findViewById(R.id.btn_item_activity_information_edit_change_password_confirm);
-                etItemActivityInformationEditChangePasswordOld = (EditText) viewDialog.findViewById(R.id.et_item_activity_information_edit_change_password_old);
-                etItemActivityInformationEditChangePasswordNew = (EditText) viewDialog.findViewById(R.id.et_item_activity_information_edit_change_password_new);
-                etItemActivityInformationEditChangePasswordConfirm = (EditText) viewDialog.findViewById(R.id.et_item_activity_information_edit_change_password_confirm);
-
-                ivItemActivityInformationEditChangePasswordClose.setOnClickListener(this);
-                btnItemActivityInformationEditChangePasswordConfirm.setOnClickListener(this);
-                etItemActivityInformationEditChangePasswordOld.addTextChangedListener(new TextWatcher() {
-                    @Override
-                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                    }
-
-                    @Override
-                    public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                    }
-
-                    @Override
-                    public void afterTextChanged(Editable s) {
-                        oldPassword = etItemActivityInformationEditChangePasswordOld.getText().toString().trim();
-                    }
-                });
-                etItemActivityInformationEditChangePasswordNew.addTextChangedListener(new TextWatcher() {
-                    @Override
-                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                    }
-
-                    @Override
-                    public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                    }
-
-                    @Override
-                    public void afterTextChanged(Editable s) {
-                        newPassword = etItemActivityInformationEditChangePasswordNew.getText().toString().trim();
-                    }
-                });
-                etItemActivityInformationEditChangePasswordConfirm.addTextChangedListener(new TextWatcher() {
-                    @Override
-                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                    }
-
-                    @Override
-                    public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                    }
-
-                    @Override
-                    public void afterTextChanged(Editable s) {
-                        confirmPassword = etItemActivityInformationEditChangePasswordConfirm.getText().toString().trim();
-                    }
-                });
-
-                builder.setView(viewDialog);//添加自定义View
-                builder.create();
-                dialog = builder.show();
+                setPassword();
                 break;
             case R.id.tv_title_activity_left:
                 // TODO: 2017/7/5 0005   返回待实现 
@@ -325,7 +261,7 @@ public class InformationEditActivity extends AppCompatActivity implements IInfor
                     return;
                 }
                 // 从相册中选择
-                selectFromAlbum();
+                setPic();
                 dialog.dismiss();
             }
         });
@@ -333,21 +269,13 @@ public class InformationEditActivity extends AppCompatActivity implements IInfor
         window.setContentView(dialogView);
     }
 
-    /**
-     * 从相册中选择
-     */
-    private void selectFromAlbum() {
-        Intent intent = new Intent(Intent.ACTION_PICK, null);
-        intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
-        startActivityForResult(intent, GALLERY_REQUEST_CODE);
-    }
 
     /**
      * 拍照
      */
     private void takePhoto() {
         // 打开系统拍照界面
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // 获得拍照图片的保存Uri
         Uri mImageCaptureUri;
         File file = new File(tempPhotoPath);
@@ -458,4 +386,89 @@ public class InformationEditActivity extends AppCompatActivity implements IInfor
     }
 
 
+    @Override
+    public void setData() {
+        intent = new Intent(InformationEditActivity.this, DataActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void setAddress() {
+        intent = new Intent(InformationEditActivity.this, AddressEditActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void setPic() {
+        intent = new Intent(Intent.ACTION_PICK, null);
+        intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
+        startActivityForResult(intent, GALLERY_REQUEST_CODE);
+    }
+
+    @Override
+    public void setPassword() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(InformationEditActivity.this);
+        LayoutInflater inflater = getLayoutInflater();
+        View viewDialog = inflater.inflate(R.layout.item_activity_information_edit_change_password, null);
+        ivItemActivityInformationEditChangePasswordClose = (ImageView) viewDialog.findViewById(R.id.iv_item_activity_information_edit_change_password_close);
+        btnItemActivityInformationEditChangePasswordConfirm = (Button) viewDialog.findViewById(R.id.btn_item_activity_information_edit_change_password_confirm);
+        etItemActivityInformationEditChangePasswordOld = (EditText) viewDialog.findViewById(R.id.et_item_activity_information_edit_change_password_old);
+        etItemActivityInformationEditChangePasswordNew = (EditText) viewDialog.findViewById(R.id.et_item_activity_information_edit_change_password_new);
+        etItemActivityInformationEditChangePasswordConfirm = (EditText) viewDialog.findViewById(R.id.et_item_activity_information_edit_change_password_confirm);
+
+        ivItemActivityInformationEditChangePasswordClose.setOnClickListener(this);
+        btnItemActivityInformationEditChangePasswordConfirm.setOnClickListener(this);
+        etItemActivityInformationEditChangePasswordOld.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                oldPassword = etItemActivityInformationEditChangePasswordOld.getText().toString().trim();
+            }
+        });
+        etItemActivityInformationEditChangePasswordNew.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                newPassword = etItemActivityInformationEditChangePasswordNew.getText().toString().trim();
+            }
+        });
+        etItemActivityInformationEditChangePasswordConfirm.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                confirmPassword = etItemActivityInformationEditChangePasswordConfirm.getText().toString().trim();
+            }
+        });
+
+        builder.setView(viewDialog);//添加自定义View
+        builder.create();
+        dialog = builder.show();
+    }
 }

@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <!--轮播图片-->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_150" >
@@ -13,7 +14,7 @@
             android:layout_height="400dp" >
 
             <android.support.v4.view.ViewPager
-                android:id="@+id/vp"
+                android:id="@+id/vp_fragment_home_carousel"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
@@ -26,7 +27,7 @@
                 android:orientation="vertical" >
 
                 <TextView
-                    android:id="@+id/title"
+                    android:id="@+id/tv_fragment_home_pic_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="图片标题"
@@ -39,7 +40,7 @@
                     android:orientation="horizontal" >
 
                     <View
-                        android:id="@+id/dot_0"
+                        android:id="@+id/v_fragment_home_dot_one"
                         android:layout_width="5dip"
                         android:layout_height="5dip"
                         android:layout_marginLeft="2dip"
@@ -47,28 +48,28 @@
                         android:background="@drawable/dot_focused"/>
 
                     <View
-                        android:id="@+id/dot_1"
+                        android:id="@+id/v_fragment_home_dot_two"
                         android:layout_width="5dip"
                         android:layout_height="5dip"
                         android:layout_marginLeft="2dip"
                         android:layout_marginRight="2dip"
                         android:background="@drawable/dot_normal"/>
                     <View
-                        android:id="@+id/dot_2"
+                        android:id="@+id/v_fragment_home_dot_three"
                         android:layout_width="5dip"
                         android:layout_height="5dip"
                         android:layout_marginLeft="2dip"
                         android:layout_marginRight="2dip"
                         android:background="@drawable/dot_normal"/>
                     <View
-                        android:id="@+id/dot_3"
+                        android:id="@+id/v_fragment_home_dot_four"
                         android:layout_width="5dip"
                         android:layout_height="5dip"
                         android:layout_marginLeft="2dip"
                         android:layout_marginRight="2dip"
                         android:background="@drawable/dot_normal"/>
                     <View
-                        android:id="@+id/dot_4"
+                        android:id="@+id/v_fragment_home_dot_five"
                         android:layout_width="5dip"
                         android:layout_height="5dip"
                         android:layout_marginLeft="2dip"

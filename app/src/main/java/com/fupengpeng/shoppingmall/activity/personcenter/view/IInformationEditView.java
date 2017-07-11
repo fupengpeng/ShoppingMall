@@ -9,4 +9,25 @@ import com.fupengpeng.shoppingmall.activity.IBaseView;
  */
 
 public interface IInformationEditView extends IBaseView {
+
+    /**
+     * 设置资料完善界面变化
+     */
+    void setData();
+
+    /**
+     * 设置收货地址编辑界面变化
+     */
+    void setAddress();
+
+    /**
+     * 设置修改头像界面变化
+     */
+    void  setPic();
+
+    /**
+     * 设置修改密码界面变化
+     */
+    void setPassword();
+
 }

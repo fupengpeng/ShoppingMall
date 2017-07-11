@@ -65,7 +65,8 @@ public class LoginActivity extends BaseActivity implements ILoginView {
      *
      * @param editable editable
      */
-    @OnTextChanged(value = {R.id.cet_login_account, R.id.cet_login_password}, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
+    @OnTextChanged(value = {R.id.cet_login_account,
+            R.id.cet_login_password}, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
     public void afterTextChanged(Editable editable) {
         // 判断账号和密码是否都被输入
         if (!TextUtils.isEmpty(cetLoginAccount.getText().toString().trim()) &&

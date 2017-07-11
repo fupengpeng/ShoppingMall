@@ -14,7 +14,7 @@ import android.widget.TextView;
 import com.fupengpeng.shoppingmall.entity.eventbusbean.ShoppingCartFragmentEvent;
 import com.fupengpeng.shoppingmall.fragment.ClassifyFragment;
 import com.fupengpeng.shoppingmall.fragment.HomeFragment;
-import com.fupengpeng.shoppingmall.fragment.PersonCenterFragment;
+import com.fupengpeng.shoppingmall.fragment.personcenter.PersonCenterFragment;
 import com.fupengpeng.shoppingmall.fragment.ShareFragment;
 import com.fupengpeng.shoppingmall.fragment.ShoppingCartFragment;
 

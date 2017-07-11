@@ -23,6 +23,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
 }
 
 dependencies {
@@ -43,20 +47,9 @@ dependencies {
     //上拉刷新下拉加载
     compile project(':pulltorefresh')
     compile files('libs/fastjson-1.2.9.jar')
-
     //eventbus
     compile 'org.greenrobot:eventbus:3.0.0'
     apt 'org.greenrobot:eventbus-annotation-processor:3.0.1'
-
-
-
-
-
-
-
-
-
-
     //第三方分享
     compile files('libs/ShareSDK-Alipay-Moments-3.0.0.jar')
     compile files('libs/ShareSDK-VKontakte-3.0.0.jar')
@@ -105,7 +98,6 @@ dependencies {
     compile files('libs/ShareSDK-Pocket-3.0.0.jar')
     compile files('libs/ShareSDK-YouDao-3.0.0.jar')
     compile files('libs/ShareSDK-Wechat-Core-3.0.0.jar')
-
 }
 apt {
     arguments {

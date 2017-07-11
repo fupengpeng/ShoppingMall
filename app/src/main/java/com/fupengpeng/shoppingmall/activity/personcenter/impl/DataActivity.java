@@ -169,46 +169,13 @@ public class DataActivity extends AppCompatActivity implements IDataView {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_activity_data_province_city:
-                selectAddress(this);
+                setSelectAddress(this);
                 break;
             case R.id.btn_activity_data_confirm:
-                // TODO: 2017/6/6 确认修改 待实现
-
-                ToastUtils.showLong(this, "姓名：" + username + "   性别：" + sex + "    所在地：" + provinceCity + "    生日：" + birthday + "    微信号：" + weChat);
-
-                intent = new Intent(DataActivity.this, InformationEditActivity.class);
-                startActivity(intent);
+                setConfirm();
                 break;
             case R.id.tv_activity_data_birthday:
-
-                datePickerDialog = new DatePickerDialog(this);
-                datePickerDialog.show();
-
-                // 获取当前的年月日，小时，分钟
-                Calendar ca = Calendar.getInstance();
-                mYear = ca.get(Calendar.YEAR);
-                mMonth = ca.get(Calendar.MONTH);
-                mDay = ca.get(Calendar.DAY_OF_MONTH);
-
-                // 设置文本的内容：
-                tvActivityDataBirthday.setText(new StringBuilder().append(mYear).append("年")
-                        .append(mMonth + 1).append("月")// 得到的月份+1，因为从0开始
-                        .append(mDay).append("日"));
-
-                datePickerDialog.setOnDateSetListener(new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        mYear = year;
-                        mMonth = month;
-                        mDay = dayOfMonth;
-
-                        birthday = new String(new StringBuilder().append(mYear)
-                                .append("年").append(mMonth + 1).append("月")// 得到的月份+1，因为从0开始
-                                .append(mDay).append("日"));
-                        // 设置文本的内容：
-                        tvActivityDataBirthday.setText(birthday);
-                    }
-                });
+                setBirthday();
 
                 break;
             case R.id.iv_title_activity_left:
@@ -219,7 +186,19 @@ public class DataActivity extends AppCompatActivity implements IDataView {
         }
     }
 
-    private void selectAddress(Context context) {
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unbinder.unbind();
+    }
+
+
+
+
+    @Override
+    public void setSelectAddress(Context context) {
         CityPicker cityPicker = new CityPicker.Builder(context)
                 .textSize(14)
                 .title("地址选择")
@@ -253,10 +232,48 @@ public class DataActivity extends AppCompatActivity implements IDataView {
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        unbinder.unbind();
+    public void setConfirm() {
+        // TODO: 2017/6/6 确认修改 待实现
+
+        ToastUtils.showLong(this, "姓名：" + username + "   性别：" + sex + "    所在地：" + provinceCity + "    生日：" + birthday + "    微信号：" + weChat);
+
+        intent = new Intent(DataActivity.this, InformationEditActivity.class);
+        startActivity(intent);
     }
 
+    @Override
+    public void setBirthday() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            datePickerDialog = new DatePickerDialog(this);
+        }
+        datePickerDialog.show();
 
+        // 获取当前的年月日，小时，分钟
+        Calendar ca = Calendar.getInstance();
+        mYear = ca.get(Calendar.YEAR);
+        mMonth = ca.get(Calendar.MONTH);
+        mDay = ca.get(Calendar.DAY_OF_MONTH);
+
+        // 设置文本的内容：
+        tvActivityDataBirthday.setText(new StringBuilder().append(mYear).append("年")
+                .append(mMonth + 1).append("月")// 得到的月份+1，因为从0开始
+                .append(mDay).append("日"));
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            datePickerDialog.setOnDateSetListener(new DatePickerDialog.OnDateSetListener() {
+                @Override
+                public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                    mYear = year;
+                    mMonth = month;
+                    mDay = dayOfMonth;
+
+                    birthday = new String(new StringBuilder().append(mYear)
+                            .append("年").append(mMonth + 1).append("月")// 得到的月份+1，因为从0开始
+                            .append(mDay).append("日"));
+                    // 设置文本的内容：
+                    tvActivityDataBirthday.setText(birthday);
+                }
+            });
+        }
+    }
 }
